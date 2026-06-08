@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Magento\Catalog\Block\Product\ImageBuilder" type="Forever\Lazyload\Block\Product\ImageBuilder" />
+	<type name="Magento\Cms\Model\Template\Filter">
+		<plugin name="lazyload_filter" type="\Forever\Lazyload\Plugin\Model\Template\Filter" />
+	</type>
+	<type name="Magento\Catalog\Block\Product\ImageFactory">
+		<plugin name="changeImageData" type="\Forever\Lazyload\Plugin\Block\Product\ImageFactory" />
+	</type>
+</config>

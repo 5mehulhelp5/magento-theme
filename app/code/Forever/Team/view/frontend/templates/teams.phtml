@@ -1,0 +1,27 @@
+<?php
+$isEnableModule = $block->getConfigValue();
+if ($isEnableModule == 1): ?>
+<div class="meet-our-team-wraper">
+    <div class="meet-our-team-text-block">
+        <h3><?= /* @noEscape */ __('Meet our team') ?></h3>
+    </div>
+    <div class="meet-our-team-detail-block" id="team-grid">
+        <div class="meet-our-team-margin">
+            <?php foreach ($block->getItems() as $question): ?>
+                <div class="meet-our-team-equal-box">
+                    <div class="meet-our-team-inner">
+                        <div class="meet-our-team-image">
+                            <img src="<?= /* @noEscape */ $block->getMediaUrl() .'team/image/'.$question->getImage()?>"
+                            alt="customer" width="160" height="160">
+                        </div>
+                        <div class="meet-our-team-name-designation">
+                            <h2><?= /* @noEscape */ $question->getName()?></h2>
+                            <h4><?= /* @noEscape */ $question->getDesignation()?></h4>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach;?>
+        </div>
+    </div>
+</div>
+<?php endif;?>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!-- /**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="page_block_html_topmenu_gethtml_before">
+        <observer name="Forever_StoreLocator_observer" instance="Forever\StoreLocator\Observer\Topmenu"/>
+    </event>
+</config>

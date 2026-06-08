@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+        <css src="Forever_Core::css/flip.css" />
+    </head>
+	<body>
+		<referenceContainer name="content">
+    		<block class="Magento\Catalog\Block\Product\View\Description" name="forever.product.info.previousnext" template="product/view/previousnext.phtml" />   
+		</referenceContainer>
+		<move element="forever.product.info.previousnext" destination="product.info.main" before="-"/>
+		<referenceBlock name="forever.product.info.previousnext">
+			<arguments>
+        		<argument name="view_model"
+                  xsi:type="object">Forever\Core\ViewModel\ProductNavigation</argument>
+    		</arguments>
+		</referenceBlock>
+		<referenceBlock name="product.info.upsell">
+            <arguments>
+                <argument name="imageswticher" xsi:type="object">Forever\Core\ViewModel\Imageswitcher</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="catalog.product.related">
+            <arguments>
+                <argument name="imageswticher" xsi:type="object">Forever\Core\ViewModel\Imageswitcher</argument>
+            </arguments>
+        </referenceBlock>
+        <container name="pdp-cutomization-section" as="pdp-cutomization-section" label="pdp-cutomization-section" htmlTag="div" htmlClass="pdp-cutomization-section">
+        </container>
+
+         <move element ="product.info" destination="pdp-cutomization-section" before="-" />
+          <move element ="product.info.extrahint" destination="pdp-cutomization-section" after="-" />
+          <move element ="pdp-cutomization-section" destination="product.info.main" after="alert.urls" />
+	</body>
+</page>

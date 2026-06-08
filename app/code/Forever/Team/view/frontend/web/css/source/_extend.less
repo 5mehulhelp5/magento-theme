@@ -1,0 +1,25 @@
+& when (@media-common = true) {
+	.team-index-index {
+		.page-main {
+			padding-left:20px;
+			padding-right:20px;
+			margin-top: 40px;
+		}
+		.meet-our-team-wraper .meet-our-team-text-block {
+			padding-bottom:50px;
+		}
+		.meet-our-team-name-designation {
+			padding: 0px 20px 20px;
+		}
+		.meet-our-team-inner {
+			box-shadow: ~"0 1px 2px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.03), 0 4px 8px rgba(0,0,0,0.03), 0 8px 16px rgba(0,0,0,0.03), 0 16px 32px rgba(0,0,0,0.03), 0 32px 64px rgba(0,0,0,0.03)";
+		}
+	}
+}
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+	.team-index-index {
+		.page-main {
+			margin-top: 20px;
+		}
+	}
+}

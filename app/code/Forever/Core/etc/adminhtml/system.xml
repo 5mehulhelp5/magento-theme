@@ -1,0 +1,690 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="buynow" translate="label" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Buy Now</label>
+            <tab>forever</tab>
+            <resource>Forever_Core::system_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="buynow_enable" translate="label" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Buy Now</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                     <comment><![CDATA[-]]></comment>
+                </field>
+
+            </group>
+        </section>
+        <section id="forever_general" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>General Options</label>
+            <tab>forever</tab>
+            <resource>Forever_Core::fforever_config</resource>
+            <group id="header"
+                translate="label"
+                type="text"
+                sortOrder="1"
+                showInDefault="1"
+                showInWebsite="1"
+                showInStore="1"
+            >
+                <label>Header</label>
+                <field id="style"
+                    translate="label"
+                    type="select"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Header Style</label>
+                    <source_model>Forever\Core\Model\Config\Source\Style</source_model>
+                </field>
+                <field id="sticky"
+                    translate="label"
+                    type="select"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Sticky Header</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="stickyheader"
+                    translate="label"
+                    type="select"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Select Sticky Header</label>
+                    <depends>
+                        <field id="forever_general/header/sticky">1</field>
+                    </depends>
+                    <source_model>Forever\Core\Model\Config\Source\Sticky</source_model>
+                </field>
+            </group>
+            <group id="footer"
+                translate="label"
+                type="text"
+                sortOrder="1"
+                showInDefault="1"
+                showInWebsite="1"
+                showInStore="1"
+            >
+                <label>Footer</label>
+                <field id="style"
+                    translate="label"
+                    type="select"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Footer Style</label>
+                    <source_model>Forever\Core\Model\Config\Source\Style</source_model>
+                </field>
+                <field id="footer_image"
+                    translate="label"
+                    type="text" 
+                    sortOrder="1" 
+                    showInDefault="1" 
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Footer Image</label>
+                </field>
+            </group>
+
+            <group id="forever_block_pages" 
+                    translate="label" 
+                    type="text" 
+                    sortOrder="1" 
+                    showInDefault="1" 
+                    showInWebsite="0" 
+                    showInStore="0">
+            <label>Forever Block And Page Configuration</label> 
+            <field id="import_blocks" 
+                   translate="button_label" 
+                   sortOrder="1" 
+                   showInDefault="1" 
+                   showInWebsite="1" 
+                   showInStore="1">
+            <button_label>Import Static Blocks</button_label>
+            <attribute type="action_url">forever_admin/system_config_cms/import</attribute>
+            <attribute type="import_type">blocks</attribute>
+            <frontend_model>Forever\Core\Block\System\Config\Form\Button\Import\Cms</frontend_model>
+            </field>
+            <field id="import_pages" 
+                   translate="button_label" 
+                   sortOrder="3" 
+                   showInDefault="1" 
+                   showInWebsite="1" 
+                   showInStore="1">
+            <button_label>Import CMS Pages</button_label>
+            <attribute type="action_url">forever_admin/system_config_cms/import</attribute>
+            <attribute type="import_type">pages</attribute>
+            <frontend_model>Forever\Core\Block\System\Config\Form\Button\Import\Cms</frontend_model>
+            </field>
+            <!-- <comment>Forever Cms Block And Page</comment> -->
+            </group>
+        </section>
+        <section id="themedesign" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Theme Design</label>
+            <tab>forever</tab>
+            <resource>Forever_Core::fforever_config</resource>
+            <group id="general"
+                translate="label"
+                type="text"
+                sortOrder="1"
+                showInDefault="1"
+                showInWebsite="1"
+                showInStore="1"
+            >
+                <label>General</label>
+                <field id="backgroundprimary"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+					<label>Theme Primary Color</label>
+					<frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+				</field>
+                <field id="backgroundsecondary"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+					<label>Theme Secondary Color</label>
+					<frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+				</field>
+                <field id="svgcolor"
+                    translate="label"
+                    type="text"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>SVG Color</label>
+                    <comment>Do not Enter Special Charater Like '#','*',etc (Only Use Number)</comment>
+                </field>
+            </group>
+            <group id="colors"
+                translate="label"
+                type="text"
+                sortOrder="1"
+                showInDefault="1"
+                showInWebsite="1"
+                showInStore="1"
+            >
+                <label>Colors</label>
+                <field id="basic_heading" translate="label comment" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Basic Colors</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                </field>
+                <field id="link"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Link Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+                <field id="text"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Text Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+                <field id="linkhover"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Link Hover Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+                <field id="buttons" translate="label comment" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Buttons</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                </field>
+                <field id="button"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Button Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+                <field id="buttontext"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Button Text Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+                <field id="buttonhover"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Button Hover Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+                <field id="buttonhovertext"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Button Hover Text Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+            </group>
+            <group id="header"
+                translate="label"
+                type="text"
+                sortOrder="1"
+                showInDefault="1"
+                showInWebsite="1"
+                showInStore="1"
+            >
+                <label>Header</label>
+                <field id="bgcolor"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Backgroud Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+                <field id="headerprimary"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Primary Text Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+                <field id="headersecondary"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Secondary Text Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+                <field id="top" translate="label comment" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Header Top</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                </field>
+                <field id="topheaderbg"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Background Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+                <field id="topheadertext"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Text Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+                <field id="topheaderhover"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Hover Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+                <field id="middle" translate="label comment" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Header Middle</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                </field>
+                <field id="middleheaderbg"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Background Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+                <field id="middleheadertext"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Text Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+                <field id="middleheaderhover"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Hover Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+                <field id="bottom" translate="label comment" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Header Bottom</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                </field>
+                <field id="bottomheaderbg"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Background Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+                <field id="bottomheadertext"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Text Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+            </group>
+            <group id="footer"
+                translate="label"
+                type="text"
+                sortOrder="1"
+                showInDefault="1"
+                showInWebsite="1"
+                showInStore="1"
+            >
+                <label>Footer</label>
+                <field id="top" translate="label comment" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Footer Top</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                </field>
+                <field id="topbgcolor"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Background Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+                <field id="toptextcolor"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Text Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+                <field id="tophovercolor"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Hover Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+                <field id="middle" translate="label comment" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Footer Middle</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                </field>
+                <field id="middlebgcolor"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+					<label>Background Color</label>
+					<frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+				</field>
+                <field id="middlehovercolor"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+					<label>Hover Color</label>
+					<frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+				</field>
+                <field id="middletextcolor"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+					<label>Text Color</label>
+					<frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+				</field>
+                <field id="bottom" translate="label comment" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Footer Bottom</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                </field>
+                <field id="bottombgcolor"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Background Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+                <field id="bottomtextcolor"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Text Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+                <field id="bottomhovercolor"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Hover Color</label>
+                    <frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+                </field>
+            </group>
+            <group id="productlabel"
+                translate="label"
+                type="text"
+                sortOrder="1"
+                showInDefault="1"
+                showInWebsite="1"
+                showInStore="1"
+            >
+                <label>Product Label</label>
+                <field id="salelabel"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+					<label>Sale Label Color</label>
+					<frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+				</field>
+                <field id="newlabel"
+                    translate="label"
+                    type="text"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+					<label>New Label Color</label>
+					<frontend_model>Forever\Core\Block\Adminhtml\System\Config\Color</frontend_model>
+				</field>
+            </group>
+            <group id="zoominout" 
+                translate="label" 
+                type="text"
+                sortOrder="10"
+                showInDefault="1"
+                showInWebsite="1" 
+                showInStore="1">
+                <label>Zoom In Out</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Module</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field> 
+            </group>
+            <group id="imageswitcher" 
+                translate="label" 
+                type="text"
+                sortOrder="10"
+                showInDefault="1"
+                showInWebsite="1" 
+                showInStore="1">
+                <label>Image Switcher</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Module</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field> 
+            </group>
+        </section>
+        <section id="bestseller" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Bestseller</label>
+            <tab>forever</tab>
+            <resource>Forever_BestSeller::config</resource>
+            <group id="general" 
+                translate="label"
+                type="text"
+                sortOrder="1"
+                showInDefault="1"
+                showInWebsite="1"
+                showInStore="1"
+            >
+                <label>General</label>
+                <field id="enable"
+                    translate="label"
+                    type="select"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="productscount"
+                    translate="label"
+                    type="select"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Show Products in Best seller</label>
+                    <source_model>Forever\Core\Model\Config\Rows</source_model>
+                </field>
+            </group>
+        </section>
+        <section id="forever_categories" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>New Arrival</label>
+            <class>separator-top</class>
+            <tab>forever</tab>
+            <resource>Forever_NewArrival::config</resource>
+            <group id="general"
+                translate="label"
+                type="text"
+                sortOrder="2"
+                showInDefault="1"
+                showInWebsite="1"
+                showInStore="1"
+            >
+                <label>General</label>
+                <field id="enabled"
+                    translate="label comment"
+                    type="select"
+                    sortOrder="1"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Enable</label>
+                    <comment>Enables or disables extension.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="home_page"
+                translate="label"
+                type="text"
+                sortOrder="4"
+                showInDefault="1"
+                showInWebsite="1"
+                showInStore="1"
+            >
+                <label>Home Page</label>
+                <field id="category_select"
+                    translate="label comment"
+                    type="multiselect"
+                    sortOrder="10"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <can_be_empty>1</can_be_empty>
+                    <label>Show Categories</label>
+                    <comment>Select the categories displayed on the home page.</comment>
+                    <source_model>Forever\Core\Model\Config\Category</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

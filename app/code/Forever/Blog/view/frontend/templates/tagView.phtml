@@ -1,0 +1,44 @@
+<?php
+$tagviewUrl = $block->getRequest()->getParams();
+foreach ($tagviewUrl as $key => $value) {
+    $tagviewUrlKey =  $key;
+}
+$collections = $block->getTagPostList($tagviewUrlKey);
+$viewModel = $block->getViewModel();
+$isEnableModule = $viewModel->getConfig();
+?>
+<?php if ($isEnableModule == 1): ?>
+    <?php foreach ($collections as $item): ?>
+    <div class="blog-content">
+        <div class="blog-image">
+        <?php if ($item->getBlogImage()): ?>
+            <img src="<?= /* @noEscape */ $viewModel->getMediaUrl() .'blog/image/'.
+            $item->getBlogImage(); ?>" width="1440" height="900"/>
+        <?php else: ?>
+            <img src="<?= /* @noEscape */ $block->getPlaceHolderImage(); ?>"
+                width="1440"
+                height="900"
+            />
+        <?php endif; ?>
+        </div> 
+        <div class="blog-description">       
+            <div class="blog-title">
+                <h2><a href="<?= /* @noEscape */ $block->getViewUrl($item->getUrlKey())?>">
+                    <?= /* @noEscape */ $item->getTitle(); ?>                        
+                    </a>
+                </h2>
+            </div>
+            <div class="blog-plublish-date">
+                <span><?= /* @noEscape */ $item->getPublishTime(); ?></span>
+                <span><?= /* @noEscape */ $item->getAuthor(); ?></span>
+            </div>
+            <div class="blog-short-content">
+                <div><?= /* @noEscape */ $item->getContentHeading(); ?></div>
+            </div>             
+            <a class="read-more-btn action primary" href="<?= /* @noEscape */ $block->getViewUrl($item->getUrlKey())?>">
+                <?= /* @noEscape */ $block->escapeHtml(__('Read More...')) ?>     
+            </a>
+        </div> 
+    </div>
+    <?php endforeach ?>
+<?php endif; ?>

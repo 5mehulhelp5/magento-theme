@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="forever_blog" resource="default" engine="innodb" comment="Forever Blog Table">
+        <column xsi:type="int" name="blog_id" unsigned="false" identity="true" nullable="false" comment="Entity Id"/>
+        <column xsi:type="text" name="title" nullable="true" comment="Blog Title"/>
+        <column xsi:type="text" name="url_key" nullable="true" comment="Blog String Identifier"/>
+        <column xsi:type="text" name="content_heading" nullable="true" comment="Blog Content Heading"/>
+        <column xsi:type="text" name="content" nullable="true" comment="Blog Content"/>
+        <column xsi:type="text" name="blog_image" nullable="true" comment="Blog Image"/>
+        <column xsi:type="int" name="status" unsigned="false" nullable="false" default="0" comment="Status"/>
+        <column xsi:type="text" name="author" nullable="false" comment="Author"/>
+        <column xsi:type="text" name="tags" nullable="false" comment="Tags"/>
+        <column xsi:type="timestamp" name="publish_time" nullable="false" default="CURRENT_TIMESTAMP" on_update="false" comment="Blog Publish Time"/>
+        <column xsi:type="timestamp" name="update_time" nullable="false" default="CURRENT_TIMESTAMP" on_update="true" comment="Blog Modification Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="blog_id"/>
+        </constraint>
+    </table>
+    <!-- tag table -->
+    <table name="forever_blog_tag" resource="default" engine="innodb" comment="Forever Blog Tag Table">
+        <column xsi:type="int" name="tag_id" unsigned="false" identity="true" nullable="false" comment="Entity Id"/>
+        <column xsi:type="text" name="title" nullable="true" comment="Tag Title"/>
+        <column xsi:type="int" name="status" unsigned="false" nullable="false" default="0" comment="Status"/>
+        <column xsi:type="timestamp" name="create_time" nullable="false" default="CURRENT_TIMESTAMP" on_update="false" comment="Tag Create Time"/>
+        <column xsi:type="timestamp" name="update_time" nullable="false" default="CURRENT_TIMESTAMP" on_update="true" comment="Tag Modification Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="tag_id"/>
+        </constraint>
+    </table>
+    <!-- tag table end -->
+</schema>

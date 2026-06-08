@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!-- /**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="blog_index_listing_data_source" xsi:type="string">Forever\Blog\Model\ResourceModel\Blog\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Forever\Blog\Model\ResourceModel\Blog\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">forever_blog</argument>
+            <argument name="resourceModel" xsi:type="string">Forever\Blog\Model\ResourceModel\Blog</argument>
+        </arguments>
+    </virtualType>
+    <!-- tag -->
+     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="blog_tag_listing_data_source" xsi:type="string">Forever\Blog\Model\ResourceModel\Tag\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Forever\Blog\Model\ResourceModel\Tag\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">forever_blog_tag</argument>
+            <argument name="resourceModel" xsi:type="string">Forever\Blog\Model\ResourceModel\Tag</argument>
+        </arguments>
+    </virtualType>
+    <!--tag end  -->
+    <virtualType name="Forever\Blog\ReferenceImageUpload" type="Forever\Blog\Model\ImageUploader">
+    <arguments>
+        <argument name="baseTmpPath" xsi:type="string">blog/image</argument>
+        <argument name="basePath" xsi:type="string">blog/image</argument>
+        <argument name="allowedExtensions" xsi:type="array">
+            <item name="jpg" xsi:type="string">jpg</item>
+            <item name="jpeg" xsi:type="string">jpeg</item>
+            <item name="gif" xsi:type="string">gif</item>
+            <item name="png" xsi:type="string">png</item>
+        </argument>
+        <argument name="allowedMimeTypes" xsi:type="array">
+            <item name="jpg" xsi:type="string">image/jpg</item>
+            <item name="jpeg" xsi:type="string">image/jpeg</item>
+            <item name="gif" xsi:type="string">image/gif</item>
+            <item name="png" xsi:type="string">image/png</item>
+        </argument> 
+    </arguments>
+    </virtualType> 
+    <type name="Forever\Blog\Controller\Adminhtml\Index\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Forever\Blog\ReferenceImageUpload</argument>
+        </arguments>
+    </type>
+</config>

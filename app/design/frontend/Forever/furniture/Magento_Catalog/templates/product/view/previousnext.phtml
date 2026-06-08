@@ -1,0 +1,59 @@
+<?php
+/**
+ * Next and Previous product navigation in product page template
+ */
+
+/** @var \Magento\Catalog\Block\Product\View\Description $block */
+?>
+<?php
+    $viewModel = $block->getViewModel();
+    $product = $block->getProduct();
+    $prevProduct = $viewModel->getPrevProduct($product);
+    $nextProduct = $viewModel->getNextProduct($product);
+    $category = $viewModel->getCurrentCategory($product);
+    $mediaPath = $viewModel->getMediaUrl();
+?>
+<div class="product-next-prev">
+    <ol class="products list items product-items">
+        <?php if ($prevProduct): ?>
+            <?php $item = $prevProduct ?>
+            <li class="item product product-item">
+                <div class="product-prev">
+                    <a class="btn-product-prev"
+                        title="<?= /* @noEscape */ __('Previous') ?>"
+                        href="<?= /* @noEscape */ $item->getProductUrl(); ?>">
+                        <span class="arrow"><?= /* @noEscape */ __('Previous') ?></span>
+                    </a>
+                    <a class="product photo product-item-photo">
+                        <span class="product-image-container">
+                            <span class="product-image-wrapper">
+                                <img src="<?= /* @noEscape */ $viewModel->getProductThumbnail($item) ?>"
+                                alt="<?= /* @noEscape */ $item->getName() ?>" />
+                            </span>
+                        </span>
+                    </a>
+                </div>
+            </li>
+        <?php endif; ?>
+        <?php if ($nextProduct): ?>
+            <?php $item = $nextProduct ?>
+            <li class="item product product-item">
+                <div class="product-next">
+                    <a class="btn-product-next"
+                        title="<?= /* @noEscape */ __('Next') ?>"
+                        href="<?= /* @noEscape */ $item->getProductUrl(); ?>">
+                        <span class="arrow"><?= /* @noEscape */ __('Next') ?></span>
+                    </a>    
+                    <a class="product photo product-item-photo">
+                        <span class="product-image-container">
+                            <span class="product-image-wrapper">
+                                <img src="<?= /* @noEscape */ $viewModel->getProductThumbnail($item) ?>"
+                                alt="<?= /* @noEscape */ $item->getName() ?>" />
+                            </span>
+                        </span>
+                    </a>
+                </div>
+            </li>
+        <?php endif; ?>
+    </ol>
+</div>

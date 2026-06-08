@@ -1,0 +1,15 @@
+<?php
+$viewmodel = $block->getViewModel();
+$stickyenable = $viewmodel->isStickyEnable();
+$stickytype = $viewmodel->getStickyHeaderType();
+?>
+<script type="text/x-magento-init">
+    {
+       "*": {
+           "stickyheader": {
+           "stickey_type": "<?=/* @noEscape */ $stickytype ?>",
+           "stickey_type_enable": <?=/* @noEscape */ $stickyenable ?>
+           }
+       }
+    }
+</script>

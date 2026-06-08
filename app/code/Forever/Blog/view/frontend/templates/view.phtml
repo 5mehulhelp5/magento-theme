@@ -1,0 +1,27 @@
+<?php
+$postData = $block->getRequest()->getParams();
+foreach ($postData as $key => $value) {
+    $urlKey = $key;
+}
+$collections = $block->getPost($urlKey);
+$viewModel = $block->getViewModel();
+$isEnableModule = $viewModel->getConfig();
+?>
+<?php if ($isEnableModule == 1): ?>
+    <div class="blog-content">
+        <div class="blog-image">
+            <?php if ($collections->getBlogImage()): ?>
+                <img src="<?= /* @noEscape */  $viewModel->getMediaUrl()
+                .'blog/image/'. $collections->getBlogImage(); ?>" width="900" height="900"/>
+            <?php else: ?>
+                <img src="<?= /* @noEscape */ $block->getPlaceHolderImage(); ?>"
+                    width="900"
+                    height="900"
+                />
+            <?php endif; ?>
+            <div class="blog-plublish-date">
+                <div><?= /* @noEscape */ $collections->getContent(); ?></div>
+            </div>
+        </div> 
+    </div> 
+<?php endif; ?>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Forever_BannerSlider::view"
+            title="BannerSlider"
+            module="Forever_BannerSlider"
+            sortOrder="100"
+            parent="Forever_Core::forever"
+            resource="Forever_StoreLocator::elements"
+        />
+        <add id="Forever_BannerSlider::menu"
+            title="Add Slider"
+            module="Forever_BannerSlider"
+            sortOrder="100"
+            parent="Forever_BannerSlider::view"
+            action="bannerslider/index/index"
+            resource="Forever_BannerSlider::menu"
+        />
+    </menu>
+</config>

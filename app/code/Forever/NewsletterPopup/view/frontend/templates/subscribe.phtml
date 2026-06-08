@@ -1,0 +1,62 @@
+<?php
+$enableshowpopup = $block->isEnable();
+$showonlyhomepage = $block->showinHomepageOnly();
+$currentFullAction = $block->getRequest()->getFullActionName();
+$cmspages = ['cms_index_index',' '];
+$allpages = ['catalog_product_view','catalog_category_view','cms_index_index'];
+// $popupheight = $block->getHeight();
+// $popupwidth = $block->getWidth();
+$title = $block->getTitle();
+?>
+<div id="newsletter-validate-detail-modal" >   
+    <?= $block->getLayout()->createBlock(Magento\Cms\Block\Block::class)
+        ->setBlockId('forever_newsletter_popup')
+        ->toHtml();
+    ?>
+     <?= $block->getLayout()->createBlock(Magento\Newsletter\Block\Subscribe::class)
+            ->setTemplate("Magento_Newsletter::subscribe.phtml")->toHtml();?>
+</div>
+<script>
+ require(
+    [
+        'jquery',
+        'Magento_Ui/js/modal/modal',
+        'jquery/jquery.cookie'
+    ],
+    function(
+        $,
+        modal
+    ) {
+       
+        var options = {
+            type: 'popup',
+            modalClass: 'popup_newsletter',
+            responsive: true,
+            innerScroll: true,
+            title: '<?= /* @noEscape */ $title; ?>',
+            buttons: [{
+                text: $.mage.__('Close'),
+                class: '',
+                click: function () {
+                    this.closeModal();
+                }
+            }]
+        };
+        var popup = modal(options, $('#newsletter-validate-detail-modal'));
+        <?php if ($enableshowpopup == 1 && $showonlyhomepage == 1 && in_array($currentFullAction, $cmspages)) { ?>
+        if (!$.cookie('news_letter_popup')) {
+            $('#newsletter-validate-detail-modal').modal('openModal');
+                    
+        } 
+        <?php } elseif ($enableshowpopup == 1 &&
+            !$showonlyhomepage == 1 && in_array($currentFullAction, $allpages)) { ?>
+                if (!$.cookie('news_letter_popup')) {
+                    $('#newsletter-validate-detail-modal').modal('openModal');
+                }   
+                <?php } ?>
+        var date = new Date();
+        var minutes = 1440;
+        date.setTime(date.getTime() + (minutes * 60 * 1000));
+        $.cookie('news_letter_popup', 'popupshow', {expires: date});
+    }); 
+</script>

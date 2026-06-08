@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- <referenceBlock name="catalog.topnav" remove="false" /> -->
+        <referenceBlock name="store.menu">
+            <block class="Forever\Megamenu\Block\Menu" name="catalog.topnav" template="topmenu.phtml">
+                <block class="Magento\Theme\Block\Html\Topmenu" name="catalog.topnav.default" template="Magento_Theme::html/topmenu.phtml"/>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

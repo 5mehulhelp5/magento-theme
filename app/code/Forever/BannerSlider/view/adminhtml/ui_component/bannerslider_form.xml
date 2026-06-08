@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+   <argument name="data" xsi:type="array">
+      <item name="js_config" xsi:type="array">
+         <item name="provider" xsi:type="string">bannerslider_form.bannerslider_form_data_source</item>
+         <item name="deps" xsi:type="string">bannerslider_form.bannerslider_form_data_source</item>
+      </item>
+      <item name="label" xsi:type="string" translate="true">General Information</item>
+      <item name="config" xsi:type="array">
+         <item name="dataScope" xsi:type="string">data</item>
+         <item name="namespace" xsi:type="string">bannerslider_form</item>
+      </item>
+      <item name="spinner" xsi:type="string">general_information</item>
+      <item name="buttons" xsi:type="array">
+         <item name="back" xsi:type="string">Forever\BannerSlider\Block\Adminhtml\Index\Edit\Button\Back</item>
+         <item name="delete" xsi:type="string">Forever\BannerSlider\Block\Adminhtml\Index\Edit\Button\Delete</item>
+         <item name="reset" xsi:type="string">Forever\BannerSlider\Block\Adminhtml\Index\Edit\Button\Reset</item>
+         <item name="save" xsi:type="string">Forever\BannerSlider\Block\Adminhtml\Index\Edit\Button\Save</item>
+      </item>
+      <item name="template" xsi:type="string">templates/form/collapsible</item>
+   </argument>
+   <dataSource name="bannerslider_form_data_source">
+      <argument name="dataProvider" xsi:type="configurableObject">
+         <argument name="class" xsi:type="string">Forever\BannerSlider\Model\DataProvider</argument>
+         <argument name="name" xsi:type="string">bannerslider_form_data_source</argument>
+         <argument name="primaryFieldName" xsi:type="string">id</argument>
+         <argument name="requestFieldName" xsi:type="string">id</argument>
+         <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+               <item name="submit_url" xsi:type="url" path="*/*/save" />
+            </item>
+         </argument>
+      </argument>
+      <argument name="data" xsi:type="array">
+         <item name="js_config" xsi:type="array">
+            <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+         </item>
+      </argument>
+   </dataSource>
+   <fieldset name="general_information">
+      <argument name="data" xsi:type="array">
+         <item name="config" xsi:type="array">
+            <item name="collapsible" xsi:type="boolean">false</item>
+            <item name="label" xsi:type="string" translate="true">General Information</item>
+            <item name="sortOrder" xsi:type="number">20</item>
+         </item>
+      </argument>
+
+   <field name="imagetext">
+         <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+               <item name="dataType" xsi:type="string">text</item>
+               <item name="label" xsi:type="string" translate="true">ImageText</item>
+               <item name="formElement" xsi:type="string">input</item>
+               <item name="source" xsi:type="string">imagetext</item>
+               <item name="dataScope" xsi:type="string">imagetext</item>
+               <item name="validation" xsi:type="array">
+                  <item name="required-entry" xsi:type="boolean">true</item>
+               </item>
+            </item>
+         </argument>
+   </field>  
+   <field name="description" sortOrder="10" formElement="wysiwyg" template="ui/form/field">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">page</item>
+                    <item name="wysiwygConfigData" xsi:type="array">
+                        <item name="is_pagebuilder_enabled" xsi:type="boolean">false</item>
+                        <item name="toggle_button" xsi:type="boolean">true</item>
+                        <item name="height" xsi:type="string">200px</item>
+                        <item name="add_variables" xsi:type="boolean">true</item>
+                        <item name="add_widgets" xsi:type="boolean">true</item>
+                        <item name="add_images" xsi:type="boolean">true</item>
+                        <item name="add_directives" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Description</label>
+                <dataScope>description</dataScope>
+            </settings>
+            <formElements>
+                <wysiwyg>
+                    <settings>
+                        <rows>5</rows>
+                        <wysiwyg>true</wysiwyg>
+                    </settings>
+                </wysiwyg>
+            </formElements>
+        </field>
+
+     <field name="buttonlink">
+         <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+               <item name="dataType" xsi:type="string">text</item>
+               <item name="label" xsi:type="string" translate="true">Button Link</item>
+               <item name="formElement" xsi:type="string">input</item>
+               <item name="source" xsi:type="string">buttonlink</item>
+               <item name="dataScope" xsi:type="string">buttonlink</item>
+            </item>
+         </argument>
+      </field>  
+   <field name="buttontext">
+         <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+               <item name="dataType" xsi:type="string">text</item>
+               <item name="label" xsi:type="string" translate="true">Button Text</item>
+               <item name="formElement" xsi:type="string">input</item>
+               <item name="source" xsi:type="string">buttontext</item>
+               <item name="dataScope" xsi:type="string">buttontext</item>
+            </item>
+         </argument>
+    </field> 
+   <field name="sliderimage">
+    <argument name="data" xsi:type="array">
+        <item name="config" xsi:type="array">
+            <item name="dataType" xsi:type="string">string</item>
+            <item name="source" xsi:type="string">sliderimage</item>
+            <item name="label" xsi:type="string" translate="true">Sliderimage</item>
+            <item name="visible" xsi:type="boolean">true</item>
+            <item name="formElement" xsi:type="string">fileUploader</item>
+            <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+            <item name="previewTmpl" xsi:type="string">Forever_BannerSlider/image-preview</item>
+            <item name="required" xsi:type="boolean">false</item>
+            <item name="sortOrder" xsi:type="number">40</item>
+            <item name="uploaderConfig" xsi:type="array">
+                <item name="url" xsi:type="url" path="bannerslider/index/uploader"/>
+            </item>
+            <item name="validation" xsi:type="array">
+               <item name="required-entry" xsi:type="boolean">true</item>
+            </item>
+        </item>
+    </argument>
+   </field>
+   <field name="status">
+      <argument name="data" xsi:type="array">
+         <item name="options" xsi:type="object">Forever\BannerSlider\Model\Statuses</item>
+         <item name="config" xsi:type="array">
+            <item name="required" xsi:type="boolean">true</item>
+            <item name="validation" xsi:type="array">
+               <item name="required-entry" xsi:type="boolean">false</item>
+            </item>
+            <item name="sortOrder" xsi:type="number">50</item>
+            <item name="dataType" xsi:type="string">string</item>
+            <item name="formElement" xsi:type="string">select</item>
+            <item name="label" translate="true" xsi:type="string">Status</item>
+         </item>
+      </argument>
+   </field>
+ 
+ </fieldset>
+</form> 

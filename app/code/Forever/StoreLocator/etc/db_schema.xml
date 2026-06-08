@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- /**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */ -->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="forever_storeLocator">
+        <column xsi:type="int" name="store_id" padding="10" unsigned="false" identity="true" nullable="false" comment="Entity Id"/>
+
+        <column xsi:type="text" name="name" nullable="true" comment="Store Name"/>
+
+        <column xsi:type="text" name="description" nullable="true" comment="Store Description"/>
+
+        <column xsi:type="text" name="url_key" nullable="true" comment="Store Url Key"/>
+
+        <column xsi:type="text" name="phone" nullable="true" comment="Store Phone"/>
+
+        <column xsi:type="text" name="street" nullable="true" comment="Store Street"/>
+
+        <column xsi:type="text" name="state" nullable="true" comment="Store State"/>
+
+        <column xsi:type="text" name="city" nullable="true" comment="Store City"/>
+
+        <column xsi:type="text" name="country" nullable="true" comment="Store Country"/>
+
+        <column xsi:type="text" name="zip" nullable="true" comment="Store Zip"/>
+
+        <column xsi:type="int" name="status" nullable="false" comment="Status"/>
+
+        <column xsi:type="text" name="latitude" nullable="false" comment="Latitude"/>
+
+        <column xsi:type="text" name="longitude" nullable="false" comment="Longitude"/>
+
+        <column xsi:type="timestamp" name="create_time" nullable="false" default="CURRENT_TIMESTAMP" on_update="false" comment="Store Created Time"/>
+        <column xsi:type="timestamp" name="update_time" nullable="false" default="CURRENT_TIMESTAMP" on_update="true" comment="Store Updated Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="store_id"/>
+        </constraint>
+        <index indexType="fulltext" referenceId="INDEX_TYPE_FULLTEXT">    
+            <column name="name"/>
+            <column name="city"/>
+            <column name="country"/>
+        </index>
+    </table>
+</schema>

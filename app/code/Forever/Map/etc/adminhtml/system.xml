@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="forever" translate="label" sortOrder="300">
+            <label>Forever</label>
+        </tab>
+        <section id="fgooglemaps" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Map</label>
+            <tab>forever</tab>
+            <resource>Forever_Map::configuration</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Select <b>Yes</b> to enable this module]]></comment>
+                </field>
+            </group>
+            <group id="map_setting" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Map Settings</label>                
+                <field id="api_key" translate="label comment" type="text" sortOrder="20" showInWebsite="1" showInStore="1" showInDefault="1">
+                    <label>Google API Key</label>
+                    <comment><![CDATA[Get Google Map API <a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">here</a>.]]></comment>
+                </field>
+                <group id="location_setting" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Location Settings</label>
+                    <field id="address" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Address</label>
+                    </field>
+                    <field id="latitude" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Latitude</label>
+                        <validate>required-entry</validate>
+                        <comment><![CDATA[
+                        <span><strong style="color:red">Warning</strong>:  This field is <b>required</b></span>
+                        ]]></comment>
+                    </field>
+                    <field id="longitude" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Longitude</label>
+                        <validate>required-entry</validate>
+                        <comment><![CDATA[
+                        <span><strong style="color:red">Warning</strong>:  This field is <b>required</b></span>
+                        ]]></comment>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

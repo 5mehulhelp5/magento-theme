@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <referenceBlock name="category.product.addto">
+                <block class="Forever\AuthenticationPopUp\Block\Catalog\Product\ProductList\Item\AddTo\Wishlist"
+                       name="category.product.addto.wishlist" as="wishlist" before="compare"
+                       template="Forever_AuthenticationPopUp::catalog/product/list/addto/wishlist.phtml">
+                       <arguments>
+                       <argument name="viewmodels" xsi:type="object">Forever\AuthenticationPopUp\ViewModel\AuthenticationViewModel</argument>
+                   </arguments>
+                   </block>
+            </referenceBlock>
+        </referenceContainer>
+    </body>
+</page>

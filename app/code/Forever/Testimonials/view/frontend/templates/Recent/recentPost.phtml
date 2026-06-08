@@ -1,0 +1,46 @@
+<?php
+use Forever\Testimonials\Block\Recent\RecentPost;
+
+$postsRecent = $block->getRecentPost();
+$isEnableModule = $block->getConfigData('testimonials/general/enable');
+?>
+<?php if ($isEnableModule == 1): ?>
+ <div class="testimonial-container">
+<div class="testimonial-title-block">
+<h3><?= /* @noEscape */ __('Testimonial') ?></h3>
+</div>
+<div class="testimonial-slider-container owl-carousel owl-theme testimonial-one">  
+                <?php if ($postsRecent->getSize()): ?>
+                    <?php foreach ($postsRecent as $post): ?>
+                        <div class="customer">
+                            <div class="customer-inner">
+                                <div class="testimonial-avatar">
+                                    <?php if($post->getImage()){ ?>
+
+                                    <img src="<?= /* @noEscape */ $block->getMediaUrl() .'testimonials/image/'.$post->getImage();?>"
+                                    alt="customer" width="160" height="160">
+                                    <?php }else{ ?>
+                                     <img src="<?= /* @noEscape */ $block->getPlaceHolderImage();?>" alt="customer" width="160" height="160">   
+                                   <?php } ?>
+                                </div>
+                                <div class="testimonial-detail">
+                                    <h4 class="entry-name"><?= /* @noEscape */ $post->getName();?></h4>
+                                    <div class="stars">
+                                        <div class="review">&nbsp;</div>
+                                        <div class="review">&nbsp;</div>
+                                        <div class="review">&nbsp;</div>
+                                        <div class="review">&nbsp;</div>
+                                        <div class="review">&nbsp;</div>
+                                    </div>
+                                    <div class="entry-comment">
+                                        <p><?= /* @noEscape */ $post->getMessage();?></p>
+                                    </div>
+                                </div>                    
+                            </div>
+                        </div>
+                    <?php endforeach;?>
+                <?php endif;?>
+            </div>
+<div class="view-all"><a class="view-all-btn action primary" href="/testimonials">View All</a></div>
+</div>
+<?php endif;?>

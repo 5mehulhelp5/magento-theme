@@ -1,0 +1,53 @@
+<?php
+
+/** @var \Forever\BannerSlider\Block\Banner $block */
+$collections = $block->getBannerCollection();
+if(!empty($collections->getData())):
+?>
+    <div class="home-page-banner-slider">
+        <div class="owl-carousel owl-theme banner-slider">
+            <?php foreach ($collections as $item): ?>
+
+            <div class="slide-items">
+                <div class="slide-content">
+                    <div class="slider-des">
+                        <h1>
+                            <div data-th="<?= $block->escapeHtml('imagetext') ?>" class="slide-name">
+                                <?= /* @noEscape */ $item->getImagetext() ?>
+                            </div>
+                        </h1>
+                        <a class="slider-button" href=" <?= /* @noEscape */
+                            $item->getButtonlink() ?>">
+                       <?=/* @noEscape */$item->getData('buttontext') ?></a>
+                       <div><?= /* @noEscape */ $item->getDescription() ?></div>
+                    </div>
+                </div>
+                <div data-th="<?=/* @noEscape */ $block->escapeHtml(__('sliderimage')) ?>" class="slide-image">
+                    <img src="<?= /* @noEscape */$block->getMediaUrl() . 'banner/' . $item->getData('sliderimage');?>" 
+                    width="1920" height="500"/>
+                </div>
+            </div>
+
+        <?php  endforeach; ?>
+        </div>
+    </div>
+    <script>
+    require(['jquery','jquery/ui','owlCarousel'], function ($) {
+        $(document).ready(function(){
+            $(function() {
+                $(".banner-slider").owlCarousel({
+                    autoplay:false,
+                    loop:true,
+                    nav : true, // Show next and prev buttons
+                    dots: false,
+                    autoplaySpeed : 500,
+                    navSpeed : 500,
+                    dotsSpeed : 500,
+                    autoplayHoverPause: true,
+                    items:1
+                });
+            })
+        });
+    });
+    </script>
+<?php endif; ?>

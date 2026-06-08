@@ -1,0 +1,33 @@
+<?php
+/**
+ * Catalog Product view template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View
+ * @var $viewModel \Forever\Productlabel\ViewModel\ProductLabelViewModel
+ */
+$product    = $block->getProduct();
+$viewModel  = $block->getViewmodel();
+
+// Use ViewModel method (no deprecated $product->getResource())
+$productoption    = $viewModel->getProductoption($product);
+$productlabel     = $viewModel->getProductlabel($product);
+$confproductlabel = $viewModel->getScopeconfig('productlabel/general/productlabelenable');
+?>
+<?php if ($confproductlabel && !empty($productlabel)): ?>
+    <div class="product_label_wrapper <?= /* @noEscape */ (string)$productoption ?>">
+        <?php foreach ($productlabel as $productlabelvalue): ?>
+            <?php if ($productlabelvalue): ?>
+                <span class="productlabel <?= /* @noEscape */
+                    is_numeric($productlabelvalue)
+                        ? 'discount'
+                        : strtolower(str_replace(' ', '', $productlabelvalue)) ?>">
+                    <?php if (is_numeric($productlabelvalue)): ?>
+                        <?= /* @noEscape */ $productlabelvalue ?>% off
+                    <?php else: ?>
+                        <?= /* @noEscape */ $productlabelvalue ?>
+                    <?php endif; ?>
+                </span>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>

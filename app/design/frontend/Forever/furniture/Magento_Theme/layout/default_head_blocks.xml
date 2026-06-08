@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="https://use.fontawesome.com/releases/v6.1.1/css/all.css" src_type="url" rel="stylesheet" />
+        <css src="Magento_Theme::css/owl.carousel.css"/>
+        <css src="Magento_Theme::css/owl.theme.default.css" />
+        <script src="Magento_Theme/js/custom.js"></script>
+    </head>
+    <referenceBlock name="head.additional">
+        <block class="Magento\Framework\View\Element\Text" name="dynamic.css">
+            <arguments>
+                <argument name="label" xsi:type="string">Adding Dynamic CSS</argument>
+                <argument name="text" xsi:type="helper" helper="Forever\Core\Helper\Cssconfig::getDynamicCssLink"/>
+            </arguments>
+        </block>
+    </referenceBlock>
+</page>

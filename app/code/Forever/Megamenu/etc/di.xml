@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    
+    <virtualType name="Forever\Megamenu\Model\ResourceModel\Megamenu\Megamenu\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">forever_megamenu</argument>
+            <argument name="resourceModel" xsi:type="string">Forever\Megamenu\Model\ResourceModel\Megamenu</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="forever_megamenu_list_data_source" xsi:type="string">Forever\Megamenu\Model\ResourceModel\Megamenu\Megamenu\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="megamenu_form_data_source" xsi:type="string">Forever\Megamenu\Model\ResourceModel\Megamenu\Megamenu\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Image Uploader-->
+    <virtualType name="Forever\Megamenu\ReferenceImageUpload" type="Forever\Megamenu\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">forever/customcategoryimg/image</argument>
+            <argument name="basePath" xsi:type="string">forever/customcategoryimg</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument> 
+        </arguments>
+    </virtualType>
+     
+    <type name="Forever\Megamenu\Controller\Adminhtml\Menu\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Forever\Megamenu\ReferenceImageUpload</argument>
+        </arguments>
+    </type>
+    <!-- End Image Uploader -->
+</config>

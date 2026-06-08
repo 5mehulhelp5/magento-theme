@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Forever_Core::css/flip.css" />
+    </head>
+    <body>
+         <move element ="sidebar.main" destination="content" before="category.products" />
+        <move element ="product_list_toolbar" destination="search_result_list" after="layer.catalog.leftnav" />
+        <referenceBlock name="sidebar.additional" remove="true"/>
+        <!-- <move element="search.result" destination="layer.category.products"/>
+        <move element="catalogsearch.leftnav" destination="layer.catalog.leftnav"/>
+        
+        <move element="search.result" destination="layer.category.products"/>
+        <move element="catalogsearch.leftnav" destination="layer.catalog.leftnav"/>
+<referenceBlock name="sidebar.additional" remove="true"/> -->
+        <referenceBlock name="search_result_list">
+            <arguments>
+                <argument name="imageswticher" xsi:type="object">Forever\Core\ViewModel\Imageswitcher</argument>
+                <argument name="productlabelmodel" xsi:type="object">Forever\Productlabel\ViewModel\ProductLabelViewModel</argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

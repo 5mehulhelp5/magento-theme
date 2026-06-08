@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="catalog.leftnav">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Forever_LayeredNavigation::layer/view.phtml</argument>
+            </action>
+            <arguments>    
+                <argument name="pricesliderviewmodel" xsi:type="object">Forever\LayeredNavigation\ViewModel\PricesliderViewModel</argument>
+                <argument name="viewmodel" xsi:type="object">Forever\LayeredNavigation\ViewModel\AjaxLayerViewModel</argument>
+            </arguments>
+        </referenceBlock>
+
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" name="layer.category.products" template="Forever_LayeredNavigation::products.phtml"/>
+        </referenceContainer>
+
+        <referenceContainer name="sidebar.main">
+            <block class="Magento\Framework\View\Element\Template" name="layer.catalog.leftnav" template="Forever_LayeredNavigation::layer.phtml"/>
+        </referenceContainer>
+        <move element="category.products" destination="layer.category.products"/>
+        <move element="catalog.leftnav" destination="layer.catalog.leftnav"/>
+
+        <referenceBlock name="catalog.navigation.renderer">
+            <action method="setTemplate" ifconfig="layered_navigation/general/enabled">
+                <argument name="template" xsi:type="string">Forever_LayeredNavigation::layer/filter.phtml</argument>
+            </action>
+             <arguments>    
+                <argument name="viewmodels" xsi:type="object">Forever\LayeredNavigation\ViewModel\PricesliderViewModel</argument>
+            </arguments>
+        </referenceBlock>
+
+        <referenceBlock name="catalog.navigation.state">
+            <action method="setTemplate" ifconfig="layered_navigation/general/enabled">
+                <argument name="template" xsi:type="string">Forever_LayeredNavigation::layer/state.phtml</argument>
+            </action>
+            <arguments>    
+                <argument name="pricesliderviewmodel" xsi:type="object">Forever\LayeredNavigation\ViewModel\PricesliderViewModel</argument>
+            </arguments>
+        </referenceBlock>
+
+        <referenceBlock name="category.products">
+            <action method="setTemplate" ifconfig="layered_navigation/general/enabled">
+                <argument name="template" xsi:type="string">Forever_LayeredNavigation::category/products.phtml</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

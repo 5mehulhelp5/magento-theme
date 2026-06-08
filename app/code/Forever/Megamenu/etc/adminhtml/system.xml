@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="forever" translate="label" sortOrder="89">
+            <label>Forever</label>
+        </tab>
+        <section id="megamenu" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Mega Menu</label>
+            <tab>forever</tab>
+            <resource>Forever_Megamenu::config_megamenu</resource>
+            <group id="module" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="0"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <comment>Enabled frontend</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="desktop" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Desktop Menu</label>
+                <field id="deskposition" translate="label comment" type="select" sortOrder="1"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Position</label>
+                    <comment>Set Desktop Position</comment>
+                    <source_model>Forever\Megamenu\Model\System\Config\Desktoppos</source_model>
+                </field>
+            </group>
+            <group id="mobile" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Mobile Menu</label>
+                <field id="mobposition" translate="label comment" type="select" sortOrder="2"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Position</label>
+                    <comment>Set Mobile Position</comment>
+                    <source_model>Forever\Megamenu\Model\System\Config\Mobilepos</source_model>
+                </field>
+            </group>
+            <group id="homebutton" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Home Button Enabled</label>
+                <field id="homebuttonenabled" translate="label comment" type="select" sortOrder="0"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <comment>Enabled on frontend</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

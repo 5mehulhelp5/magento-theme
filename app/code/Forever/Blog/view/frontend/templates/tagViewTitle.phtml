@@ -1,0 +1,12 @@
+<?php
+$tagviewUrl = $block->getRequest()->getParams();
+foreach ($tagviewUrl as $key => $value) {
+    $tagviewUrlKey =  $key;
+}
+$collections = $block->getTagPostList($tagviewUrlKey);
+$title = str_replace('-', ' ', $tagviewUrlKey);
+$title = ucwords($title);
+?>
+<div class="tag-title">
+    <h2>Tag : <?= /* @noEscape */  $title;  ?></h2>
+</div>

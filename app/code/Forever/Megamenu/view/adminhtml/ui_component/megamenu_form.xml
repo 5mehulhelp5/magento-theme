@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">megamenu_form.megamenu_form_data_source</item>
+            <item name="deps" xsi:type="string">megamenu_form.megamenu_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Brand Details</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">megamenu_form</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="array">
+                <item name="name" xsi:type="string">Back</item>
+                <item name="label" xsi:type="string" translate="true">Back</item>
+                <item name="class" xsi:type="string">back</item>
+                <item name="url" xsi:type="string">*/*/index</item>
+            </item>            
+            <item name="save" xsi:type="string">Forever\Megamenu\Block\Adminhtml\Menu\Edit\Save</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <dataSource name="megamenu_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Forever\Megamenu\Model\DataProvider</argument>
+            <argument name="name" xsi:type="string">megamenu_form_data_source</argument>
+            <!-- //megamenu_id to id -->
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <!-- //megamenu_id to id -->
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="megamenu/menu/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <!-- here stop -->
+
+    <fieldset name="megamenu_records_columns">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">false</item>
+                <item name="label" xsi:type="string" translate="true">Fields</item>
+            </item>
+        </argument>
+    <field name="linktype">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Forever\Megamenu\Model\Linktype</item>
+                <!-- <item name="options" xsi:type="object">Forever\Megamenu\Model\System\Config\Category</item> -->
+                <item name="config" xsi:type="array">
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="component" xsi:type="string">Forever_Megamenu/js/form/element/type</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                    <item name="sortOrder" xsi:type="number">1</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" translate="true" xsi:type="string">Link Type</item>
+                </item>
+            </argument>
+    </field>
+    <field name="catename">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="required" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string">Name</item>
+                <item name="visible" xsi:type="boolean">true</item>
+                <item name="dataType" xsi:type="string">text</item>
+                <item name="formElement" xsi:type="string">input</item>
+                <item name="sortOrder" xsi:type="number">3</item>
+                <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">true</item>
+                </item>
+            </item>
+        </argument>
+    </field>
+    <field name="custcateurl">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string">Url</item>
+                <item name="visible" xsi:type="boolean">true</item>
+                <item name="dataType" xsi:type="string">text</item>
+                <item name="formElement" xsi:type="string">input</item>
+                <item name="sortOrder" xsi:type="number">4</item>
+                <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">true</item>
+                </item>
+            </item>
+        </argument>
+    </field>
+    <field formElement="imageUploader" name="image">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="source" xsi:type="string">Demo</item>
+                <item name="sortOrder" xsi:type="number">5</item>
+            </item>
+        </argument>
+        <settings>
+            <elementTmpl>ui/form/element/uploader/image</elementTmpl>
+            <dataType>string</dataType>
+            <label translate="true">Image</label>
+            <visible>true</visible>
+            <validation>
+                <rule name="required-entry" xsi:type="boolean">false</rule>
+            </validation>
+        </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <required>true</required>
+                        <uploaderConfig>
+                            <param xsi:type="url" name="url" path="megamenu/menu/upload"/>
+                        </uploaderConfig>
+                        <previewTmpl>Forever_Megamenu/image-preview</previewTmpl>
+                        <openDialogTitle>Media Gallery</openDialogTitle>
+                        <allowedExtensions>jpg jpeg gif png</allowedExtensions>
+                        <maxFileSize>4194304</maxFileSize>
+                    </settings>
+                </imageUploader>
+            </formElements>
+        </field>    
+    <field name="cat_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Forever\Megamenu\Block\Adminhtml\Helper\Renderer\Grid\Categorys</item>
+                <item name="config" xsi:type="array">
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="sortOrder" xsi:type="number">5</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" translate="true" xsi:type="string">Category</item>
+                </item>
+            </argument>
+        </field>
+        <field name="rightcontent">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">wysiwyg</item>
+                    <item name="source" xsi:type="string">sample_shop</item>
+                    <item name="label" xsi:type="string">Right Content</item>
+
+                    <item name="template" xsi:type="string">ui/form/field</item>
+                    <item name="wysiwyg" xsi:type="boolean">true</item>
+                    <item name="dataScope" xsi:type="string">rightcontent</item>
+                    <item name="sortOrder" xsi:type="number">6</item>
+                    <item name="rows" xsi:type="number">8</item>
+                </item>
+            </argument>
+      </field>
+        <field name="leftcontent">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">wysiwyg</item>
+                    <item name="source" xsi:type="string">sample_shop</item>
+                    <item name="label" xsi:type="string">Left Content</item>
+
+                    <item name="template" xsi:type="string">ui/form/field</item>
+                    <item name="wysiwyg" xsi:type="boolean">true</item>
+                    <item name="dataScope" xsi:type="string">leftcontent</item>
+                    <item name="sortOrder" xsi:type="number">7</item>
+                    <item name="rows" xsi:type="number">8</item>
+                </item>
+            </argument>
+      </field>
+      <field name="stores">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Cms\Ui\Component\Listing\Column\Cms\Options</item>
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Stores</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">number</item>
+                        <item name="formElement" xsi:type="string">multiselect</item>
+                        <item name="source" xsi:type="string">stores</item>
+                        <item name="sortOrder" xsi:type="number">8</item>
+                        <item name="multiple" xsi:type="boolean">true</item>
+                        <item name="dataScope" xsi:type="string">stores</item>
+                        <item name="valueMap" xsi:type="array">
+                            <item name="true" xsi:type="number">1</item>
+                            <item name="false" xsi:type="number">0</item>
+                        </item>
+                        <item name="default" xsi:type="number">0</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+            </argument>
+        </field>
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Forever\Megamenu\Model\Statuses</item>
+                <item name="config" xsi:type="array">
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                    <item name="sortOrder" xsi:type="number">9</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" translate="true" xsi:type="string">Status</item>
+                </item>
+            </argument>
+        </field>
+
+    </fieldset>
+</form>

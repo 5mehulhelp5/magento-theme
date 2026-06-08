@@ -1,0 +1,46 @@
+<?php
+use Forever\Blog\Block\Sidebar\MostView;
+$viewModel = $block->getViewModel();
+$isEnableModule = $viewModel->getConfig();
+/** @var MostView $block */
+$postsRecent = $block->getRecentPost();
+?>
+<?php if ($isEnableModule == 1): ?>
+<div class="mp-sidebar product info detailed">                  
+        <div class="data item title" data-role="collapsible" id="tab-label-mostview">            
+                <div><?= $block->escapeHtml(__('Latest')) ?></div>            
+        </div>
+        <div class="data item content" id="tab-content-mostview" data-role="content">
+            <?php if ($postsRecent->getSize()): ?>
+                <?php foreach ($postsRecent as $post): ?>
+                    <div class="list-post-tabs">
+                        <div class="post-left">
+                        <?php if ($post->getBlogImage()): ?>                            
+                            <img src="<?= /* @noEscape */
+                            $block->getMediaUrl() . 'blog/image/' .
+                            $post->getBlogImage(); ?>" width="200" height="200"/>
+                        <?php else: ?>
+                        <img src="<?= /* @noEscape */ $block->getPlaceHolderImage(); ?>"
+                            width="200"
+                            height="200"
+                        />
+                        <?php endif; ?>    
+                        </div>
+                        <div class="post-right">
+                            <a href="<?= /* @noEscape */ $block->getViewUrl($post->getUrlKey())?>">
+                               <span> <?= /* @noEscape */ $post->getTitle(); ?>
+                               </span>                                
+                            </a>
+                            <span class="create-at">
+                                <?= /* @noEscape */ $post->getPublishTime(); ?>
+                            </span>
+                        </div>
+                        <div class="mp-clear"></div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="mostview-nopost"><?= /* @noEscape */ $block->escapeHtml(__('No Posts')) ?></div>
+            <?php endif; ?>
+        </div>
+</div>
+<?php endif; ?>

@@ -1,0 +1,17 @@
+{
+    "name": "forever/module-map",
+    "description": "Forever Google Map module for Magento 2 contact page.",
+    "type": "magento2-module",
+    "require": {
+        "php": "^8.4 || ^8.5",
+        "magento/framework": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Forever\\Map\\": ""
+        }
+    }
+}

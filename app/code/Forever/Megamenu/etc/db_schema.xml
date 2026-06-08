@@ -1,0 +1,26 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="forever_megamenu">
+        <column xsi:type="int" padding="6" name="id" nullable="false" unsigned="false" identity="true" comment="Megamenu ID"/>
+        <column xsi:type="int" padding="6" name="linktype" nullable="true" comment="Link Type"/>
+        <column xsi:type="varchar" length="255" name="cat_id" nullable="true" comment="Cat Id"/>
+        <column xsi:type="text" name="rightcontent" nullable="true" comment="Right"/>
+        <column xsi:type="text" name="leftcontent" nullable="true" comment="Left"/>
+        <column xsi:type="varchar" name="catename" nullable="true" length="255" comment="Category Name"/>
+        <column xsi:type="varchar" name="custcateurl" nullable="true" length="255" comment="Custom Category Url"/>
+        <column xsi:type="varchar" name="image" nullable="true" length="255" comment="Custom Category Icon Image"/>
+        <column xsi:type="smallint" name="stores" nullable="false" comment="Stores"/>
+        <column xsi:type="smallint" name="status" nullable="false" default="1" comment="Status"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index indexType="fulltext" referenceId="INDEX_TYPE_FULLTEXT">    
+            <column name="cat_id"/>
+            <column name="rightcontent"/>
+            <column name="leftcontent"/>
+            <column name="catename"/>
+        </index>
+   </table>
+
+   
+</schema>

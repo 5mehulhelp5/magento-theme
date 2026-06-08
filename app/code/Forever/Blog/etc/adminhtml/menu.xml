@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!-- /**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Forever_Blog::elements" title="Blog" module="Forever_Blog" parent="Magento_Backend::content" sortOrder="100"  resource="Forever_Blog::elements"/>
+        <add id="Forever_Blog::index" title="Blog Post" module="Forever_Blog" sortOrder="10" action="blog/index" resource="Forever_Blog::index" parent="Forever_Blog::elements"/>
+        <add id="Forever_Blog::tag" title="Blog tags" module="Forever_Blog" sortOrder="10" action="blog/tag/index" resource="Forever_Blog::index" parent="Forever_Blog::elements"/>
+        <add id="Forever_Blog::config_blog" title="Configuration" module="Forever_Blog" parent="Forever_Blog::elements" sortOrder="50" action="adminhtml/system_config/edit/section/blog" resource="Forever_Blog::config_blog"/>		
+    </menu>
+</config>

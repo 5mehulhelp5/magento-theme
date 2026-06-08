@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page layout="3columns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- <referenceBlock name="head.additional"> -->
+        <!-- <referenceBlock name="top.links"> -->
+        <!-- <referenceBlock name="header"> -->
+        <!-- <referenceContainer name="main.content"> -->
+        <referenceContainer name="after.body.start">
+            <block class="Magento\Framework\View\Element\Template" name="sticky_header_type" template="Magento_Theme::html/sticky.phtml">
+                <arguments>
+                    <argument name="view_model"
+                              xsi:type="object">Forever\Core\ViewModel\SystemConfigurations</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <!-- </referenceBlock> -->
+    </body>
+</page>

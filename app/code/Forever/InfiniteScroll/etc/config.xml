@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <infinitescroll>
+            <general>
+                <enabled>1</enabled>
+                <infinitescroll_delay>600</infinitescroll_delay>
+                <infinitescroll_content>.main</infinitescroll_content>
+                <infinitescroll_pagination>.pages-items, .pager__list</infinitescroll_pagination>
+                <infinitescroll_next>.next</infinitescroll_next>
+                <infinitescroll_item>.product-item</infinitescroll_item>
+                <infinitescroll_loadingtext><![CDATA[<em>Loading - please wait...</em>]]></infinitescroll_loadingtext>
+                <infinitescroll_loadmore>10</infinitescroll_loadmore>
+                <infinitescroll_loadmoretext>Load more items</infinitescroll_loadmoretext>
+            </general>
+        </infinitescroll>
+    </default>
+</config>

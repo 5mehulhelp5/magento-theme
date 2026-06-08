@@ -1,0 +1,35 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Forever\Map\ViewModel\DataConfig|null $viewModel
+ */
+$viewModel = $block->getData('view_model');
+
+if (!$viewModel instanceof \Forever\Map\ViewModel\DataConfig || !$viewModel->isEnabled()) {
+    return;
+}
+
+$mapConfig = [
+    'apiKey' => (string)$viewModel->getConfigValue('fgooglemaps/map_setting/api_key'),
+    'latitude' => (string)$viewModel->getConfigValue('fgooglemaps/map_setting/location_setting/latitude'),
+    'longitude' => (string)$viewModel->getConfigValue('fgooglemaps/map_setting/location_setting/longitude'),
+    'address' => (string)$viewModel->getConfigValue('fgooglemaps/map_setting/location_setting/address'),
+    'zoom' => 5,
+];
+?>
+<style>
+    #forever-google-map {
+        height: 400px;
+        width: 100%;
+    }
+</style>
+<section id="map-frame" class="row justify-content-center">
+    <div id="forever-google-map" class="col-12 px-0"></div>
+</section>
+<script type="text/x-magento-init">
+{
+    "#forever-google-map": {
+        "Forever_Map/js/map": <?= /* @noEscape */ json_encode($mapConfig, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT) ?>
+    }
+}
+</script>

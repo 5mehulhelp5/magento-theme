@@ -1,0 +1,63 @@
+<?php
+/**
+ * @var $block Forever\InfiniteScroll\Block\InfiniteScroll
+ */
+?>
+<?php
+$viewModel = $block->getData('view_model');
+$isEnabled = $block->getConfigData('infinitescroll/general/enabled');
+$delay = $block->getConfigData('infinitescroll/general/infinitescroll_delay');
+$content = $block->getConfigData('infinitescroll/general/infinitescroll_content');
+$pagination = $block->getConfigData('infinitescroll/general/infinitescroll_pagination');
+$next = $block->getConfigData('infinitescroll/general/infinitescroll_next');
+$item = $block->getConfigData('infinitescroll/general/infinitescroll_item');
+$loadingText = $block->getConfigData('infinitescroll/general/infinitescroll_loadingtext');
+$loadMore = $block->getConfigData('infinitescroll/general/infinitescroll_loadmore');
+$loadMoreText = $block->getConfigData('infinitescroll/general/infinitescroll_loadmoretext');
+$loadingImage = $block->getConfigData('infinitescroll/general/infinitescroll_loadingimage');
+$imgPath = 'forever/infinitescroll/'. $loadingImage;
+if ($loadingImage) {
+    $loadingImage = $block->getMedia($imgPath);
+} else {
+    $loadingImage = $block->getViewFileUrl('images/loader-1.gif');
+}
+?>
+<?php if ($isEnabled): ?>
+<script type="text/javascript">
+    require(['jquery', 'forever/infinitescroll', 'catalogAddToCart'], function ($) {
+        "use strict";
+        $(document).ready(function () {
+            $('body').addClass('infinitescroll');
+            window.ias = $.ias({
+                container: "<?= /* @noEscape */ $content ?>",
+                item: "<?= /* @noEscape */ $item ?>",
+                pagination: "<?= /* @noEscape */ $pagination ?>",
+                next: "<?= /* @noEscape */ $next ?>",
+                delay: "<?= /* @noEscape */ $delay ?>",
+            });
+            window.ias.extension(new IASSpinnerExtension({
+                src: "<?= /* @noEscape */ $loadingImage ?>",
+                html: '<div class="iass-spinner"><img src="{src}"/>' +
+                    '<span><?= /* @noEscape */ $loadingText ?></span></div>'
+            }));
+            window.ias.extension(new IASNoneLeftExtension({
+                text: "",
+                html: '<div class="ias-noneleft">{text}</div>'
+            }));
+            window.ias.extension(new IASTriggerExtension({
+                text: "<?= /* @noEscape */ $loadMoreText ?>",
+                html: '<div class="ias-trigger ias-trigger-next">' +
+                    '<button class="load-more"><?= /* @noEscape */ $loadMoreText ?></button></div>',
+                textPrev: "<?= /* @noEscape */ $loadMoreText ?>",
+                htmlPrev: '<div class="ias-trigger ias-trigger-prev">' +
+                    '<button class="load-more"><?= /* @noEscape */ $loadMoreText ?></button></div>',
+                offset: "<?= /* @noEscape */ $loadMore ?>",
+            }));
+            window.ias.on('rendered', function (items) {
+                $('body').trigger('contentUpdated');
+                $("form[data-role='tocart-form']").catalogAddToCart();
+            });
+        });
+    });
+</script>
+<?php endif; ?>

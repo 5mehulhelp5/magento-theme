@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+
+    <virtualType name="ForeverBannerSliderFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+     <virtualType name="ForeverBannerSliderFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Forever\BannerSlider\Model\ResourceModel\Banner\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">ForeverBannerSliderFilterPool</argument>
+        </arguments>
+    </virtualType>
+     <type name="Forever\BannerSlider\Model\ResourceModel\Banner\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">bannerslider</argument>
+            <argument name="eventPrefix" xsi:type="string">forever_bannerslider_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">bannerslider_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Forever\BannerSlider\Model\ResourceModel\Banner</argument>
+        </arguments>
+    </type>
+     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="forever_bannerslider_listing_data_source" xsi:type="string">Forever\BannerSlider\Model\ResourceModel\Banner\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+        <virtualType name="imageUploaderType" type="Forever\BannerSlider\Model\ImageUploader">
+            <arguments>
+                <argument name="baseTmpPath" xsi:type="string">banner/</argument>
+                <argument name="basePath" xsi:type="string">banner/</argument>
+                <argument name="allowedExtensions" xsi:type="array">
+                    <item name="jpg" xsi:type="string">jpg</item>
+                    <item name="jpeg" xsi:type="string">jpeg</item>
+                    <item name="gif" xsi:type="string">gif</item>
+                    <item name="png" xsi:type="string">png</item>
+                </argument>
+            </arguments>
+        </virtualType>
+        <type name="Forever\BannerSlider\Controller\Adminhtml\Index\Uploader">
+            <arguments>
+                <argument name="imageUploader" xsi:type="object">imageUploaderType</argument>
+            </arguments>
+        </type>
+</config>
+
+ 

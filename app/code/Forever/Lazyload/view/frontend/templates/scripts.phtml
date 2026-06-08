@@ -1,0 +1,41 @@
+<?php
+$helper = $this->helper(Forever\Lazyload\Helper\Filter::class);
+$delay = (int) $helper->getConfig('lazyload/general/lazyload_delay');
+$effect = $helper->getConfig('lazyload/general/lazyload_effect');
+$effectTime = (int) $helper->getConfig('lazyload/general/lazyload_effecttime');
+$isEnable = (int) $helper->getConfig('lazyload/general/enable');
+?>
+<?php if ($isEnable): ?>
+<script>
+    require(['jquery', 'lazyLoad', 'lazyLoadPlugins'], function($) {
+        window.mgzLazyload = function(config) {
+            var settings = {
+                bind: "event",
+                delay: <?= /* @noEscape */ $delay ? $delay : '2000' ?>,
+                effect: "<?= /* @noEscape */ $effect ?>",
+                effectTime: <?= /* @noEscape */ $effectTime ?>,
+                afterLoad: function(element) {
+                    $(element).removeClass('lazy-loading').removeClass('lazy-blur').addClass('lazy-loaded');
+                }
+            };
+            if (config) settings = $.extend(settings, config);
+            $('.lazy').lazy(settings);
+        }
+        window.mgzLazyload();
+        $(document).on('scroll', function (event, xhr, settings) {
+            window.mgzLazyload();
+        });
+        $(document).ready(function($) {
+            $('.owl-carousel').on('changed.owl.carousel', function(event) {
+                window.mgzLazyload();
+            });
+        });
+        $('.swiper-container').find('img.lazy-loading').each(function(index, el) {
+            var lazySrc = $(this).data('src');
+            $(this).removeClass('lazy-loading');
+            $(this).addClass('lazy-loaded');
+            $(this).attr('src', lazySrc);
+        });
+    });
+</script>
+<?php endif; ?>

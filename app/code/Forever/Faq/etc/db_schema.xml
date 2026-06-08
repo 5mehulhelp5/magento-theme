@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- /**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */ -->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="forever_faq_question">
+        <column xsi:type="int" name="id" padding="10" unsigned="false" identity="true" nullable="false" comment="Entity Id"/>
+
+        <column xsi:type="text" name="title" nullable="true" comment="Question Title"/>
+
+        <column xsi:type="text" name="answer" nullable="true" comment="Answer for the question"/>
+
+        <column xsi:type="int" name="status" nullable="true" comment="Question Display Status"/>       
+
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="false" comment="Created Time"/>
+
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="true" comment="Updated Time"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index indexType="fulltext" referenceId="INDEX_TYPE_FULLTEXT">    
+            <column name="title"/>
+        </index>
+    </table>
+</schema>

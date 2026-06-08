@@ -1,0 +1,17 @@
+<?php $formId = 'product_addtocart_form'; ?>
+
+<div class="buynow-button">
+    <button type="submit"
+            title="Buy Now"
+            id="category-buy-now"
+            class="buy-now-btn"
+            data-mage-init='
+            {
+                "Forever_Core/js/buy-now": {
+                    "form": "#<?= /* @noEscape */ $formId; ?>"
+                }
+            }
+            '>
+        <span>Buy Now</span>
+    </button>
+</div>

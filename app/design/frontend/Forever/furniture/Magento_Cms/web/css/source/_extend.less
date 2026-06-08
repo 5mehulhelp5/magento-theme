@@ -1,0 +1,112 @@
+& when (@media-common = true) {
+	.faq-index-index {
+		.page-title-wrapper {
+			display: none;
+		}
+	}
+	.faq-index-index .page-main {
+	   margin-top:40px;
+	}
+	.blog-wrapper-container .blog-holder .blog-items .owl-stage .owl-item .item .article-thumbnail .blog-list {
+		min-height: 20px;
+	}
+	body .blog-wrapper-container .blog-holder .blog-items .owl-stage .owl-item .item .article-thumbnail .blog-list a {
+		margin-left: 0;
+	}
+	.blog-wrapper-container .blog-holder .blog-items .owl-stage .owl-item .item .article-thumbnail .blog-excerpt {
+		min-height: 70px;
+	}
+	.blog-wrapper-container .blog-holder .blog-items .owl-stage .owl-item .item .article-thumbnail {
+		.img-inner {
+			position: relative;
+		    overflow: hidden;
+		    padding-top: 63%;
+		    height: 0;
+		    img {
+				position: absolute;
+			    top: 0;
+			    left: 0;
+			    width: 100%;
+			    height: 100%;
+			    object-fit: contain;
+			}
+		}
+	}
+	.faq-list {
+	    padding: 14px 0;
+	    .faq-answers:before,
+	    .faq-questions .faq-title:before{
+			position: absolute;
+			font-size: 18px;
+		    font-weight: 700;
+		    letter-spacing: 0.02em;
+		    text-transform: uppercase;
+		    min-height: 46px;
+		    line-height: 46px;
+		    width: 46px;
+		    text-align: center;
+		    display: block;
+	    }
+	    .faq-answers {
+	    	padding-top: 35px;
+    		padding-bottom: 20px;
+    		position: relative;
+	    	p {
+	    		margin-bottom: 0;
+	    		padding-left: 80px;
+	    		line-height: 24px;
+			    font-size: 16px;
+			    color: #9d9d9d;
+			    display: flex;
+    			align-items: center;
+	    	}
+	    	&:before {
+		    	content: "A";
+			    border: 2px solid #dfa34a;
+			    color: #dfa34a;
+			    left: 0;
+		    }
+	    }
+	    .faq-questions {
+	    	position:relative;
+	    	cursor: pointer;
+	    	.faq-title {
+			    margin: 0;
+		        border-bottom: 1px solid #000;
+				padding-bottom: 0px;
+				font-size: 18px;
+    			letter-spacing: 0.5px;
+    			padding-left: 80px;
+    			position: relative;
+    			box-sizing: border-box;
+    			line-height: 46px;
+    			&:before {
+    				content: "Q";
+				    background: #000000;
+				    color: #ffffff;
+				    left: 0;
+				    top: 0px;
+    			}
+			}
+			&:after,&:before {
+				content: '';
+			    position: absolute;
+			    background: #000;
+			    transition: 150ms all ease-out;
+			    top:50%;
+			    transform: ~"translateY(-50%)";
+			    right:20px;
+			    width:20px;
+			    height:2px;
+			}
+			&:after {
+				transform: ~"rotate(90deg)";
+			}
+	    }
+	}
+	.faq-list.show .faq-questions {
+    	&:after {
+    		transform:none;
+    	}
+    }
+}

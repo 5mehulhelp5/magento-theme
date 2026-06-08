@@ -1,0 +1,39 @@
+<?php
+$isEnableModule = $block->getConfigValue();
+?>
+<?php if ($isEnableModule == 1): ?>
+<div class="testimonial-container">
+    <div class="testimonial-title-block">
+        <h3><?= /* @noEscape */ __('Testimonial') ?></h3>
+    </div>
+    <div>
+        <div class="testimonial-grid-wrapper" id="testimonial-grid">
+        <?php foreach ($block->getItems() as $question):
+            $imgsrc = $block->getMediaUrl().'testimonials/image/'.$question->getImage();
+            ?>
+            <div class="testimonial-customer">
+                <div class="customer-inner">
+                    <div class="testimonial-avatar">
+                        <?php 
+                        if($question->getImage()){
+                            $imgsrc = $block->getMediaUrl().'testimonials/image/'.$question->getImage(); ?>
+                        <img src="<?= /* @noEscape */ $imgsrc?>"
+                        alt="customer" width="160" height="160">
+                        <?php }else{ ?>
+                            <img src="<?= /* @noEscape */ $block->getPlaceHolderImage();?>"
+                        alt="customer" width="160" height="160">
+                        <?php } ?>
+                    </div>
+                    <div class="testimonial-detail">
+                        <h4 class="entry-name"><?= /* @noEscape */ $question->getName();?></h4>
+                        <div class="entry-comment">
+                            <p><?= /* @noEscape */ $question->getMessage();?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach;?>
+        </div>
+    </div>
+</div>
+<?php endif;?>

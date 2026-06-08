@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <referenceContainer name="content">
+        <block class="Forever\Blog\Block\TagView" name="blog.tag.view" template="Forever_Blog::tagView.phtml">
+            <arguments>
+                   <argument name="view_model" xsi:type="object">Forever\Blog\ViewModel\BlogData</argument>
+            </arguments> 
+        </block>
+        <container name="div.sidebar.main" htmlTag="div" htmlClass="sidebar sidebar-main" after="main">
+            <container name="blog.sidebar.main" as="sidebar_main" label="Sidebar Main">                    
+                <block class="Forever\Blog\Block\Sidebar\MostView" name="blog.sidebar.mostview" template="sidebar/mostview.phtml">
+                <arguments>
+                   <argument name="view_model" xsi:type="object">Forever\Blog\ViewModel\BlogData</argument>
+                </arguments>
+                </block>
+                <block class="Forever\Blog\Block\TagList" name="blog.tagList" template="tagList.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Forever\Blog\ViewModel\BlogData</argument>
+                </arguments>
+                </block>
+            </container>
+        </container> 
+        <block class="Forever\Blog\Block\TagView" name="tag.title" template="Forever_Blog::tagViewTitle.phtml"/>        
+    </referenceContainer>
+    <move element="tag.title" destination="columns" before="-"/>
+    <move element="blog.sidebar.main" destination="sidebar.additional" after="-" />
+    <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+    <referenceBlock name="wishlist_sidebar" remove="true" />
+</page>

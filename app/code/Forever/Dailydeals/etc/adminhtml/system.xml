@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="forever" translate="label" sortOrder="110">
+            <label>Forever</label>
+        </tab>
+		<section id="dailydeals" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+			<class>separator-top</class>
+			<label>Daily Deals</label>
+			<tab>forever</tab>
+			<resource>Forever_Dailydeals::config_dailydeals</resource>
+			<group id="dailydeals_info" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <frontend_model>Forever\Dailydeals\Block\Adminhtml\System\Config\Information</frontend_model>
+            </group>
+			<group id="general" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>General Configuration</label>
+				<field id="enabled" translate="label comment" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enabled</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="dailydeals_productsku" translate="label comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Product SKU</label>
+					<validate>required-entry</validate>
+					<comment>Enter product SKU which you want to show in dailydeals</comment>
+					<depends>
+	                    <field id="dailydeals/general/enabled">1</field>
+	                </depends>
+				</field>
+				<field id="dailydeals_exptime" translate="label comment" type="date" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sale Expires On</label>
+                    <comment>Enter Time and Date on when you want to end the sale</comment>
+                    <frontend_model>Forever\Dailydeals\Block\Adminhtml\DateTime</frontend_model>
+                    <depends>
+	                    <field id="dailydeals/general/enabled">1</field>
+	                </depends>
+                </field>
+                <field id="dailydeals_saletext" translate="label comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Sale Text</label>
+					<comment>Enter Sale Text</comment>
+					<depends>
+	                    <field id="dailydeals/general/enabled">1</field>
+	                </depends>
+				</field>
+				<field id="dailydeals_buttontext" translate="label comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>AddToCart Button Text</label>
+					<comment>Enter AddToCart Button Text</comment>
+					<depends>
+	                    <field id="dailydeals/general/enabled">1</field>
+	                </depends>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- /**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Forever_Faq::management" title="FAQ" translate="title" module="Forever_Faq" sortOrder="30"
+             parent="Magento_Backend::content" resource="Magento_Backend::design"/>
+
+        <add id="Forever_Faq::questions" title="Questions" translate="title" module="Forever_Faq" sortOrder="0"
+             parent="Forever_Faq::management" action="faq/question/index" resource="Magento_Config::config_design"/>
+        
+    </menu>
+</config>

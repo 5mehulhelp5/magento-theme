@@ -1,0 +1,64 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Top menu for store
+ *
+ * @var $block \Magento\Theme\Block\Html\Topmenu
+ */
+
+$columnsLimit = $block->getColumnsLimit() ?: 0;
+$_menuHtml = $block->getHtml('level-top', 'submenu', $columnsLimit)
+?>
+
+<nav class="navigation" data-action="navigation">
+    <ul data-mage-init='{"menu":{"responsive":true, "expanded":true, "position":{"my":"left top","at":"left bottom"}}}'>
+        <?= /* @noEscape */ $_menuHtml?>
+        <?= $block->getChildHtml() ?>
+    </ul>
+    <div class="switchpage-control">
+        <a class="control" href="#">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="times"></span>
+        </a>
+    </div>
+</nav>
+<!-- <style>
+@keyframes show-page {
+    0% {
+        opacity: 0;
+        width: 0px;
+        overflow: hidden
+    }
+    99% {
+        width: 100%;
+        overflow: hidden
+    }
+    100% {
+        opacity: 1;
+        width: 100%;
+        overflow: visible
+    }
+}
+@keyframes hide-page {
+    0% {
+        width: 100%
+    }
+    100% {
+        width: 0px
+    }
+}
+.animated {
+    animation-name: show-page;
+    animation-duration: 1000ms;
+}
+.remove-class {
+    animation-name: hide-page;
+    animation-duration: 1000ms;
+}
+</style> -->

@@ -1,0 +1,375 @@
+<?php
+use Magento\Framework\App\Action\Action;
+
+$imageBlock =  $block->getLayout()->createBlock(Magento\Catalog\Block\Product\ListProduct::class);
+$showCart = true;
+$type = 'widget-new-grid';
+$viewMode = 'grid';
+$image = 'category_page_grid';
+$pos = $block->getPositioned();
+$isEnabled = $block->isModuleEnabled();
+
+?>
+<?php if ($isEnabled):?>
+<div class="home-page-product-slider bestseller-slider-section reveal">
+    <div class="page-title-wrapper">
+        <h3 class="page-title">
+            <span><?=/* @noEscape */ __("New Arrival Products")?></span>
+        </h3>
+    </div>
+    <div class="home-product-tab">
+        <div class="home-product-tab-content">
+                <div class=" nav-tabs">
+                    <?php $selectedCategory = $block->getSelectedCategory();
+                    if($selectedCategory):
+                    ?>
+                    <ul class="tab-list" id="tabs-nav">
+                        <?php foreach ($selectedCategory as $key => $value):?>
+                            <?php $category = $value; ?>
+                            <?php
+                                $objectManager =  \Magento\Framework\App\ObjectManager::getInstance();
+                                $categorysFactory = $objectManager->get(Magento\Catalog\Model\CategoryFactory::class);
+                                $categoryData = $categorysFactory->create()->load($key);
+                                $categoryProducts = $categoryData->getProductCollection()
+                                    ->addAttributeToFilter(
+                                        'visibility',
+                                        \Magento\Catalog\Model\Product\Visibility::VISIBILITY_BOTH
+                                    )
+                                    ->addAttributeToFilter(
+                                        'status',
+                                        \Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED
+                                    );
+                                    $activePorductCount = count($categoryProducts->getData());
+                            ?>
+                            <?php if ($activePorductCount > 0):?>
+                                <li class="tablinks" name="<?=/* @noEscape */ $category ?>">
+                                    <a href="#tab-<?=/* @noEscape */ $key?>"><?=/* @noEscape */ $category ?></a>
+                                    <span class="product-count">
+                                        <?= /* @noEscape */ $activePorductCount; ?>
+                                        <b><?= /* @noEscape */ __('product') ?></b>
+                                    </span>
+                                </li>
+                            <?php endif; ?>
+                        <?php endforeach ?>
+                    </ul>
+                </div> 
+            <?php foreach ($selectedCategory as $key => $value):?>
+            <div class="tab-content" id="<?= /* @noEscape */'tab-'.$key?>">
+                <div class="products-grid">
+                    <?php $categoryProducts = $block->getCategoryProducts($key); ?>
+                    <?php if (!$categoryProducts->count()):?>
+                        <div class="message info empty"><div>
+                            <?= $block->escapeHtml(__('We can\'t find products matching the selection.')) ?></div>
+                        </div>
+                    <?php else:?>
+                    <div id="topseller-slider" class="products list items product-items owlslider" 
+                            data-jcarousel="true">
+                        <ul class="product-items">
+                            <div class="owl-carousel owl-theme new-arrival-slider product-slider ">
+                             <?php $iterator = 1; ?>
+                                <?php foreach ($categoryProducts as $key => $product): ?>
+                                    <?php $productImage = $imageBlock->getImage($product, 'category_page_grid');
+                                    if ($pos == null) {
+                                        $position = ' style="left:' . $productImage->getWidth() . 'px;'
+                                            . 'top:' . $productImage->getHeight() . 'px;"';
+                                    }
+                                    ?>
+                                    <?= /* @noEscape */($iterator++ == 1) ?
+                                    '<li class="product-item">
+                                    <div class="product-item-info">' : '</div></li>
+                                    <li class="product-item"><div class="product-item-info">' ?>
+                                <div class="product-image-section">
+                                    <?php // display the product label
+                                    if ($select = $product->getProductoption()):
+                                        $selectAttr =  $product->getResource()->getAttribute('productoption');
+                                        if ($selectAttr->usesSource()) {
+                                            $select = $selectAttr->getSource()->getOptionText($select);
+                                            $productoption = strtolower(str_replace(' ', '_', $select));
+                                        }
+                                    endif;
+                                    $productlabel = $block->getProductlabel($product);
+                                    $confproductlabel = $block->getScopeconfig(
+                                        'productlabel/general/productlabelenable'
+                                    );
+                                    if ($confproductlabel && !empty($productlabel)):?>
+                                        <div class="product_label_wrapper <?= /* @noEscape */ $productoption ?>">
+                                        <?php foreach ($productlabel as $productlabelvalue):
+                                            if ($productlabelvalue):?>
+                                                <span class="productlabel <?= /* @noEscape */
+                                                is_numeric($productlabelvalue) ? 'discount'
+                                                :strtolower(str_replace(' ', '', $productlabelvalue)) ?>">
+                                                    <?php if (is_numeric($productlabelvalue)):
+                                                        $sign = '% off';?>
+                                                        <?= /* @noEscape */ $productlabelvalue.$sign ?>
+                                                    <?php else: ?>    
+                                                        <?= /* @noEscape */ $productlabelvalue ?>
+                                                    <?php endif; ?>        
+                                                </span><?php
+                                            endif;
+                                        endforeach;?>
+                                        </div>
+                                    <?php endif;
+                                    // display the product label?>
+                                    <?php
+                                        $isEnable = $block->getImageSwitcherConfigValue();
+                                    ?>
+                                    <?php if ($isEnable): ?>
+                                        <div class="flip-box">
+                                            <div class="flip-box-inner">
+                                                <div class="flip-box-front">
+                                                    <a href="<?= $block->escapeUrl($product->getProductUrl()) ?>"
+                                                       class="product photo product-item-photo"
+                                                       tabindex="-1">
+                                                        <?= $productImage->toHtml() ?>
+                                                    </a>
+                                                </div>
+                                                <?php $productImageUrl = $block->getImageUrl($product); ?>
+                                                <div class="flip-box-back">
+                                                    <a href="<?= $block->escapeUrl($product->getProductUrl()) ?>"
+                                                       class="product photo product-item-photo"
+                                                       tabindex="-1">
+                                                        <img src="<?= /* @noEscape */ $productImageUrl ?>"
+                                                            alt="<?= /* @noEscape */ $product->getName() ?>"
+                                                            style="width:100%;height:100%">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php else: ?>
+                                        <a class="product photo product-item-photo"
+                                            href="<?= /* @noEscape */ $product->getProductUrl(); ?>"
+                                        >
+                                            <?= /* @noEscape */$productImage->toHtml()  ?></a>
+                                    <?php endif; ?>
+                                    <?php if ($showCart): ?>                                   
+                                    <div class="product-item-inner">
+                                        <div class="product actions product-item-actions">
+                                        
+                                            <div class="actions-primary"
+                                                    <?= /* @noEscape */
+                                                    ($pos && strpos($pos, $viewMode . '-primary')) ?
+                                                    $position : ''; ?>>
+                                                    <?php if ($product->isSaleable()): ?>
+                                                        <?php $postParams =
+                                                        $block->getAddToCartPostParams($product); ?>
+                                                <form data-role="tocart-form" 
+                                                action="<?= /* @noEscape */ $postParams['action']; ?>" 
+                                                method="post">
+                                                    <input type="hidden" name="product" 
+                                                    value="<?= /* @noEscape */ $postParams['data']['product']; ?>">
+                                                    <input type="hidden" name="
+                                                            <?= /* @noEscape */
+                                                            Action::PARAM_NAME_URL_ENCODED; ?>" 
+                                                    value="<?= /* @noEscape */ $postParams['data']
+                                                    [Action::PARAM_NAME_URL_ENCODED]; ?>">
+                                                            <?= /* @noEscape */
+                                                            $block->getBlockHtml('formkey')?>
+                                                    <button type="submit"
+                                                        title="
+                                                            <?= /* @noEscape */
+                                                            $block->escapeHtml(__('Add to Cart')); ?>"
+                                                        class="action tocart primary">
+                                                    <span><?= /* @noEscape */ __('Add to Cart') ?></span>
+                                                    </button>
+                                                </form>
+                                                <?php else: ?>
+                                                    <?php if ($product->getIsSalable()): ?>
+                                                        <div class="stock available">
+                                                            <span>
+                                                                <?= /* @noEscape */ __('In stock') ?>        
+                                                            </span>
+                                                        </div>
+                                                        <?php else: ?>
+                                                            <div class="stock unavailable">
+                                                            <span>
+                                                            <?= /* @noEscape */ __('Out of stock') ?>            
+                                                            </span>
+                                                            </div>
+                                                    <?php endif; ?>
+                                                <?php endif; ?>
+                                                <div class="actions-secondary" data-role="add-to-links">
+                                                    <?php
+                                                    $values = $block->getAuthenticationpopup();
+                                                    if ($values == 1) {
+                                                        $productId = json_decode(
+                                                            $block->getAddToWishlistParams(
+                                                                $product
+                                                            ),
+                                                            true
+                                                        )['data']['product'] ?>
+                                                    <a href="#"
+                                                    onclick="addProductToWishlist(this)"
+                                                    class="action towishlist"
+                                                    data-action="add-to-wishlist"
+                                                    product-id='<?= /* @noEscape */ $productId ?>'
+                                                    title="<?= /* @noEscape */ __('Add to Wish List') ?>">
+                                                     <span><?= /* @noEscape */__('Add to Wish List') ?></span>
+                                                    </a>
+
+                                                    <script>
+                                                    window.addProductToWishlist = function (obj) {
+                                                        if(!parseInt(obj)){
+                                                            var id = obj.getAttribute('product-id');
+                                                        }else{
+                                                            var id = obj;
+                                                        }
+                                                        
+                                                        require(["jquery"], function($){
+                                                            var url = '<?= /* @noEscape */
+                                                            $block->getUrl('ajaxlogin/index/addtowishlist')
+                                                            ?>';
+                                                            var locationUrl = '<?= /* @noEscape */
+                                                            $block->getUrl('wishlist/index/index') ?>';
+                                                            $.ajax({
+                                                                url: url,
+                                                                method: 'get',
+                                                                data: { productId: id},
+                                                                dataType: 'json',
+                                                                showLoader:true,
+                                                                success: function(data){
+                                                                    if(data.status=="400"){
+                                                                        localStorage.removeItem('wishlist_elem');    
+                                                                        localStorage.setItem('wishlist_elem', id);
+                                                                        $('.trigger-ajax-login').eq(0).trigger('click');
+                                                                    }else{
+                                                                        var redirect = data.redirect;
+                                                                        localStorage.removeItem('wishlist_elem');
+                                                                        if(redirect) {
+                                                                            window.location.href = locationUrl
+                                                                        } else {
+                                                                          <?= /* @noEscape */ __("success"); ?>
+                                                                        }
+                                                                    }
+                                                                }
+                                                            });
+
+
+                                                        });
+                                                    }
+                                                    </script>
+                                                    <?php } else { ?>
+
+                                                        <a href="#"
+                                                       data-post='<?= /* @noEscape */
+                                                        $block->getAddToWishlistParams($product); ?>'
+                                                       class="action towishlist" data-action="add-to-wishlist"
+                                                       title="<?= /* @noEscape */ __('Add to Wish List') ?>">
+                                                        <span><?= /* @noEscape */__('Add to Wish List') ?></span>
+                                                    </a>
+
+                                                <?php }?>
+                                                    <a href="#" 
+                                                       data-post='<?= /* @noEscape */
+                                                        $block->getCompareHelper()
+                                                        ->getPostDataParams($product);?>'
+                                                       class="action tocompare"
+                                                       data-action="add-to-compare"
+                                                       title="<?= /* @noEscape */__('Add to Compare') ?>">
+                                                        <span><?= /* @noEscape */ __('Add to Compare') ?></span>
+                                                    </a>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product details product-item-details">
+                                    <strong class="product name product-item-name">
+                                    <a class="product-item-link" 
+                                        href="<?= /* @noEscape */ $product->getProductUrl() ?>"
+                                    >
+                                        <?= /* @noEscape */ $product->getName(); ?>
+                                    </a>
+                                    </strong>
+                                    <?= /* @noEscape */
+                                        $block->getProductPricetoHtml($product, $type); ?>
+                                        <?= /* @noEscape */
+                                        $block->getProductDetailsHtml($product); ?>
+                                </div>
+                                    <?= /* @noEscape */
+                                    ($iterator == count($categoryProducts)+1) ? '</div></li>' : '' ?>
+                                <?php endforeach ?>
+                            </div>
+                        </ul>
+                    </div>  
+                    <?php endif ?>   
+                </div> 
+            </div> 
+            <?php endforeach ?>
+            <?php endif ?>
+        </div>
+    </div>
+</div>
+    <?php if (!$block->isRedirectToCartEnabled()): ?>
+    <script type="text/x-magento-init">
+        {
+            "[data-role=tocart-form], .form.map.checkout": {
+                "catalogAddToCart": {}
+            }
+        }
+    </script>
+    <?php endif; ?>
+
+<script>
+require(['jquery'], function ($) {
+    $(document).ready(function(){
+        $('#tabs-nav li:first-child').addClass('active');
+        $('.tab-content').hide();
+        $('.tab-content:first').show();
+
+        // Click function
+        $('#tabs-nav li').click(function(){
+          $('#tabs-nav li').removeClass('active');
+          $(this).addClass('active');
+          $('.tab-content').hide();
+          
+          var activeTab = $(this).find('a').attr('href');
+          $(activeTab).fadeIn();
+          return false;
+        });
+    });
+});
+</script>
+
+<?php endif; ?> 
+
+<script>
+require(['jquery','jquery/ui','owlCarousel'], function ($) {
+    $(document).ready(function(){
+        $(function() {
+            $(".new-arrival-slider").owlCarousel({
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    480:{
+                        items:2
+                    },
+                    768:{
+                        items:2
+                    },
+                    992:{
+                        items:2
+                    },
+                    1024:{
+                        items:3
+                    },
+                    1200:{
+                        items:3
+                    }
+                },
+                autoplay:false,
+                loop:false,
+                nav : true, // Show next and prev buttons
+                dots: false,
+                autoplaySpeed : 500,
+                navSpeed : 500,
+                dotsSpeed : 500,
+                autoplayHoverPause: true,
+                items:4,
+            });
+        })
+    });
+});
+</script>
+

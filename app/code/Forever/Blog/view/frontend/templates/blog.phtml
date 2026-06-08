@@ -1,0 +1,59 @@
+<?php
+/**
+ * @var $block Forever\Blog\Block\BlogHome
+ */
+$isEnableModule = $block->getConfig();
+?>
+<?php if ($isEnableModule == 1): ?>
+<?php $colletion = $block->getBlogCollection(); ?>
+<div class="blog-wrapper-container reveal">
+<h3 class="blog-heading"><?= __("Blog") ?></h3>
+    <div class="blog-holder">
+       <div class="blog-items owl-carousel owl-theme">    
+            <?php if (count($colletion)): ?>
+                <?php foreach ($colletion as $row): ?>
+                    <div class="item">
+                        <div class="article-thumbnail owl-carousel owl-theme">
+                            <div class="img-inner">
+                            <?php if($row->getBlogImage()): ?>
+                                <img class="attachment-drile_blog_thumb size-drile_blog_thumb wp-post-image"
+                                    src="<?= /* @noEscape */ $block->getBlogImage($row->getBlogImage()) ?>"
+                                    alt="<?= /* @noEscape */ $row->getBlogImage() ?>"
+                                    width="1170"
+                                    height="940" 
+                                />
+                            <?php else: ?>
+                                <img class="attachment-drile_blog_thumb size-drile_blog_thumb wp-post-image"
+                                    src="<?= /* @noEscape */ $block->getPlaceHolderImage(); ?>"
+                                    alt="<?= /* @noEscape */ $row->getBlogImage() ?>"
+                                    width="1170"
+                                    height="940" 
+                                />
+                            <?php endif; ?>
+                            </div>
+                            <p class="blog-meta-date">
+                                <?= /* @noEscape */ $block->getBlogDate($row->getPublishTime()) ?>
+                            </p>
+                            <p class="blog-list">
+                                <a href="<?= /* @noEscape */ $block->getViewUrl($row->getUrlKey()) ?>">
+                                    <?= /* @noEscape */ $row->getAuthor() ?>
+                                </a>
+                            </p>
+                            <a class="blog-title" href="<?= /* @noEscape */ $block->getViewUrl($row->getUrlKey()) ?>">
+                                <?= /* @noEscape */ $row->getTitle() ?>
+                            </a>
+                            <p class="blog-excerpt">
+                                <?= /* @noEscape */ $block->getBlogShortContent($row->getContentHeading()) ?>
+                            </p>
+                            <a class="blog-button action primary"
+                                href="<?= /* @noEscape */ $block->getViewUrl($row->getUrlKey()) ?>">
+                                <?= /* @noEscape */ __('Read More') ?>
+                            </a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif;?>
+        </div>
+    </div>
+</div>
+<?php endif;?>

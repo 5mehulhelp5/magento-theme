@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!-- /**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles"/>
+    <head>
+        <title>FAQ — Frequently Asked Questions</title>
+        <css src="Forever_Faq::css/accordion.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block template="questions.phtml" class="Forever\Faq\Block\Questions"
+                   name="faq_block_questions"/>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,83 @@
+<ol class="items">
+    <?php
+    $viewModel = $block->getViewmodels();
+    $blockLayered = $block->getLayout()->createBlock(\Forever\LayeredNavigation\Block\Layerednav::class);
+    $rangePrice = $blockLayered ? $blockLayered->getCurrentCategoryMaxPrice() : false;
+    $showCount = $viewModel->shouldDisplayProductCountOnLayer();
+    $priceFormat = $viewModel->getPriceFormat($block->getStore());
+    $jsonHelper = $viewModel->getjsondata();
+    ?>
+    <?php foreach ($filterItems as $filterItem): ?>
+        <?php
+        $filter = $filterItem->getFilter();
+        $attributeModel = $filter->getData('attribute_model');
+        $inputName = $filter->getRequestVar();
+        $requestValue = $block->getRequest()->getParam($inputName);
+        $requestValueString = is_array($requestValue) ? '' : (string)$requestValue;
+        $requestArray = $requestValueString !== '' ? explode(',', $requestValueString) : [];
+        $isPriceFilter = $inputName === 'price' || ($attributeModel && $attributeModel->getFrontendInput() == 'price');
+        $url = in_array((string)$filterItem->getValue(), $requestArray, true) ? $filterItem->getRemoveUrl() : $filterItem->getUrl();
+        ?>
+        <li class="item">
+            <?php if ($isPriceFilter): ?>
+                <?php
+                $min = is_array($rangePrice) ? (int)$rangePrice['min'] : (int)$filterItem->getData('from');
+                $max = is_array($rangePrice) ? (int)$rangePrice['max'] : (int)$filterItem->getData('to');
+                if ($max <= $min) {
+                    $max = $min + 1;
+                }
+                $selectedRange = $requestValueString !== '' ? explode('-', explode(',', $requestValueString)[0]) : [$min, $max];
+                $from = isset($selectedRange[0]) && is_numeric($selectedRange[0]) ? (float)$selectedRange[0] : $min;
+                $to = isset($selectedRange[1]) && is_numeric($selectedRange[1]) ? (float)$selectedRange[1] : $max;
+                ?>
+                <div id="layered_ajax_price_attribute">
+                    <div id="layered_ajax_price_text"></div>
+                    <div id="layerednav_price_slider"></div>
+                </div>
+                <script type="text/x-magento-init">
+                    {
+                        "#layered_ajax_price_attribute": {
+                            "Forever_LayeredNavigation/js/priceslider": {
+                                "selectedFrom": <?= /* @noEscape */ $from ?>,
+                                "selectedTo": <?= /* @noEscape */ $to ?>,
+                                "minValue": <?= /* @noEscape */ $min ?>,
+                                "maxValue": <?= /* @noEscape */ $max ?>,
+                                "priceFormat": <?= /* @noEscape */ $priceFormat ?>,
+                                "ajaxUrl": <?= /* @noEscape */ $jsonHelper->jsonEncode($filterItem->getUrl()) ?>
+                            }
+                        }
+                    }
+                </script>
+            <?php else: ?>
+                <?php if ($filterItem->getCount() > 0): ?>
+                    <a <?= in_array((string)$filterItem->getValue(), $requestArray, true) ? 'class="active"' : '' ?>
+                       href="<?= $block->escapeUrl($url) ?>">
+                        <?php if ($attributeModel && $attributeModel->getFrontendInput() == 'multiselect'): ?>
+                            <input type="checkbox" <?= in_array((string)$filterItem->getValue(), $requestArray, true) ? 'checked="checked"' : '' ?> />
+                        <?php endif; ?>
+                        <?= /* @noEscape */ $filterItem->getLabel() ?>
+                        <?php if ($showCount): ?>
+                            <span class="count"><?= /* @noEscape */ $filterItem->getCount() ?>
+                                <span class="filter-count-label">
+                                    <?= /* @noEscape */ $filterItem->getCount() == 1 ? __('item') : __('items') ?>
+                                </span>
+                            </span>
+                        <?php endif; ?>
+                    </a>
+                <?php else: ?>
+                    <?php if ($attributeModel && $attributeModel->getFrontendInput() == 'multiselect'): ?>
+                        <input type="checkbox" disabled="disabled" />
+                    <?php endif; ?>
+                    <?= /* @noEscape */ $filterItem->getLabel() ?>
+                    <?php if ($showCount): ?>
+                        <span class="count"><?= /* @noEscape */ $filterItem->getCount() ?>
+                            <span class="filter-count-label">
+                                <?= /* @noEscape */ $filterItem->getCount() == 1 ? __('item') : __('items') ?>
+                            </span>
+                        </span>
+                    <?php endif; ?>
+                <?php endif; ?>
+            <?php endif; ?>
+        </li>
+    <?php endforeach ?>
+</ol>

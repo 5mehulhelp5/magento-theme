@@ -1,0 +1,22 @@
+<?php
+/**
+ * @var $block \Magento\Catalog\Block\Product\Image
+ */
+?>
+<?php
+$helper = $this->helper(Forever\Lazyload\Helper\Filter::class);
+$customAttributes = !is_array($block->getCustomAttributes()) ? $block->getCustomAttributes() : null;
+?>
+<span class="product-image-container"
+      style="width:<?= /* @noEscape */ $block->getWidth() ?>px;">
+    <span class="product-image-wrapper"
+          style="padding-bottom: <?= /* @noEscape */ ($block->getRatio() * 100) ?>%;">
+        <img class="product-image-photo <?= /* @noEscape */ $helper->getLazyClasses() ?>"
+            <?= /* @noEscape */ $customAttributes ?>
+            src="<?= /* @noEscape */ $helper->getPlaceHolderUrl() ?>"
+            data-src="<?= /* @noEscape */ $block->getImageUrl() ?>"
+            width="<?= /* @noEscape */ $block->getResizedImageWidth() ?>"
+            height="<?= /* @noEscape */ $block->getResizedImageHeight() ?>"
+            alt="<?= /* @noEscape */ $block->stripTags($block->getLabel(), null, true) ?>"/>
+    </span>
+</span>

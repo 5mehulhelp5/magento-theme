@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!-- /**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add 
+        id="Forever_Theme::storelocator" 
+        title="Store Locator" 
+        module="Forever_StoreLocator" 
+        sortOrder="10"
+        parent="Forever_Core::forever" 
+        resource="Forever_StoreLocator::elements" />
+        
+        <add id="Forever_StoreLocator::index" 
+            title="Store Locator" 
+            module="Forever_StoreLocator" 
+            sortOrder="20" 
+            parent="Forever_Theme::storelocator" 
+            action="storelocator/index" 
+            resource="Forever_StoreLocator::index"
+        />
+
+    </menu>
+</config>

@@ -1,0 +1,10 @@
+<?php
+$postData = $block->getRequest()->getParams();
+foreach ($postData as $key => $value) {
+    $urlKey = $key;
+}
+$collections = $block->getPost($urlKey);
+?>
+<div class="blog-title page-title-wrapper">
+    <h2 class="page-title"><span class="mb-5"><?= /* @noEscape */ $collections->getTitle(); ?></span></h2>
+</div>  

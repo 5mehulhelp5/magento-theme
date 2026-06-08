@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="forever" translate="label" sortOrder="110">
+            <label>Forever</label>
+        </tab>
+		<section id="infinitescroll" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+			<class>separator-top</class>
+			<label>Infinite Scroll</label>
+			<tab>forever</tab>
+			<resource>Forever_InfiniteScroll::config_infinitescroll</resource>
+			<group id="general" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>General Configuration</label>
+				<field id="enabled" translate="label comment" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="infinitescroll_delay" translate="label comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Delay (ms)</label>
+					<comment>Delay value for scroll down.</comment>
+					<depends>
+	                    <field id="infinitescroll/general/enabled">1</field>
+	                </depends>
+				</field>
+				<field id="infinitescroll_content" translate="label comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Content</label>
+					<comment>Selector for the element that surrounds the items you will be loading more of. (For Ex.= .classname/#id)</comment>
+					<depends>
+	                    <field id="infinitescroll/general/enabled">1</field>
+	                </depends>
+				</field>
+				<field id="infinitescroll_pagination" translate="label comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Pagination</label>
+					<comment>Selector for pagination. (For Ex.= .classname/#id)</comment>
+					<depends>
+	                    <field id="infinitescroll/general/enabled">1</field>
+	                </depends>
+				</field>
+				<field id="infinitescroll_next" translate="label comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Next</label>
+					<comment>Selector for the link to the next page. (For Ex.= .classname/#id)</comment>
+					<depends>
+	                    <field id="infinitescroll/general/enabled">1</field>
+	                </depends>
+				</field>
+				<field id="infinitescroll_item" translate="label comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Item</label>
+					<comment>Selector for all items you will receive. (For Ex.= .classname/#id)</comment>
+					<depends>
+	                    <field id="infinitescroll/general/enabled">1</field>
+	                </depends>
+				</field>
+				
+				<field id="infinitescroll_loadingimage" translate="label comment" type="image" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Loading Image Placeholder</label>
+                    <comment>Allowed file types: jpg, jpeg, gif, png.</comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+					<upload_dir config="system/filesystem/media" scope_info="1">forever/infinitescroll</upload_dir>
+					<base_url type="media" scope_info="1">forever/infinitescroll</base_url>
+					<depends>
+	                    <field id="infinitescroll/general/enabled">1</field>
+	                </depends>
+                </field>
+				<field id="infinitescroll_loadingtext" translate="label comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Loading Text</label>
+					<depends>
+	                    <field id="infinitescroll/general/enabled">1</field>
+	                </depends>
+				</field>
+				<field id="infinitescroll_loadmore" translate="label comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Load More threshold</label>  
+					<comment>When this page number is reached, a button to load more products will be shown instead of continue loading products automatically with the scroll (this could be useful to help the user to reach the footer). Note: use a high number to disable this feature.</comment>
+					<depends>
+	                    <field id="infinitescroll/general/enabled">1</field>
+	                </depends>
+				</field>
+				<field id="infinitescroll_loadmoretext" translate="label comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Load More button text</label>  
+					<comment>Set an offset before page end from which the content will start to load. A high number will load the next page a long time before the user reaches the bottom of the screen.</comment>
+					<depends>
+	                    <field id="infinitescroll/general/enabled">1</field>
+	                </depends>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

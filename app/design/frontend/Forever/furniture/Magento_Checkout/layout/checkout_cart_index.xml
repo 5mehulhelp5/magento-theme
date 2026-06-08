@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Forever_Core::css/flip.css" />
+    </head>
+    <body>
+        <referenceBlock name="checkout.cart.crosssell">
+            <arguments>
+                <argument name="imageswticher" xsi:type="object">Forever\Core\ViewModel\Imageswitcher</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="checkout.cart.crosssell">
+            <arguments>
+                <argument name="labelviewmodel" xsi:type="object">Forever\Productlabel\ViewModel\ProductLabelViewModel</argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

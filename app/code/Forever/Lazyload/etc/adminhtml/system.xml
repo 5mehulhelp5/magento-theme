@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="forever" translate="label" sortOrder="110">
+            <label>Forever</label>
+        </tab>
+        <section id="lazyload" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+			<class>separator-top</class>
+			<label>LazyLoad</label>
+			<tab>forever</tab>
+			<resource>Forever_Lazyload::config_lazyload</resource>
+			<group id="general" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>General Configuration</label>
+				<field id="enable" translate="label comment" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Lazy Load</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="lazyload_images" translate="label comment" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Lazy load images</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends>
+	                    <field id="lazyload/general/enable">1</field>
+	                </depends>
+				</field>
+				<field id="lazyload_iframes" translate="label comment" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Lazy load iframes</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends>
+	                    <field id="lazyload/general/enable">1</field>
+	                </depends>
+				</field>
+				<field id="lazyload_cms" translate="label comment" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Lazy load CMS</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends>
+	                    <field id="lazyload/general/enable">1</field>
+	                </depends>
+				</field>
+				<field id="lazyload_placeholder" translate="label comment" type="image" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Placeholder Image</label>
+					<backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+					<upload_dir config="system/filesystem/media" scope_info="1">forever/lazyload</upload_dir>
+					<base_url type="media" scope_info="1">forever/lazyload</base_url>
+					<depends>
+	                    <field id="lazyload/general/enable">1</field>
+	                </depends>
+				</field>
+				<field id="lazyload_skipclasses" translate="label comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Skip images with classes</label>
+					<comment>Comma-separated. Example: "no-lazy, lazy-ignore"</comment>
+					<depends>
+	                    <field id="lazyload/general/enable">1</field>
+	                </depends>
+				</field>
+				<field id="lazyload_delay" translate="label comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Delay</label>
+					<validate>validate-number</validate>
+					<comment>If you want to load all elements at once after page load, then you can specify a delay time in milliseconds.</comment>
+					<depends>
+	                    <field id="lazyload/general/enable">1</field>
+	                </depends>
+				</field>
+				<field id="lazyload_effect" translate="label comment" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Effect</label>
+					<source_model>Forever\Lazyload\Model\Config\Source\Effect</source_model>
+					<depends>
+	                    <field id="lazyload/general/enable">1</field>
+	                </depends>
+				</field>
+				<field id="lazyload_effecttime" translate="label comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Effect Time</label>
+					<comment>Time in milliseconds the effect should use to view the image.</comment>
+					<validate>validate-not-negative-number</validate>
+					<depends>
+	                    <field id="lazyload/general/enable">1</field>
+	                </depends>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

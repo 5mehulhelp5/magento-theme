@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!-- /**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+<system>
+    <tab id="forever" translate="label" class="forever" sortOrder="100">
+        <label>Forever</label>
+    </tab>
+    <section id="blog" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1"
+        showInStore="1">
+        <class>separator-top</class>
+        <label>Blog</label>
+        <tab>forever</tab>
+        <resource>Forever_Blog::config_blog</resource>
+        <group id="general" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+         showInStore="1">
+            <label>Configuration</label>
+            <field id="enable" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+            showInWebsite="1" showInStore="1">
+            <label>Module Enable</label>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>         
+            <field id="list_per_page_values" translate="label comment" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <label>Products per Page on List Allowed Values</label>
+                <comment>Comma-separated.</comment>
+                <validate>validate-per-page-value-list required-entry</validate>
+            </field>
+            <field id="list_per_page" translate="label comment" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Products per Page on List Default Value</label>
+                        <comment>Must be in the allowed values list.</comment>
+                        <validate>validate-per-page-value</validate>
+            </field>       
+        </group>
+        <group id="sidebar" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Sidebar</label>
+            <field id="number_recent_posts" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                  <label>Number of recent posts</label>
+                  <validate>validate-digits</validate>
+            </field>            
+      </group>      
+    </section> 
+</system>
+</config>

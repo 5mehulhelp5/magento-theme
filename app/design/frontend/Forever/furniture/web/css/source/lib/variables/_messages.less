@@ -1,0 +1,123 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Messages variables
+//  _____________________________________________
+
+@message__padding: @indent__s @indent__base;
+@message__margin: 0 0 @indent__s;
+
+@message__color: false; // Each message type has its own message color
+@message__font-size: 13px;
+@message__font-family: false;
+@message__font-style: false;
+@message__font-weight: false;
+@message__line-height: 1.2em;
+
+@message-icon__font-size: ceil(@message__font-size * 2 + 2);
+@message-icon__font-line-height: @message-icon__font-size;
+@message-icon__inner-padding-left: 40px;
+@message-icon__lateral-width: 30px;
+@message-icon__lateral-arrow-size: 5px;
+@message-icon__top: 18px;
+@message-icon__right: false;
+@message-icon__bottom: false;
+@message-icon__left: 0;
+
+@message__border-width: false;
+@message__border-color: false;
+@message__border-style: false;
+@message__border-radius: false;
+
+//  Information message
+@message-info__color: @warninig_message_color;
+@message-info__background: @warninig_message_bgcolor;
+@message-info__border-color: @warninig_message_bgcolor;
+
+@message-info-link__color: @warninig_message_color;
+@message-info-link__color-hover: @warninig_message_color;
+@message-info-link__color-active: @warninig_message_color;
+
+@message-info-icon: @icon-warning;
+@message-info-icon__color-inner: @warninig_message_color;
+@message-info-icon__color-lateral: @warninig_message_color;
+@message-info-icon__background: @warninig_message_color;
+@message-info-icon__top: @message-icon__top;
+@message-info-icon__right: @message-icon__right;
+@message-info-icon__bottom: @message-icon__bottom;
+@message-info-icon__left: @message-icon__left;
+
+//  Warning message
+@message-warning__color: @warninig_message_color;
+@message-warning__background: @warninig_message_bgcolor;
+@message-warning__border-color: @warninig_message_bgcolor;
+
+@message-warning-link__color: @warninig_message_color;
+@message-warning-link__color-hover: @warninig_message_color;
+@message-warning-link__color-active: @warninig_message_color;
+
+@message-warning-icon: @icon-warning;
+@message-warning-icon__color-inner: @warninig_message_color;
+@message-warning-icon__color-lateral: @warninig_message_color;
+@message-warning-icon__background: @warninig_message_color;
+@message-warning-icon__top: @message-icon__top;
+@message-warning-icon__right: @message-icon__right;
+@message-warning-icon__bottom: @message-icon__bottom;
+@message-warning-icon__left: @message-icon__left;
+
+//  Error message
+@message-error__color: @error_message_color;
+@message-error__background: @error_message_bgcolor;
+@message-error__border-color: @error_message_bgcolor;
+
+@message-error-link__color: @error_message_color;
+@message-error-link__color-hover: @error_message_color;
+@message-error-link__color-active: @error_message_color;
+
+@message-error-icon: @icon-warning;
+@message-error-icon__color-inner: @error_message_color;
+@message-error-icon__color-lateral: @error_message_color;
+@message-error-icon__background: @error_message_color;
+@message-error-icon__top: @message-icon__top;
+@message-error-icon__right: @message-icon__right;
+@message-error-icon__bottom: @message-icon__bottom;
+@message-error-icon__left: @message-icon__left;
+
+//  Success message
+@message-success__color: @success_message_color;
+@message-success__background: @success_message_bgcolor;
+@message-success__border-color: @success_message_bgcolor;
+
+@message-success-link__color: @success_message_color;
+@message-success-link__color-hover: @success_message_color;
+@message-success-link__color-active: @success_message_color;
+
+@message-success-icon: @icon-checkmark;
+@message-success-icon__color-inner: @success_message_color;
+@message-success-icon__color-lateral: @success_message_color;
+@message-success-icon__background: @success_message_color;
+@message-success-icon__top: @message-icon__top;
+@message-success-icon__right: @message-icon__right;
+@message-success-icon__bottom: @message-icon__bottom;
+@message-success-icon__left: @message-icon__left;
+
+//  Notice message
+@message-notice__color: @message-info__color;
+@message-notice__background: @message-info__background;
+@message-notice__border-color: @message-info__border-color;
+
+@message-notice-link__color: @message-info-link__color;
+@message-notice-link__color-hover: @message-info-link__color-hover;
+@message-notice-link__color-active: @message-info-link__color-active;
+
+@message-notice-icon: @message-info-icon;
+@message-notice-icon__color-inner: @message-info-icon__color-inner;
+@message-notice-icon__color-lateral: @message-info-icon__color-lateral;
+@message-notice-icon__background: @message-info-icon__background;
+@message-notice-icon__top: @message-icon__top;
+@message-notice-icon__right: @message-icon__right;
+@message-notice-icon__bottom: @message-icon__bottom;
+@message-notice-icon__left: @message-icon__left;

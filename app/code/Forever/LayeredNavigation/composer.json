@@ -1,0 +1,24 @@
+{
+  "name": "forever/layered-navigation",
+  "description": "Magento 2 Ajax Layered Navigation Extension",
+  "require": {
+    "php": "^8.4 || ^8.5",
+    "magento/framework": "*",
+    "magento/module-catalog": "*",
+    "magento/module-catalog-search": "*",
+    "magento/module-layered-navigation": "*",
+    "magento/module-customer": "*",
+    "magento/module-tax": "*",
+    "magento/module-theme": "*"
+  },
+  "type": "magento2-module",
+  "version": "4.0.10",
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Forever\\LayeredNavigation\\": ""
+    }
+  }
+}

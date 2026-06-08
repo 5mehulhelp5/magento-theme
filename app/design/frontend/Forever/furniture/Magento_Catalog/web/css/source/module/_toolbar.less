@@ -1,0 +1,355 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+@toolbar-mode-icon-font-size: 16px;
+@toolbar-background: transparent;
+@toolbar-element-background: @color-gray94;
+@toolbar-element__color: @color-gray37;
+@pager-action__background: @toolbar-element-background;
+@pager-action__hover__background: darken(@toolbar-element-background, 7%);
+@pager__font-weight: @font-weight__bold;
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .catalogsearch-result-index {
+        .toolbar-products {
+            justify-content: space-between;
+            &:before {
+                display: none;
+            }
+        }
+    }
+    .page-products {
+        .columns {
+            padding-top: 60px;
+            position: relative;
+            z-index: 1;
+        }
+        select.sorter-options {
+            height: 40px;
+            line-height: 40px;
+            padding-top:0px;
+            padding-bottom:0px;
+            min-width: 150px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #000;
+            text-transform: uppercase;
+            margin-right: 0px;
+        }
+        select.sorter-options:not([disabled]):focus {
+            box-shadow:none;
+        }
+        .toolbar .sorter-action {
+            display: none;
+        }
+        .toolbar .sorter-label {
+            display: none;
+        }
+        .toolbar {
+            .pages {
+                .action {
+                    box-shadow: none; 
+                    background:transparent;
+                    &:hover {
+                        background: #000;
+                        &:before {
+                            color: #fff;
+                        }
+                    }
+                }
+                .item ,.item strong , .item a {
+                    font-size:15px;
+                    color:#707070;
+                    background: transparent;
+                }
+                .item a:hover {
+                    color:#707070;
+                }
+            }
+            strong.page {
+                font-weight: 600;
+            }
+        }
+    }
+
+    .toolbar {
+        &:extend(.abs-add-clearfix all);
+        text-align: center;
+
+        select {
+            background-color: #fff;
+            box-shadow: none;
+            border-radius: 3px;
+        }
+        .sorter-action {
+            position: relative;
+            top: -2px;
+        }
+        &-amount {
+            left: 0;
+            line-height: @toolbar-mode-icon-font-size + 2;
+            margin: 0;
+            padding: 7px 15px;
+            text-align: left;
+            top: 0;
+            vertical-align: middle;
+
+            .products.wrapper ~ .toolbar & {
+                display: none;
+            }
+        }
+
+        .page-with-filter & {
+            &-amount {
+                position: static;
+            }
+        }
+
+        &-products {
+            .lib-css(background-color, @toolbar-background);
+
+            .pages {
+                display: none;
+
+                .products.wrapper ~ & {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    .sorter {
+        float: right;
+
+        .page-products & {
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 1;
+        }
+
+        .products.wrapper ~ .toolbar & {
+            display: none;
+        }
+
+        &-options {
+            margin: 0 15px 0 7px;
+            width: auto;
+        }
+
+        &-action {
+            .lib-icon-font(
+            @icon-arrow-up,
+            @_icon-font-size: 16px,
+            @_icon-font-color: @header-icons-color,
+            @_icon-font-color-hover: @header-icons-color-hover
+            );
+            .lib-icon-text-hide();
+
+            &.sort-desc:before {
+                content: @icon-arrow-down;
+            }
+        }
+    }
+
+    .modes {
+        display: none;
+    }
+
+    .limiter {
+        &-options {
+            margin: 0 5px 0 7px;
+            width: auto;
+        }
+
+        &-label {
+            font-weight: 400;
+        }
+
+        .page-products .toolbar & {
+            display: none;
+        }
+
+        .control {
+            display: inline-block;
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__lll) {
+    .page-products {
+        .sorter-options {
+            margin: 0px;
+        }
+    }
+}
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__ml) {
+    .toolbar-amount {
+        font-size: 13px;
+    }
+    .page-products select.sorter-options {
+        font-size: 13px;
+    }
+}
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+    .toolbar-products {
+        margin-bottom: 0;
+    }
+    .toolbar {
+        .pages {
+            .pages-items {
+                padding:0px;
+                display: flex;
+            }
+            .action {
+                border:1px solid #ececec;
+                margin-left: 0px;
+                margin-right: 0px;
+            }
+            a.page {
+                padding: 0px;
+            }
+            strong.page {
+                padding: 0px;
+            }
+            li.item {
+                position: static;
+            }
+            li {
+                display: block;
+                margin: 0 8px;
+            }
+        }
+    }
+}
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .toolbar {
+        .toolbar-amount {
+            display: none;
+        }
+    }
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .page-products {
+        .toolbar-products {
+            display: flex;
+            align-items:center;
+        }
+        .columns {
+            padding-top: 0;
+            position: relative;
+            z-index: 1;
+        }
+    }
+
+    .toolbar-amount {
+        display: block;
+        float: left;
+        position: static;
+        color: #707070;
+        font-weight: 600;
+        font-size: 15px;
+        letter-spacing: 1px;
+    }
+
+    .toolbar {
+        .products.wrapper ~ & .pages {
+            float: left;
+            margin-bottom: 0;
+        }
+        .modes-mode {
+            &:before {
+                color: #ccc;
+            }
+            &.active {
+                &:before {
+                    color: @SecondaryColor;
+                }
+            }
+        }
+    }
+
+    .modes {
+        display: inline-block;
+        float: left;
+
+        .products.wrapper ~ .toolbar & {
+            display: none;
+        }
+    }
+
+    .modes-label {
+        &:extend(.abs-visually-hidden-desktop all);
+    }
+
+    .modes-mode {
+        background-color: transparent;
+        box-shadow: none;
+        border: 1px solid @border-color__base;
+        border-right: 0;
+        float: left;
+        font-weight: @font-weight__regular;
+        line-height: 1;
+        padding: 7px 10px;
+        text-align: center;
+
+        .modes-label + & {
+            border-radius: 3px 0 0 3px;
+        }
+
+        &:last-child {
+            border-radius: 0 3px 3px 0;
+            border-right: 1px solid @border-color__base;
+        }
+
+        .lib-icon-font(
+        @icon-grid,
+        @_icon-font-size: @toolbar-mode-icon-font-size,
+        @_icon-font-text-hide: true,
+        @_icon-font-color: @text__color__muted,
+        @_icon-font-color-hover: @text__color__muted
+        );
+    }
+
+    .sorter {
+        .page-products & {
+            position: static;
+        }
+    }
+
+    .mode-list {
+        &:before {
+            content: @icon-list;
+        }
+    }
+
+    .toolbar {
+        .products.wrapper ~ & .limiter {
+            display: block;
+            float: right;
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+    .sorter-options {
+        margin: 0 2px;
+    }
+}

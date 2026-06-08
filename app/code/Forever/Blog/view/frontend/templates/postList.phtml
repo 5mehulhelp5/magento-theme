@@ -1,0 +1,52 @@
+<?php
+$collections = $block->getCollection();
+$viewModel = $block->getViewModel();
+$isEnableModule = $viewModel->getConfig();
+?>
+<?php if ($isEnableModule == 1): ?>
+<?php if ($block->getPagerHtml()): ?>
+<div class="order-products-toolbar toolbar bottom">
+    <?= $block->getPagerHtml(); ?>
+</div>
+<?php endif; ?>
+    <?php foreach ($collections as $item): ?>
+    <div class="blog-content">      
+        <div class="blog-image">
+        <?php if ($item->getBlogImage()): ?>
+            <img src="<?= /* @noEscape */ $viewModel->getMediaUrl() .'blog/image/'.
+            $item->getBlogImage(); ?>" height="900" width="1440"/>
+        <?php else: ?>
+            <img src="<?= /* @noEscape */ $block->getPlaceHolderImage(); ?>"
+                height="900"
+                width="1440"
+            />
+        <?php endif; ?>
+        </div>
+        <div class="blog-description">       
+            <div class="blog-title">
+                <h2><a href="<?= /* @noEscape */ $block->getViewUrl($item->getUrlKey())?>">
+                    <?= /* @noEscape */ $item->getTitle(); ?>                        
+                    </a>
+                </h2>
+            </div>
+            <div class="blog-plublish-date">
+                <span><?= /* @noEscape */ $item->getPublishTime(); ?></span>
+                <span><?= /* @noEscape */ $item->getAuthor(); ?></span>
+            </div>
+            <div class="blog-short-content">
+                <div><?= /* @noEscape */ $item->getContentHeading(); ?></div>
+            </div>             
+            <a class="read-more-btn action primary" href="<?= /* @noEscape */ $block->getViewUrl($item->getUrlKey())?>">
+                <?= /* @noEscape */ $block->escapeHtml(__('Read More')) ?>     
+            </a>
+        </div> 
+    </div>
+<?php endforeach; ?>
+    <?php if ($block->getPagerHtml()): ?>
+    <div class="order-products-toolbar toolbar bottom"><?= $block->getPagerHtml(); ?></div>
+<?php endif; ?>
+<?php else: ?>
+    <div class="message info empty"><span>
+        <?= $block->escapeHtml(__('You have no any records in your custom collection.')); ?>            
+        </span></div>
+<?php endif; ?>

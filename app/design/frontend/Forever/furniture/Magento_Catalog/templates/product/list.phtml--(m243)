@@ -1,0 +1,316 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+use Magento\Framework\App\Action\Action;
+
+?>
+<?php
+/**
+ * Product list template
+ *
+ * @var $block \Magento\Catalog\Block\Product\ListProduct
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+?>
+<?php
+/*product label viewmodel*/
+$viewModellabel = $block->getProductlabelmodel();
+$_productCollection = $block->getLoadedProductCollection();
+/** @var \Magento\Catalog\Helper\Output $_helper */
+$_helper = $block->getData('outputHelper');
+?>
+<?php if (!$_productCollection->count()): ?>
+    <div class="message info empty">
+        <div><?= $escaper->escapeHtml(__('We can\'t find products matching the selection.')) ?></div>
+    </div>
+<?php else: ?>
+    <?= $block->getToolbarHtml() ?>
+    <?= $block->getAdditionalHtml() ?>
+    <?php
+    if ($block->getMode() === 'grid') {
+        $viewMode = 'grid';
+        $imageDisplayArea = 'category_page_grid';
+        $showDescription = false;
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+    } else {
+        $viewMode = 'list';
+        $imageDisplayArea = 'category_page_list';
+        $showDescription = true;
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::FULL_VIEW;
+    }
+    /**
+     * Position for actions regarding image size changing in vde if needed
+     */
+    $pos = $block->getPositioned();
+    $zoomenable = $viewModellabel->getScopeconfig('themedesign/zoominout/enable');
+    ?>
+    <?php if ($viewMode == 'grid' && $zoomenable): ?>
+        <div class="product-grid-options">
+            <div class="product-grid-options-list mt-3 d-flex justify-content-center">
+                <div class="grid-option-two common-grid">
+                    <a href="javascript:void(0)"></a>
+                </div>
+                <div class="grid-option-three common-grid">
+                    <a href="javascript:void(0)"></a>
+                </div>
+                <div class="grid-option-four common-grid">
+                    <a href="javascript:void(0)"></a>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+    <div class="products wrapper <?= /* @noEscape */ $viewMode ?> products-<?= /* @noEscape */ $viewMode ?>">
+        <ol class="products list items product-items">
+            <?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
+            <?php foreach ($_productCollection as $_product): ?>
+            <li class="item product product-item">
+                <div class="product-item-info"
+                     id="product-item-info_<?= /* @noEscape */ $_product->getId() ?>"
+                     data-container="product-<?= /* @noEscape */ $viewMode ?>">
+                     <div class="product-image-section">
+                        <?php
+                        $productImage = $block->getImage($_product, $imageDisplayArea);
+                        if ($pos != null) {
+                            $position = 'left:' . $productImage->getWidth() . 'px;'
+                                . 'top:' . $productImage->getHeight() . 'px;';
+                        }
+                        ?>
+                        <?php // Product Image ?>
+                        <?php
+                            $viewmodel=$block->getImageswticher();
+                            $isEnable = $viewmodel->getConfigData();
+                        ?>
+                        <?php if ($isEnable): ?>
+                            <!-- product label -->
+                            <?php //$viewModellabel = $block->getProductlabelmodel();
+                            if ($select = $_product->getProductoption()):
+                                $selectAttr =  $_product->getResource()->getAttribute('productoption');
+                                if ($selectAttr->usesSource()) {
+                                    $select = $selectAttr->getSource()->getOptionText($select);
+                                    $productoption = strtolower(str_replace(' ', '_', $select));
+                                }
+                            endif;
+                            $productlabel = $viewModellabel->getProductlabel($_product);
+                            $confproductlabel = $viewModellabel->getScopeconfig(
+                                'productlabel/general/productlabelenable'
+                            );
+                            if ($confproductlabel && !empty($productlabel)):?>
+                                <div class="product_label_wrapper <?= /* @noEscape */ $productoption ?>"><?php
+                                foreach ($productlabel as $productlabelvalue):
+                                    if ($productlabelvalue):?>
+                                        <span class="productlabel <?= /* @noEscape */
+                                        is_numeric($productlabelvalue) ?
+                                        'discount' :strtolower(str_replace(' ', '', $productlabelvalue)) ?>">
+                                            <?php if (is_numeric($productlabelvalue)):
+                                                $sign = '% off';?>
+                                                <?= /* @noEscape */ $productlabelvalue.$sign ?>
+                                            <?php else: ?>    
+                                                <?= /* @noEscape */ $productlabelvalue ?>
+                                            <?php endif; ?>        
+                                        </span><?php
+                                    endif;
+                                endforeach;?>
+                                </div>
+                            <?php endif; ?>
+                            <!-- product label -->                    
+                            <div class="flip-box">
+                                 <div class="flip-box-inner">
+                                    <div class="flip-box-front">
+                                        <a href="<?= $block->escapeUrl($_product->getProductUrl()) ?>"
+                                           class="product photo product-item-photo"
+                                           tabindex="-1">
+                                            <?= $productImage->toHtml() ?>
+                                        </a>
+                                    </div>
+                                    <?php $productImageUrl = $viewmodel->getImageUrl($_product); ?>
+                                    <div class="flip-box-back">
+                                        <a href="<?= $block->escapeUrl($_product->getProductUrl()) ?>"
+                                           class="product photo product-item-photo"
+                                           tabindex="-1">
+                                           <span class="product-image-container"
+                                           style="width:<?php echo $viewmodel->getImageWidth($_product); ?>px;">
+                                                <span class="product-image-wrapper" style="padding-bottom:<?php echo $viewmodel->getImagePadding($_product) * 100; ?>%">
+                                                    <img src="<?= /* @noEscape */ $productImageUrl ?>"
+                                                        alt="<?= /* @noEscape */ $_product->getName() ?>"
+                                                        width="<?php echo $viewmodel->getImageWidth($_product); ?>"
+                                                        height="<?php echo $viewmodel->getImageHeight($_product); ?>">
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <a href="<?= $block->escapeUrl($_product->getProductUrl()) ?>"
+                               class="product photo product-item-photo"
+                               tabindex="-1">
+                                <?= $productImage->toHtml() ?>
+                            </a>
+                        <?php endif; ?>
+                        <div class="product-item-inner">
+                            <div class="product actions product-item-actions">
+                                <a class="quickview forever-quickview forever-quickview-text"
+                                    data-quickview-url="http://magentotheme.ictstagingsite.com/quickview/catalog_product/view/id/<?= /* @noEscape */ $_product->getId() ?>/"
+                                    data-forever-js="quickview-item-default"
+                                    href="http://magentotheme.ictstagingsite.com/quickview/catalog_product/view/id/<?= /* @noEscape */ $_product->getId() ?>/"
+                                    >
+                                    <span>Quickview</span>
+                                </a>
+                                <div class="actions-primary">
+                                    <?php if ($_product->isSaleable()):?>
+                                        <?php $postParams = $block->getAddToCartPostParams($_product); ?>
+                                        <form data-role="tocart-form"
+                                              data-product-sku="<?= $escaper->escapeHtml($_product->getSku()) ?>"
+                                              action="<?= $escaper->escapeUrl($postParams['action']) ?>"
+                                              method="post">
+                                            <?php $optionsData = $block->getData(
+                                                'viewModel'
+                                            )->getOptionsData(
+                                                $_product
+                                            ); ?>
+                                            <?php foreach ($optionsData as $optionItem): ?>
+                                                <input type="hidden"
+                                                       name="<?= $escaper->escapeHtml($optionItem['name']) ?>"
+                                                       value="<?= $escaper->escapeHtml($optionItem['value']) ?>">
+                                            <?php endforeach; ?>
+                                            <input type="hidden"
+                                                   name="product"
+                                                   value="<?= /* @noEscape */ $postParams['data']['product'] ?>">
+                                            <input type="hidden"
+                                                   name="<?= /* @noEscape */ Action::PARAM_NAME_URL_ENCODED ?>"
+                                                   value="<?=
+                                                   /* @noEscape */ $postParams['data'][Action::PARAM_NAME_URL_ENCODED]
+                                                    ?>">
+                                            <?= $block->getBlockHtml('formkey') ?>
+                                            <button type="submit"
+                                                    title="<?= $escaper->escapeHtmlAttr(__('Add to Cart')) ?>"
+                                                    class="action tocart primary"
+                                                    disabled>
+                                                <span><?= $escaper->escapeHtml(__('Add to Cart')) ?></span>
+                                            </button>
+                                        </form>
+                                    <?php else:?>
+                                        <?php if ($_product->isAvailable()):?>
+                                            <div class="stock available">
+                                                <span><?= $escaper->escapeHtml(__('In stock')) ?></span></div>
+                                        <?php else:?>
+                                            <div class="stock unavailable">
+                                                <span><?= $escaper->escapeHtml(__('Out of stock')) ?></span></div>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                </div>
+                                <?= strpos($pos, $viewMode . '-primary') ?
+                                    /* @noEscape */ $secureRenderer->renderStyleAsTag(
+                                        $position,
+                                        'product-item-info_' . $_product->getId() . ' div.actions-primary'
+                                    ) : '' ?>
+                                <div data-role="add-to-links" class="actions-secondary">
+                                    <?php if ($addToBlock = $block->getChildBlock('addto')): ?>
+                                        <?= $addToBlock->setProduct($_product)->getChildHtml() ?>
+                                    <?php endif; ?>
+                                </div>
+                                <?= strpos($pos, $viewMode . '-secondary') ?
+                                    /* @noEscape */ $secureRenderer->renderStyleAsTag(
+                                        $position,
+                                        'product-item-info_' . $_product->getId() . ' div.actions-secondary'
+                                    ) : '' ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product details product-item-details">
+                        <?php $_productNameStripped = $block->stripTags($_product->getName(), null, true); ?>
+                        <strong class="product name product-item-name">
+                            <a class="product-item-link"
+                               href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>">
+                                <?=/* @noEscape */ $_helper->productAttribute($_product, $_product->getName(), 'name')?>
+                            </a>
+                        </strong>
+                        <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
+                        <?= /* @noEscape */ $block->getProductPrice($_product) ?>
+
+                        <?= $block->getProductDetailsHtml($_product) ?>
+                        
+                        <?php if ($showDescription): ?>
+                            <div class="product description product-item-description">
+                                <?= /* @noEscape */ $_helper->productAttribute(
+                                    $_product,
+                                    $_product->getShortDescription(),
+                                    'short_description'
+                                ) ?>
+                                <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
+                                   title="<?= /* @noEscape */ $_productNameStripped ?>"
+                                   class="action more"><?= $escaper->escapeHtml(__('Learn More')) ?></a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <?= strpos($pos, $viewMode . '-actions') ?
+                /* @noEscape */ $secureRenderer->renderStyleAsTag(
+                    $position,
+                    'product-item-info_' . $_product->getId() . ' div.product-item-actions'
+                ) : '' ?>
+            </li>
+            <?php endforeach; ?>
+        </ol>
+    </div>
+    <?= $block->getChildBlock('toolbar')->setIsBottom(true)->toHtml() ?>
+    <script type="text/x-magento-init">
+    {
+        "[data-role=tocart-form], .form.map.checkout": {
+            "catalogAddToCart": {
+                "product_sku": "<?= $escaper->escapeJs($_product->getSku()) ?>"
+            }
+        }
+    }
+    </script>
+<?php endif; ?>
+
+<script>
+require(['jquery','jquery/ui'], function ($) {
+    $(document).ready(function() {
+        $(function() {
+          jQuery('.grid-option-three').addClass('selected'); 
+          jQuery('.common-grid').on('click', function(){
+             jQuery('.common-grid').removeClass('selected');
+             jQuery(this).addClass('selected')
+          });
+          function changeNumber(el, classEl) {
+            if(jQuery(window).width() >= 992) {
+                jQuery('.products-grid ol').removeClass(function (index, css) {
+                    return (css.match (/\bcol-des\S+/g) || []).join(' '); // removes anything that starts with "itemnx"
+                });
+                jQuery('.products-grid ol').removeClass(function (index, css) {
+                    return (css.match (/\bcol-tb\S+/g) || []).join(' '); // removes anything that starts with "itemnx"
+                });
+            }
+            jQuery('.products-grid ol').addClass(classEl);
+        }
+          jQuery('.products-grid ol').addClass('col-des-4 col-tb-4');
+            jQuery(".grid-option-two").click(function(e) {
+                e.preventDefault();
+                changeNumber(jQuery(this), 'col-des-6 col-tb-6');
+            });
+            jQuery(".grid-option-three").click(function(e) {
+                e.preventDefault();
+                changeNumber(jQuery(this), 'col-des-4 col-tb-4');
+            });
+            jQuery(".grid-option-four").click(function(e) {
+                e.preventDefault();
+                changeNumber(jQuery(this), 'col-des-3 col-tb-3');
+            });
+        });
+
+        var url = window.location.href;
+        var value = url.split("=");
+        if (value[1] == 'list') {
+            jQuery('.product-grid-options').addClass('product-grid-options-list-hide');
+        }
+    });
+});
+</script>
+<script>
+    require(['lazyloadeffect'], function() {});
+</script>

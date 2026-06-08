@@ -1,0 +1,79 @@
+<?php
+/**
+ * @var $block Forever\Megamenu\Block\Menu
+ */
+?>
+<?php
+$homebutton = $block->_sysCfg->homebutton;
+$menu = $block->_sysCfg->module;
+$menudesktop = $block->_sysCfg->desktop;
+$menumobile = $block->_sysCfg->mobile;
+
+$homeHtml      = $block->drawHomeMenu();
+$menuHtml      = $block->drawMainMenu();
+$extraHtml  = $block->drawExtraMenu();
+$mobileMenu = $menuHtml['mobile'];
+$drawHomeMenu  = $homeHtml;
+$drawMainMenu  = '';
+$drawExtraMenu = $extraHtml ;
+
+$classmob=$menumobile['mobposition'];
+
+if (!$menu['enabled']) {
+    echo $block->getChildHtml();
+    return;
+}
+?>
+<?php if ($menu['enabled']):?>
+<nav class="navigation mean-nav 
+navigation-mobile <?= /* @noEscape */ $classmob ?>" role="navigation" data-action="navigation">
+    <ul class="nav-mobile"
+        data-alo-init='{"menu":{"responsive":true, 
+        "expanded":true, "position":{"my":"leftcontent top","at":"leftcontent bottom"}}}'>
+        <?php if ($homebutton['homebuttonenabled']): ?>
+            <?= /* @noEscape */ $drawHomeMenu ?>
+        <?php  endif; ?>
+        <?= /* @noEscape */ $mobileMenu ?>
+        <?= /* @noEscape */ $drawExtraMenu ?>
+    </ul>
+</nav>
+<?php else:?>
+    <nav class="navigation mean-nav 
+    navigation-mobile <?= /* @noEscape */ $classmob ?>" role="navigation" data-action="navigation">
+        <ul class="nav-mobile"
+            data-alo-init='{"menu":{"responsive":true, 
+            "expanded":true, "position":{"my":"leftcontent top","at":"leftcontent bottom"}}}'>
+            <?= /* @noEscape */ $block->getChildHtml() ?>
+        </ul>
+    </nav>
+<?php  endif; ?>
+
+<?php if ($menu['enabled']):?>
+    <?php
+        $desktop     = $menuHtml['desktop'];
+        $drawMainMenu = implode("\n", $desktop);
+    endif;?>
+    
+    <?php
+    $classdesktop=$menudesktop['deskposition'];
+    if ($menu['enabled']):?>
+    <div class="megamenu clearfix <?= /* @noEscape */ $classdesktop ?>" >
+        <ul class="nav-desktop ">
+            <?php if ($homebutton['homebuttonenabled']): ?>
+                <?= /* @noEscape */ $drawHomeMenu ?>
+            <?php  endif; ?>
+            <?= /* @noEscape */ $drawMainMenu ?>
+            <?= /* @noEscape */ $drawExtraMenu ?>
+        </ul>
+    </div>
+<?php else: ?>
+    <div class="megamenu clearfix <?= /* @noEscape */ $classdesktop ?>" >
+        <ul class="nav-desktop ">
+            <?= /* @noEscape */ $block->getChildHtml() ?>
+        </ul>
+    </div>
+    
+<?php endif;?>
+<script type="text/javascript">
+    require(['jquery','Forever_Megamenu/js/megamenu']);
+</script>

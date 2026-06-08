@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+    	<!-- <update id="forever" title="Forever Menu" module="Forever_Megamenu" sortOrder="10" resource="Forever_Megamenu::forever"/> -->
+
+            <add id="Forever_Megamenu::megamenu"
+                title="Megamenu" 
+                module="Forever_Megamenu" 
+                sortOrder="10" 
+                parent="Forever_Core::forever"
+                resource="Forever_StoreLocator::elements"
+            />
+
+	        <add id="Forever_Megamenu::index"
+                title="Mega Menu"
+                module="Forever_Megamenu"
+                sortOrder="10"
+                parent="Forever_Megamenu::megamenu"
+                resource="Forever_Megamenu::index"
+                action="megamenu/menu"
+            />				
+    </menu>
+</config>

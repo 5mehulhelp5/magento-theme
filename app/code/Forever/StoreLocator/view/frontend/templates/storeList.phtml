@@ -1,0 +1,178 @@
+<?php
+$viewModel = $block->getViewModel();
+$isEnableModule = $viewModel->getConfig('storelocator/general/enable');
+$lat = $viewModel->getConfig('storelocator/mapscope/lat');
+$lng = $viewModel->getConfig('storelocator/mapscope/lng');
+$collection = $block->getCollection();
+$arr = [];
+$i = 1;
+$j = 0;
+?>
+<?php if ($isEnableModule == 1): ?>
+<!-- Address search start -->
+<div class="storelocator-search">
+<div class="field search">
+    <label class="label" for="search" data-role="minisearch-label">
+        <span><?= /* @noEscape */ __('Search'); ?></span>
+    </label>
+    <div class="control">
+        <input id="address-search" 
+        class="address-search" 
+        type="text" 
+        name="search" 
+        placeholder="<?= /* @noEscape */ __('Search Store here...'); ?>"
+        class="input-text"
+        autocomplete="off"/>
+    </div>
+</div>
+<div class="actions">
+    <button type="submit"
+            title="<?= $block->escapeHtml(__('Search')) ?>"
+            class="action-search">
+        <span><?= /* @noEscape */ __('Search'); ?></span>
+    </button>
+</div>
+</div>
+<!-- Address search end  -->
+<div class="store-information">
+
+
+    <?php $idArr = [];?>
+
+    <?php foreach ($collection as $item): ?>
+        <?php
+
+        $idArr[] = $item->getId();
+        ?>
+  <div class="store-details-wrapper">
+    <div id="<?= /* @noEscape */ $item->getId(); ?>" class="store-details">  
+      <div class="store-title" >
+          <h2> 
+            <li value=<?= /* @noEscape */ $j;?> onclick="SetMarker([this.value])">               
+              <?= /* @noEscape */ $item->getName(); ?>
+            </li>
+          </h2>
+          <input type = "hidden" name ="lat" class="lat" value=<?= /* @noEscape */ $item->getLatitude()?>>
+          <input type = "hidden" name ="lng" class="lng" value=<?= /* @noEscape */ $item->getLongitude()?>>
+      </div>
+        <?php $j++;?>
+      
+      <div class="store-address">
+          <?= /* @noEscape */ $item->getStreet(); ?> 
+          <?= /* @noEscape */ $item->getCity(); ?> 
+          <?= /* @noEscape */ $item->getState(); ?> 
+          <?= /* @noEscape */ $item->getCountry(); ?>
+          <?= /* @noEscape */ $item->getZip(); ?> 
+      </div>
+    </div>
+  </div>
+        <?php
+        $arr[] = [
+            $item->getName() . ' ' . $item->getStreet() . ' ' . $item->getCity()  . ' ,
+            ' . $item->getState() . ' ,' . $item->getCountry(),
+            $item->getLatitude(),
+            $item->getLongitude(),
+            $i
+        ];
+        $i++;
+        ?> 
+    <?php endforeach ?>
+</div>
+<div id="map" class="first-map" style="width: 1000px; height: 600px;">        
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-AB-9XZd-iQby-bNLYPFyb0pR2Qw3orw&callback=initMap" async defer> <?php //phpcs:ignore ?> 
+</script>
+<!-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script> -->
+<script type="text/javascript">
+  //  window.onload = function () {
+  //       LoadMap();
+  //   };
+    var map;
+    var marker;
+    var initial_marker=[];
+    function initMap(locations) {
+      if (locations == undefined)
+      {
+        var locations = <?= /* @noEscape */ json_encode($arr); ?>;
+      }
+      // console.log(locations);
+
+      map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 2,
+          center: new google.maps.LatLng(23.01, 72.51),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+      var infowindow = new google.maps.InfoWindow();
+      var i;
+      for (i = 0; i < locations.length; i++) {  
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+          map: map
+        }); 
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+        })(marker, i));
+        initial_marker.push(marker);
+      }
+    }
+    function SetMarker(positions) {
+        for (var i = 1; i <= initial_marker.length; i++) {
+            if(positions.indexOf(i-1)==-1) {
+              initial_marker[i-1].setMap(null);
+            }else{
+              initial_marker[i-1].setMap(map);
+            }
+        }
+        window.initialM = initial_marker;
+          console.log(initial_marker);
+      };
+
+</script>
+<script type="text/javascript">
+  require([
+    'jquery', 'jquery/ui'
+  ], function($) {
+      $(document).ready(function(){
+          $(".action-search").click(function(){
+            // alert('here');
+            var param = $('#address-search').val();
+            var id = <?= /* @noEscape */ json_encode($idArr);?>;
+            // console.log(id);
+            $.ajax({
+              type: "POST",
+              url: "<?= /* @noEscape */ $block->getUrl('storelocator/index/search');?>",
+              data: { search: param },
+              dataType: "json",
+              success: function(searchdata) {
+                initMap(searchdata);
+                // console.log(searchdata);
+                var valueId = [];
+                $.each(searchdata, function(key, value) {
+                  // var searchid = this.storeId;
+                  var key = Object.keys(value)[3];
+                  var searchId = value[key];                  
+                  valueId.push(searchId);
+                  
+                });
+                // console.log(valueId)
+                  // console.log(searchId);
+                  // console.log(key+ 'is' +value);                  
+                  $.each(id,function(i, v) { 
+                    // console.log(valueId);
+                    if($.inArray(v, valueId) == -1) {
+                      $("#"+v).hide();
+                    } else {
+                      $("#"+v).show();                     
+                    }
+                  }); 
+              }
+            });          
+          });
+      });
+  });
+</script>
+<?php endif;?>

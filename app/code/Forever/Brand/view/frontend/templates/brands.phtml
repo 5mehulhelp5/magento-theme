@@ -1,0 +1,22 @@
+<?php
+$isEnableModule = $block->getConfigValue();
+?>
+<?php if ($isEnableModule == 1): ?>
+<div class="brand-holder-container">
+    <div class="brand-title">
+        <h3><?= /* @noEscape */ __('Brands') ?></h3>
+    </div>
+    <div class="brand-section">
+        <?php foreach ($block->getItems() as $question): ?>
+            <div class="item">
+                <div class="brand-wraper d-flex align-items-center justify-content-center">
+                    <a class="brand-link" href="" target="_self">
+                        <img class="brand-image-hover" 
+                        src="<?= /* @noEscape */ $block->getMediaUrl() .'brand/image/'.$question->getImage()?>"
+                        alt="a" width="210" height="83"> </a>
+                </div>
+            </div>
+        <?php endforeach;?>
+    </div>
+</div>
+<?php endif;?>

@@ -1,0 +1,22 @@
+@media (min-width: 768px){
+	.forever ol#checkoutSteps li {
+		float: left;
+		width: 42%;
+		margin-right: 5%;
+	}
+	.forever .opc-sidebar {
+		margin: 0;
+	}
+	.forever .opc-block-summary {
+		padding: 0 0 22px 30px;
+	}
+	.forever .opc-wrapper .step-title {
+		border-bottom: 1px solid #ccc;
+	}
+	.forever .payment-methods .payment-method {
+		margin-left: 15px;
+	}
+	.forever .table-checkout-shipping-method {
+	    min-width: 450px;
+	}
+}

@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <attribute name="class" value="header-1"/>
+        <block class="Magento\Cms\Block\Block" name="header-welcome-message"> 
+            <arguments> 
+                <argument name="block_id" xsi:type="string">header-welcome-message</argument> 
+            </arguments> 
+        </block>
+        <block class="Magento\Cms\Block\Block" name="header-call-us">
+            <arguments> 
+                <argument name="block_id" xsi:type="string">header-call-us</argument> 
+            </arguments> 
+        </block>
+        <block class="Magento\Cms\Block\Block" name="header-wishlist"> 
+            <arguments> 
+                <argument name="block_id" xsi:type="string">header-wishlist</argument> 
+            </arguments> 
+        </block>
+        <container name="header-top-container" label="Header Top Container" htmlTag="div" htmlClass="header-top-container">
+            <container name="header-top-container-left" as="heade-contents-left" label="Header Top Container left" htmlTag="div" htmlClass="header-top-container-left" />
+        </container>
+        <referenceContainer name="header.container"> 
+            <container name="header1-block" as="header1-block" label="Page Header block" htmlTag="div" htmlClass="header-one header-container__inner">
+            </container>
+        </referenceContainer>
+        <container name="header2-mobile-block" as="header2-mobile-block" label="Page Header mobile2 block" htmlTag="div" htmlClass="header-two-mobile-block">
+            </container>
+        <referenceContainer name="footer-container">
+            <container name="footer-block" as="footer-block" label="Page Footer block" htmlTag="div" htmlClass="footer-one footer-container__inner">
+                <block class="Magento\Cms\Block\Block" name="footer-1-footer-top-section">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">footer-1-footer-top-section</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Cms\Block\Block" name="footer-1-footer-middle-section">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">footer-1-footer-middle-section</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Cms\Block\Block" name="footer-1-footer-bottom-section">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">footer-1-footer-bottom-section</argument>
+                    </arguments>
+                </block>
+            </container>
+            <container name="footer-blocks" as="footer-blocks" label="Page Footer block" htmlTag="div" htmlClass="footer-two footer-container__inner">
+                <block class="Magento\Cms\Block\Block" name="footer-2-footer-top-section">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">footer-2-footer-top-section</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Cms\Block\Block" name="footer-2-footer-middle-section">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">footer-2-footer-middle-section</argument>
+                    </arguments>
+                </block>
+            </container>
+            <container name="footer-block3" as="footer-block3" label="Page Footer block" htmlTag="div" htmlClass="footer-three footer-container__inner">
+                <block class="Magento\Cms\Block\Block" name="footer-3-footer-top-section">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">footer-3-footer-top-section</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Cms\Block\Block" name="footer-3-footer-middle-section">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">footer-3-footer-middle-section</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Cms\Block\Block" name="footer-3-footer-bottom-section">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">footer-3-footer-bottom-section</argument>
+                    </arguments>
+                </block>
+            </container>
+                        <container name="footer-block4" as="footer-block4" label="Page Footer block" htmlTag="div" htmlClass="footer-four footer-container__inner">
+                <block class="Magento\Cms\Block\Block" name="footer-4-footer-top-section">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">footer-4-footer-top-section</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Cms\Block\Block" name="footer-4-footer-middle-section">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">footer-4-footer-middle-section</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Cms\Block\Block" name="footer-4-footer-bottom-section">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">footer-4-footer-bottom-section</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+            <container name="header1-mobile-block" as="header1-mobile-block" label="Page Header Mobile block" htmlTag="div" htmlClass="header-mobile-section">
+            </container>
+        <move element="header-welcome-message" destination="header-top-container-left" before="-" />
+        <move element="header.panel" destination="header-top-container-left" after="-" />
+        <move element="header-top-container" destination="header.container" before="-" />
+        <move element="header-call-us" destination="catalog.topnav" after="-" />
+        <move element="header-wishlist" destination="header-wrapper" after="-"/>
+        <move element="header-top-container" destination="header1-block" before="-"/>
+        <move element="header-wrapper" destination="header1-block" after="-"/>
+        <move element="header1-mobile-block" destination="header.container" before="-"/>
+        <move element="catalog.compare.link" destination="header1-mobile-block" before="-"/>
+        
+
+        <referenceBlock name="footer" remove="true" />
+        <referenceBlock name="footer_links" remove="true" />
+        <referenceBlock name="copyright" remove="true" />
+        <referenceBlock name="report.bugs" remove="true" />
+    </body>
+</page>

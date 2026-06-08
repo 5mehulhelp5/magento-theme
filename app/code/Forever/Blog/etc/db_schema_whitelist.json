@@ -1,0 +1,32 @@
+{
+    "forever_blog": {
+        "column": {
+            "blog_id": true,
+            "title": true,
+            "url_key": true,
+            "content_heading": true,
+            "content": true,
+            "blog_image": true,
+            "status": true,
+            "author": true,
+            "tags": true,
+            "publish_time": true,
+            "update_time": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "forever_blog_tag": {
+        "column": {
+            "tag_id": true,
+            "title": true,
+            "status": true,
+            "create_time": true,
+            "update_time": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<lazyload>
+			<general>
+				<enable>1</enable>
+				<lazyload_images>1</lazyload_images>
+				<lazyload_iframes>1</lazyload_iframes>
+				<lazyload_cms>1</lazyload_cms>
+				<lazyload_skipclasses>no-lazy</lazyload_skipclasses>
+				<lazyload_delay>2000</lazyload_delay>
+				<lazyload_effect>show</lazyload_effect>
+				<lazyload_effecttime>500</lazyload_effecttime>
+			</general>
+		</lazyload>
+	</default>
+</config>

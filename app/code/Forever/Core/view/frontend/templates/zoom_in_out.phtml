@@ -1,0 +1,33 @@
+<?php /** $block Forever\Core\Block\ZoomInOut */ ?>
+<?php if ($block->getConfigData()): ?>
+    <div class="zoom-in-out-button">
+        <a href="javascript:void(0)" class="zoom_in" ><?= /* @noEscape*/ __('Zoom In') ?></a>
+        <a href="javascript:void(0)" class="zoom_out" style="display: none"><?= /* @noEscape*/ __('Zoom Out') ?></a>
+    </div>
+<?php endif; ?>
+
+<script>
+require(['jquery','jquery/ui'], function ($) {
+    $(document).ready(function(){
+        $(function() {
+            $(".page-products .products.wrapper").addClass("zoom-out");
+            $(".page-products .zoom_out").click(function(){
+              if($(".page-products .products.wrapper").hasClass("zoom-in")) {
+                $(".products.wrapper").removeClass("zoom-in");
+                $(".products.wrapper").addClass("zoom-out");
+              }
+              $(".zoom_in").css("display", "block");
+              $(".zoom_out").css("display", "none");
+            });
+            $(".page-products .zoom_in").click(function(){
+              if($(".page-products .products.wrapper").hasClass("zoom-out")) {
+                $(".products.wrapper").removeClass("zoom-out");
+                $(".products.wrapper").addClass("zoom-in");
+              }
+              $(".zoom_out").css("display", "block");
+              $(".zoom_in").css("display", "none");
+            });
+        })
+    });
+});
+</script>

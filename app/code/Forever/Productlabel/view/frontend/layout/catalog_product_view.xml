@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="catalog.product.related">
+            <arguments>
+                <argument name="labelviewmodel" xsi:type="object">Forever\Productlabel\ViewModel\ProductLabelViewModel</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="product.info.upsell">
+            <arguments>
+                <argument name="labelviewmodel" xsi:type="object">Forever\Productlabel\ViewModel\ProductLabelViewModel</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="product.info.crosssell">
+            <arguments>
+                <argument name="labelviewmodel" xsi:type="object">Forever\Productlabel\ViewModel\ProductLabelViewModel</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceContainer name="product.info.media">
+            <block class="Magento\Catalog\Block\Product\View" name="labeldata" template="Forever_Productlabel::productview.phtml" after="skip_gallery_after.target">
+                <arguments>
+                    <argument name="viewmodel" xsi:type="object">Forever\Productlabel\ViewModel\ProductLabelViewModel</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
