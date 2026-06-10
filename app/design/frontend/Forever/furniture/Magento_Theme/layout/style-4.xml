@@ -88,10 +88,11 @@
             <container name="header3-mobile-block" as="header3-mobile-block" label="Page Header Mobile block" htmlTag="div" htmlClass="header-mobile-section">
             </container>
 
-        <move element="header.panel" destination="header-wrapper" before="-" />
-        <move element="navigation.sections" destination="header-wrapper" after="logo" />
+        <!-- Move catalog.topnav directly (bypasses hidden tabs wrapper) -->
+        <move element="catalog.topnav" destination="header-wrapper" after="logo"/>
         <move element="header-wishlist" destination="header-wrapper" after="-"/>
         <move element="header-wrapper" destination="header3-block" after="-"/>
+        <move element="header3-block" destination="header.container" before="-"/>
         <move element="header3-mobile-block" destination="header.container" before="-"/>
         <move element="catalog.compare.link" destination="header3-mobile-block" before="-"/>
         

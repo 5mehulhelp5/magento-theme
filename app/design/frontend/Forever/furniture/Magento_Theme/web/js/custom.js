@@ -138,47 +138,50 @@ require([
         return false;
     })
 
-    jQuery('.switchpage-control .control').click(function(){
+    jQuery('.switchpage-control .control').click(function(e){
+        e.preventDefault();
+        var lists = jQuery(this).closest('nav.navigation').find('> ul > .sub-list');
+        if (!lists.length) {
+            lists = jQuery('.sub-list');
+        }
         jQuery(this).toggleClass('page-two');
-        jQuery('.sub-list:first-child').toggleClass('remove-class');
-        jQuery('.sub-list:last-child').toggleClass('add-class');
+        lists.first().toggleClass('remove-class');
+        lists.last().toggleClass('add-class');
         setTimeout(function(){
-         jQuery('.sub-list').toggleClass('annimated');  
+         lists.toggleClass('annimated');
        },1000)
     });
-//     jQuery(window).scroll(function() { 
-//         if($(window).width() > 1024) {
-//     jQuery(function(jQuery) {
-//         var num_cols = 2,
-//         container = jQuery('.navigation > ul'),
-//         listItem = 'li',
-//         listClass = 'sub-list';
-//         container.each(function() {
-//             var items_per_col = new Array(),
-//             items = jQuery(this).find(listItem),
-//             min_items_per_col = Math.floor(items.length / num_cols),
-//             difference = items.length - (min_items_per_col * num_cols);
-//             for (var i = 0; i < num_cols; i++) {
-//                 if (i < difference) {
-//                     items_per_col[i] = min_items_per_col + 1;
-//                 } else {
-//                     items_per_col[i] = min_items_per_col;
-//                 }
-//             }
-//             for (var i = 0; i < num_cols; i++) {
-//                 jQuery(this).append(jQuery('<ul ></ul>').addClass(listClass));
-//                 for (var j = 0; j < items_per_col[i]; j++) {
-//                     var pointer = 0;
-//                     for (var k = 0; k < i; k++) {
-//                         pointer += items_per_col[k];
-//                     }
-//                     jQuery(this).find('.' + listClass).last().append(items[j + pointer]);
-//                 }
-//             }
-//         });
-//     });
-// }
-//     });
+    if (jQuery(window).width() > 1024) {
+        var container = jQuery('.nav-desktop .navigation > ul, .megamenu-native-desktop .navigation > ul');
+        if (container.length && !container.find('.sub-list').length) {
+            var num_cols = 2,
+                listItem = 'li',
+                listClass = 'sub-list';
+            container.each(function() {
+                var items_per_col = new Array(),
+                    items = jQuery(this).children(listItem).not('.sub-list'),
+                    min_items_per_col = Math.floor(items.length / num_cols),
+                    difference = items.length - (min_items_per_col * num_cols);
+                for (var i = 0; i < num_cols; i++) {
+                    if (i < difference) {
+                        items_per_col[i] = min_items_per_col + 1;
+                    } else {
+                        items_per_col[i] = min_items_per_col;
+                    }
+                }
+                for (var i = 0; i < num_cols; i++) {
+                    jQuery(this).append(jQuery('<ul></ul>').addClass(listClass));
+                    for (var j = 0; j < items_per_col[i]; j++) {
+                        var pointer = 0;
+                        for (var k = 0; k < i; k++) {
+                            pointer += items_per_col[k];
+                        }
+                        jQuery(this).find('.' + listClass).last().append(items[j + pointer]);
+                    }
+                }
+            });
+        }
+    }
     jQuery('.faq-answers').hide();
     jQuery('.faq-questions').click(function(e) {
         e.preventDefault();
@@ -220,4 +223,3 @@ require([
         }
     });
 });
-

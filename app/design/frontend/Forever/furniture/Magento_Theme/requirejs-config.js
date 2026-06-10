@@ -1,28 +1,32 @@
 var config = {
-	paths:{
-        'custom':"Magento_Theme/js/custom"
+    paths: {
+        'custom': 'Magento_Theme/js/custom',
+        'jquery/ui': 'jquery/jquery-ui'
     },
     map: {
         '*': {
-        'cartflip': 'Magento_Theme/js/cartflip',
-        'productflip': 'Magento_Theme/js/product-flip',
-        'carousel': 'Magento_Theme/js/carousel',
-        'owlCarousel': 'Magento_Theme/js/owl-carousel/owl.carousel',
-        'stickyheader': 'Magento_Theme/js/sticky'
-      }
+            'cartflip': 'Magento_Theme/js/cartflip',
+            'productflip': 'Magento_Theme/js/product-flip',
+            'carousel': 'Magento_Theme/js/carousel',
+            'owlCarousel': 'Magento_Theme/js/owl-carousel/owl.carousel',
+            'stickyheader': 'Magento_Theme/js/sticky'
+        }
     },
     shim: {
         'custom': {
-            "deps": ['jquery']
+            deps: ['jquery']
         },
         'cartflip': {
-            "deps": ["jquery"]
+            deps: ['jquery']
         },
         'productflip': {
-            "deps": ["cartflip"]
+            deps: ['cartflip']
         },
         'owlCarousel': {
-            "deps": ["jquery"]
+            deps: ['jquery']
+        },
+        'jquery/jquery-ui': {
+            deps: ['jquery']
         }
     }
-}
+};

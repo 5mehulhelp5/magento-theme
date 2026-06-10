@@ -46,6 +46,27 @@
     .cms-home .new-arrival-slider.product-slider,.cms-home .bestseller-slider.product-slider {
         padding-top: 30px;
     }
+    body.cms-index-index .bestseller-slider-section .page-title,
+    body.cms-home-page2 .bestseller-slider-section .page-title {
+        position: static !important;
+        width: auto !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        clip: auto !important;
+        clip-path: none !important;
+        white-space: normal !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: block !important;
+        color: #111 !important;
+    }
+    body.cms-index-index .bestseller-slider-section .page-title span,
+    body.cms-home-page2 .bestseller-slider-section .page-title span {
+        display: inline-block !important;
+        color: #111 !important;
+    }
     div.quickview.forever-quickview-text {
         display:none;
     }
@@ -1658,7 +1679,22 @@
 }
 // 1024px
 @media only screen and (max-width: (@screen__l - 1)) {
+    body .page-wrapper,
+    body.cms-index-index .page-wrapper,
+    body.cms-home-page2 .page-wrapper {
+        overflow-x: hidden;
+    }
     .storelocator-index-index {
+        .storelocator-search {
+            box-sizing: border-box;
+            max-width: 100%;
+            padding-left: 20px;
+            padding-right: 20px;
+            width: 100%;
+        }
+        .column.main .field.search {
+            max-width: 100%;
+        }
         .column.main .field.search .control {
             width:100%;
         }
@@ -1880,6 +1916,7 @@
     body.storelocator-index-index {
         .first-map {
             height:400px !important;
+            max-width:100%;
         }
         .store-information {
            flex-direction:column;
@@ -1889,9 +1926,15 @@
            }
         }
         .store-details-wrapper {
+            box-sizing:border-box;
+            max-width:100%;
             margin-bottom:20px;
         }
         .column.main .field.search {
+            box-sizing:border-box;
+            width:100%;
+        }
+        .action-search {
             width:100%;
         }
         .first-map {
@@ -2257,20 +2300,77 @@
     }
     
 }
-@media (min-width: 768px) {
+@media (min-width: 1025px) {
     .navigation-mobile {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+
+    .navigation-mobile .nav-mobile {
+        display: none !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    html:not(.nav-open) .navigation-mobile {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+
+    html.nav-open .navigation-mobile {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+
+    html.nav-open .nav-sections .navigation-mobile {
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
     }
 
-    .navigation-mobile .nav-mobile {
-        display: flex !important;
-        align-items: center;
-        gap: 30px;
+    html.nav-open .nav-sections .navigation-mobile .nav-mobile {
+        display: block !important;
+        gap: 0;
     }
 
-    .navigation-mobile .nav-mobile > li {
-        display: inline-block !important;
+    html.nav-open .nav-sections .navigation-mobile .nav-mobile > li {
+        display: block !important;
+    }
+
+    html.nav-open .nav-sections .nav-sections-item-title[aria-controls="store.menu"].active + #store\.menu {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    html.nav-open .nav-sections .nav-sections-item-title[aria-controls="store.menu"].active + #store\.menu .navigation-mobile {
+        display: block !important;
+        position: static;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    html.nav-open .nav-sections .nav-sections-item-title[aria-controls="store.menu"].active + #store\.menu .nav-mobile,
+    html.nav-open .nav-sections .nav-sections-item-title[aria-controls="store.menu"].active + #store\.menu .nav-mobile > li,
+    html.nav-open .nav-sections .nav-sections-item-title[aria-controls="store.menu"].active + #store\.menu .nav-mobile > li > a {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    html.nav-open .nav-sections .nav-sections-item-title[aria-controls="store.menu"]:not(.active) + #store\.menu,
+    html.nav-open .nav-sections .nav-sections-item-title[aria-controls="store.links"]:not(.active) + #store\.links {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+
+    html.nav-open .nav-sections .nav-sections-item-title[aria-controls="store.links"].active + #store\.links {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 }
