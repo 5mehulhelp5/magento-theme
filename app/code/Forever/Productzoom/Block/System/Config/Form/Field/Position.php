@@ -1,34 +1,30 @@
 <?php
 
-/**
- * @Author: Alex Dong
- * @Date:   2020-07-09 22:24:37
- * @Last Modified by:   nguyen
- * @Last Modified time: 2020-07-10 13:51:02
- */
+declare(strict_types=1);
 
 namespace Forever\Productzoom\Block\System\Config\Form\Field;
 
-class Position extends \Magento\Config\Block\System\Config\Form\Field
+use Magento\Backend\Block\Template\Context;
+use Magento\Config\Block\System\Config\Form\Field;
+use Magento\Framework\Data\Form\Element\AbstractElement;
+use Magento\Framework\View\Asset\Repository as AssetRepository;
+
+class Position extends Field
 {
+    private readonly AssetRepository $assetRepository;
 
-    private $assetRepository;
-
-    public function __construct(
-        \Magento\Backend\Block\Template\Context $context, array $data = []
-    ) {
+    public function __construct(Context $context, array $data = [])
+    {
         $this->assetRepository = $context->getAssetRepository();
         parent::__construct($context, $data);
     }
 
-    protected function _getElementHtml(\Magento\Framework\Data\Form\Element\AbstractElement $element) 
+    protected function _getElementHtml(AbstractElement $element): string
     {
         $html  = $element->getElementHtml();
-        $value = $element->getData('value');
-        
         $asset = $this->assetRepository->createAsset('Forever_Productzoom::images/window-positions.png');
-        $html .= '<div style="position: relative; margin-top:10px"><img id="window-positions" src="' . $asset->getUrl() . '" alt="" border="0"></div>';
+        $html .= '<div style="position:relative;margin-top:10px"><img id="window-positions" src="'
+            . $asset->getUrl() . '" alt="" border="0"></div>';
         return $html;
     }
-
 }

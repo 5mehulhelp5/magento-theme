@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
-<!-- /**
- * @Author: nguyen
- * @Date:   2020-02-12 14:01:01
- * @Last Modified by:   nguyen
- * @Last Modified time: 2020-02-15 18:55:34
- */ -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="Forever_Productzoom"/>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Forever_Productzoom">
+        <sequence>
+            <module name="Magento_Store"/>
+            <module name="Magento_Config"/>
+            <module name="Magento_Catalog"/>
+        </sequence>
+    </module>
 </config>

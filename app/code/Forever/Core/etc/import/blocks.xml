@@ -356,7 +356,7 @@
 <div class="header-top-inner">
 <div class="top-left">
 <ul>
-<li><a href="#">Contact</a></li>
+<li><a href="contact">Contact</a></li>
 <li><a href="#">Reviews</a></li>
 <li><a href="#">Support</a></li>
 </ul>
@@ -452,7 +452,7 @@ Get Latest News &amp; Update</div>
       <cms_item>
          <title>New Arrival Products</title>
          <identifier>new-arrival-products</identifier>
-         <content><![CDATA[<p>{{block class="Forever\Core\Block\CategoryList" name="newarrival" template="Forever_Core::product-filter.phtml"}}</p>]]></content>
+         <content><![CDATA[<!-- FOREVER_NEW_ARRIVAL_PRODUCTS -->]]></content>
       </cms_item>
 
 

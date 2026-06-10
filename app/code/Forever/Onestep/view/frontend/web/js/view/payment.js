@@ -7,5 +7,5 @@ define([], function () {
                 template: 'Forever_Onestep/payment'
             }
         });
-    }
+    };
 });

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @Author: nguyen
  * @Date:   2020-07-09 20:12:00
@@ -9,14 +11,14 @@
 
 namespace Forever\Productzoom\Model\Config\Source;
 
-class Truefalse implements \Magento\Framework\Option\ArrayInterface
+class Truefalse implements \Magento\Framework\Data\OptionSourceInterface
 {
     /**
      * Options getter
      *
      * @return array
      */
-    public function toOptionArray()
+    public function toOptionArray(): array
     {
         return [['value' => 'true', 'label' => __('True')], ['value' => 'false', 'label' => __('False')]];
     }
@@ -26,7 +28,7 @@ class Truefalse implements \Magento\Framework\Option\ArrayInterface
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return ['false' => __('No'), 'true' => __('Yes')];
     }

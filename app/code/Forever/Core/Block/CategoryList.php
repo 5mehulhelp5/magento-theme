@@ -55,6 +55,21 @@ class CategoryList extends \Magento\Framework\View\Element\Template
     protected $productLabelViewModel;
 
     /**
+     * @var \Magento\Catalog\Pricing\Price\SpecialPriceBulkResolverInterface
+     */
+    protected $specialPriceBulkResolver;
+
+    /**
+     * @var array
+     */
+    protected $specialPriceMap = [];
+
+    protected $listProductBlock;
+    protected $compareProduct;
+    protected $wishlistHelper;
+    protected $authenticationviewmodel;
+
+    /**
      * @param Context $context
      * @param Context $gridcontext
      * @param Resolver $layerResolver
@@ -194,12 +209,21 @@ class CategoryList extends \Magento\Framework\View\Element\Template
         \Magento\Catalog\Model\Product $product,
         $priceType = null
     ) {
+        $priceType = $priceType ?: \Magento\Catalog\Pricing\Price\FinalPrice::PRICE_CODE;
         $priceRender = $this->getLayout()->getBlock('product.price.render.default');
         $price = '';
         if ($priceRender) {
+            $priceRender->setData('is_product_list', true);
+            $priceRender->setData('special_price_map', $this->getSpecialPriceMap($product));
             $price = $priceRender->render(
-                \Magento\Catalog\Pricing\Price\FinalPrice::PRICE_CODE,
-                $product
+                $priceType,
+                $product,
+                [
+                    'include_container' => true,
+                    'display_minimal_price' => true,
+                    'zone' => \Magento\Framework\Pricing\Render::ZONE_ITEM_LIST,
+                    'list_category_page' => true,
+                ]
             );
         }
         return $price;
@@ -211,7 +235,42 @@ class CategoryList extends \Magento\Framework\View\Element\Template
         $products = clone $this->getProductCollection();
         $products->addCategoriesFilter(['eq' => $categoryId]);
         $products->addAttributeToSort('created_at', 'DESC');
+        if (!$products->getAllIds()) {
+            $this->specialPriceMap = [];
+            return $products;
+        }
+        $this->specialPriceMap = $this->getSpecialPriceBulkResolver()->generateSpecialPriceMap(
+            (int) $this->storeManager->getStore()->getId(),
+            $products
+        );
         return $products;
+    }
+
+    /**
+     * @param \Magento\Catalog\Model\Product $product
+     * @return array
+     */
+    protected function getSpecialPriceMap(\Magento\Catalog\Model\Product $product)
+    {
+        if (!isset($this->specialPriceMap[$product->getId()])) {
+            $this->specialPriceMap[$product->getId()] = (bool) ($product->getFinalPrice() < $product->getPrice());
+        }
+
+        return $this->specialPriceMap;
+    }
+
+    /**
+     * @return \Magento\Catalog\Pricing\Price\SpecialPriceBulkResolverInterface
+     */
+    protected function getSpecialPriceBulkResolver()
+    {
+        if ($this->specialPriceBulkResolver === null) {
+            $this->specialPriceBulkResolver = \Magento\Framework\App\ObjectManager::getInstance()->get(
+                \Magento\Catalog\Pricing\Price\SpecialPriceBulkResolverInterface::class
+            );
+        }
+
+        return $this->specialPriceBulkResolver;
     }
 
     public function getProductCollection()

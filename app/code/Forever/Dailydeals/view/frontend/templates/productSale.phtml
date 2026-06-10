@@ -1,39 +1,46 @@
 <?php
 /**
- * @var $block Forever\Dailydeals\Block\Dailydeals
+ * @var $block \Forever\Dailydeals\Block\Dailydeals
+ * @var $escaper \Magento\Framework\Escaper
  */
 ?>
 <?php if ($block->isEnable() && $block->isProductAvailable()): ?>
     <?php
-    date_default_timezone_set($block->getConfigTimeZone());
+    $timezone = $block->getConfigTimeZone() ?: 'UTC';
+    $tz = new \DateTimeZone($timezone);
+    $now = new \DateTime('now', $tz);
     $product = $block->getSpecificProduct();
     $image_url = $block->getProductImage($product);
-    $addToCartUrl= $block->getAddCartUrl($product);
-    $saleExpDateTime = explode(" ", $block->getConfigExpDateTime());
-    $timeFormat = date('h:i A', strtotime($block->getConfigExpDateTime()));
-    $saleExpDate = $saleExpDateTime[0];
+    $addToCartUrl = $block->getAddCartUrl($product);
+    $expDateTimeStr = $block->getConfigExpDateTime();
+    $expDateTime = new \DateTime($expDateTimeStr, $tz);
+    $saleExpDate = $expDateTime->format('Y-m-d');
+    $timeFormat = $expDateTime->format('h:i A');
     $type = $product->getTypeId();
-    if ($type == 'simple' || $type == 'downloadable' || $type == 'virtual') {
-        $groupPrice = $product->getPrice();
-        $specialPrice = $product->getSpecialPrice();
+
+    if ($type === 'simple' || $type === 'downloadable' || $type === 'virtual') {
+        $groupPrice = (float) $product->getPrice();
+        $specialPrice = (float) $product->getSpecialPrice();
         $formattedPrice = $block->getFormatedPrice($groupPrice);
         $formattedSpecialPrice = $block->getFormatedPrice($specialPrice);
-    } elseif ($type == 'configurable') {
+    } elseif ($type === 'configurable') {
         $price = $product->getPriceInfo()->getPrice('regular_price');
         $configMinPrice = $block->getFormatedPrice($price->getMinRegularAmount()->getValue());
-    } elseif ($type == 'bundle') {
+    } elseif ($type === 'bundle') {
         $price = $product->getPriceInfo()->getPrice('final_price');
         $bundleMinPrice = $block->getFormatedPrice($price->getMinimalPrice()->getValue());
-    } elseif ($type == 'grouped') {
+    } elseif ($type === 'grouped') {
         $price = $product->getPriceInfo()->getPrice('final_price');
         $groupMinPrice = $block->getFormatedPrice($price->getMinimalPrice()->getValue());
     }
-    $isInStock = $product->getExtensionAttributes()->getStockItem()->getIsInStock();
+
+    $stockItem = $product->getExtensionAttributes()->getStockItem();
+    $isInStock = $stockItem && $stockItem->getIsInStock();
     ?>
     <?php if ($isInStock): ?>
         <script type="text/javascript">
-            var saleExpDate = '<?= /* @noEscape */ $saleExpDate ?>';
-            var saleExpTime = '<?= /* @noEscape */ $timeFormat ?>';
+            var saleExpDate = '<?= $escaper->escapeJs($saleExpDate) ?>';
+            var saleExpTime = '<?= $escaper->escapeJs($timeFormat) ?>';
             CountDownTimer((saleExpDate + ' ' + saleExpTime), 'countdown');
             function CountDownTimer(dt, id)
             {
@@ -43,7 +50,7 @@
                 var _hour = _minute * 60;
                 var _day = _hour * 24;
                 var timer;
-                
+
                 function showRemaining()
                 {
                     var now = new Date();
@@ -61,30 +68,24 @@
                     var hours = Math.floor((distance % _day) / _hour);
                     var minutes = Math.floor((distance % _hour) / _minute);
                     var seconds = Math.floor((distance % _minute) / _second);
-                    
-                    if (String(hours).length < 2) {
-                        hours = 0 + String(hours);
-                    }
-                    if (String(minutes).length < 2) {
-                        minutes = 0 + String(minutes);
-                    }
-                    if (String(seconds).length < 2) {
-                        seconds = 0 + String(seconds);
-                    }
-                    
+
+                    if (String(hours).length < 2) { hours = '0' + String(hours); }
+                    if (String(minutes).length < 2) { minutes = '0' + String(minutes); }
+                    if (String(seconds).length < 2) { seconds = '0' + String(seconds); }
+
                     var datestr = '<div class="counter">';
-                    datestr += '<div class="counter-timer">'
+                    datestr += '<div class="counter-timer">';
                     datestr += '<p class="days-num number">' + days + '<p class="days text">';
-                    datestr += '<?= /* @noEscape */ __('days') ?>' + '</p></p></div>';
-                    datestr += '<div class="counter-timer">'
+                    datestr += '<?= $escaper->escapeJs(__('days')) ?>' + '</p></p></div>';
+                    datestr += '<div class="counter-timer">';
                     datestr += '<p class="minutes-num number">' + hours + '<p class="hours text">';
-                    datestr += '<?= /* @noEscape */ __('Hrs') ?>' + '</p></p></div>';
-                    datestr += '<div class="counter-timer">'
+                    datestr += '<?= $escaper->escapeJs(__('Hrs')) ?>' + '</p></p></div>';
+                    datestr += '<div class="counter-timer">';
                     datestr += '<p class="minutes-num number">' + minutes + '<p class="minutes text">';
-                    datestr += '<?= /* @noEscape */ __('Mins') ?>' + '</p></p></div>';
-                    datestr += '<div class="counter-timer">'
+                    datestr += '<?= $escaper->escapeJs(__('Mins')) ?>' + '</p></p></div>';
+                    datestr += '<div class="counter-timer">';
                     datestr += '<p class="seconds-num number">' + seconds + '<p class="seconds text">';
-                    datestr += '<?= /* @noEscape */ __('Secs') ?>' + '</p></p></div></div>';
+                    datestr += '<?= $escaper->escapeJs(__('Secs')) ?>' + '</p></p></div></div>';
                     document.getElementById(id).innerHTML = datestr;
                 }
                 timer = setInterval(showRemaining, 1000);
@@ -96,14 +97,14 @@
                 <div id="sale-description" class="daily-deals-title bestseller-slider-section">
                     <div class="page-title-wrapper">
                         <h3 class="sale-description-text page-title">
-                            <span><?= /* @noEscape */ __($block->getConfigSaleText()) ?></span>
+                            <span><?= $block->getConfigSaleText() ?></span>
                         </h3>
                     </div>
                 </div>
                 <div class="daily-deals-left">
                     <div id="sale-header">
                         <div id="product-image">
-                            <img width="200" height="170" src="<?= /* @noEscape */ $image_url; ?>">
+                            <img width="200" height="170" src="<?= $escaper->escapeUrl($image_url) ?>" alt="<?= $escaper->escapeHtmlAttr($product->getName()) ?>">
                         </div>
                     </div>
                 </div>
@@ -111,62 +112,62 @@
                     <div class="sale-body">
                         <div class="product-name">
                             <span class="name">
-                                <?= /* @noEscape */ __($product->getName()) ?>
+                                <?= $escaper->escapeHtml($product->getName()) ?>
                             </span>
                         </div>
                         <div class="product-price">
-                            <?php if ($type == 'simple' || $type == 'downloadable' || $type == 'virtual'): ?>
+                            <?php if ($type === 'simple' || $type === 'downloadable' || $type === 'virtual'): ?>
                                 <?php if ($product->getSpecialPrice()): ?>
                                     <span class="regular-price">
-                                        <?= /* @noEscape */ __($formattedPrice) ?>
+                                        <?= $escaper->escapeHtml($formattedPrice) ?>
                                     </span>
                                     <span class="special-price">
-                                        <?= /* @noEscape */ __($formattedSpecialPrice) ?>
+                                        <?= $escaper->escapeHtml($formattedSpecialPrice) ?>
                                     </span>
                                 <?php else: ?>
                                     <span class="price">
-                                        <?= /* @noEscape */ __($formattedPrice) ?>
+                                        <?= $escaper->escapeHtml($formattedPrice) ?>
                                     </span>
                                 <?php endif; ?>
                             <?php endif; ?>
-                            <?php if ($type == 'configurable'): ?>
+                            <?php if ($type === 'configurable'): ?>
                                 <span class="price">
-                                    <?= /* @noEscape */ __('As low as ' . $configMinPrice) ?>
+                                    <?= $escaper->escapeHtml(__('As low as ') . $configMinPrice) ?>
                                 </span>
                             <?php endif; ?>
-                            <?php if ($type == 'bundle'): ?>
+                            <?php if ($type === 'bundle'): ?>
                                 <span class="price">
-                                    <?= /* @noEscape */ __('From ' . $bundleMinPrice) ?>
+                                    <?= $escaper->escapeHtml(__('From ') . $bundleMinPrice) ?>
                                 </span>
                             <?php endif; ?>
-                            <?php if ($type == 'grouped'): ?>
+                            <?php if ($type === 'grouped'): ?>
                                 <span class="price">
-                                    <?= /* @noEscape */ __($groupMinPrice) ?>
+                                    <?= $escaper->escapeHtml($groupMinPrice) ?>
                                 </span>
                             <?php endif; ?>
                         </div>
                         <div class="sale-footer">
                             <div class="addtocart-button">
-                                <?php if ($type == 'simple' || $type == 'downloadable' || $type == 'virtual'): ?>
+                                <?php if ($type === 'simple' || $type === 'downloadable' || $type === 'virtual'): ?>
                                     <form data-role="tocart-form"
-                                        action="<?= /* @noEscape */ $addToCartUrl; ?>"
+                                        action="<?= $escaper->escapeUrl($addToCartUrl) ?>"
                                         method="post">
-                                        <?= /* @noEscape */ $block->getBlockHtml('formkey')?>
+                                        <?= $block->getBlockHtml('formkey') ?>
                                         <button type="submit"
-                                            title="<?= /* @noEscape */ __($block->getConfigButtonText()) ?>"
+                                            title="<?= $escaper->escapeHtmlAttr($block->getConfigButtonText()) ?>"
                                             id="order-button"
                                             class="action tocart primary">
                                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                            <span><?= /* @noEscape */ __($block->getConfigButtonText()) ?></span>
-                                         </button>
-                                     </form>
+                                            <span><?= $escaper->escapeHtml($block->getConfigButtonText()) ?></span>
+                                        </button>
+                                    </form>
                                 <?php else: ?>
-                                    <button type="submit" id="order-button" class="action tocart primary">
-                                        <a href="<?= /*@noEscape*/ $product->getProductUrl() ?>">
-                                            <?= /*@noEscape*/ __('View Product') ?>
+                                    <button type="button" id="order-button" class="action tocart primary">
+                                        <a href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>">
+                                            <?= $escaper->escapeHtml(__('View Product')) ?>
                                         </a>
                                     </button>
-                                <?php endif;?>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -178,19 +179,19 @@
 <?php endif; ?>
 
 <script>
-require(['jquery','jquery/ui'], function ($) {
-    $(document).ready(function(){
-        $(function() {
-            var elementPosition = $('.daily-deals-section').offset();
-
-            $(window).scroll(function(){
-                    if($(window).scrollTop() > elementPosition.top){
-                         $('.daily-deals-section').addClass('stick');
-                    } else {
-                        $('.daily-deals-section').removeClass('stick');
-                    }    
+require(['jquery', 'jquery/ui'], function ($) {
+    $(document).ready(function () {
+        var $section = $('.daily-deals-section');
+        if ($section.length) {
+            var elementPosition = $section.offset();
+            $(window).on('scroll', function () {
+                if ($(window).scrollTop() > elementPosition.top) {
+                    $section.addClass('stick');
+                } else {
+                    $section.removeClass('stick');
+                }
             });
-        })
+        }
     });
 });
 </script>

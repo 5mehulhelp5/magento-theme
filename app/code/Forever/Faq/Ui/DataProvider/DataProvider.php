@@ -1,61 +1,45 @@
 <?php
 
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
+declare(strict_types=1);
 
 namespace Forever\Faq\Ui\DataProvider;
 
 use Forever\Faq\Model\ResourceModel\Question\CollectionFactory;
-use Magento\Store\Model\StoreManagerInterface;
+use Magento\Ui\DataProvider\AbstractDataProvider;
 
-class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
+class DataProvider extends AbstractDataProvider
 {
-    protected $collection;
     /**
-     * @var loadedData
+     * @var array|null
      */
-    protected $loadedData;
-     /**
-      * @var storeManager
-      */
-    protected $storeManager;
-    
+    protected ?array $loadedData = null;
+
     public function __construct(
-        $name,
-        $primaryFieldName,
-        $requestFieldName,
-        StoreManagerInterface $storeManager,
-        CollectionFactory $contactCollectionFactory,
+        string $name,
+        string $primaryFieldName,
+        string $requestFieldName,
+        CollectionFactory $collectionFactory,
         array $meta = [],
         array $data = []
     ) {
-        $this->collection = $contactCollectionFactory->create();
-        $this->storeManager = $storeManager;
-        parent::__construct(
-            $name,
-            $primaryFieldName,
-            $requestFieldName,
-            $meta,
-            $data
-        );
+        $this->collection = $collectionFactory->create();
+        parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
-    /**
-     * @return getData
-     */
 
-    public function getData()
+    /**
+     * Get data for the form
+     */
+    public function getData(): array
     {
-        if (isset($this->loadedData)) {
+        if ($this->loadedData !== null) {
             return $this->loadedData;
         }
 
-        $items = $this->collection->getItems();
-        foreach ($items as $item) {
-            $itemData = $item->getData();
-            $this->loadedData[$item->getId()] = $itemData;
+        $this->loadedData = [];
+        foreach ($this->collection->getItems() as $item) {
+            $this->loadedData[$item->getId()] = $item->getData();
         }
+
         return $this->loadedData;
     }
 }

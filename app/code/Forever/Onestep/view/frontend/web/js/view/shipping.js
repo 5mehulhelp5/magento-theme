@@ -1,33 +1,44 @@
-define(['Magento_Checkout/js/checkout-data','Magento_Checkout/js/model/quote'], function (checkoutData, quote) {
+define([
+    'Magento_Checkout/js/checkout-data',
+    'Magento_Checkout/js/model/quote'
+], function (checkoutData, quote) {
     'use strict';
-    var parent;
-    var first;
-    var mixin = {
-
-        defaults: {
-            template: 'Forever_Onestep/shipping',
-        },
-        initialize: function () {
-            parent = this._super();
-            quote.shippingMethod.subscribe(function () {
-                if(!first && checkoutData.getSelectedShippingRate()){
-                    setTimeout(function(){
-                        parent.setShippingInformation();
-                        first = true;
-                    },1000);
-                }
-            });
-            return parent;
-        },
-        selectShippingMethod: function (shippingMethod) {
-            this._super();
-            parent.setShippingInformation();
-            return true;
-        },
-    };
 
     return function (target) {
-        return target.extend(mixin);
-    };
+        return target.extend({
+            defaults: {
+                template: 'Forever_Onestep/shipping'
+            },
 
+            initialize: function () {
+                var self = this,
+                    initialized = false;
+
+                this._super();
+
+                quote.shippingMethod.subscribe(function () {
+                    if (!initialized && checkoutData.getSelectedShippingRate()) {
+                        initialized = true;
+                        window.setTimeout(function () {
+                            if (typeof self.setShippingInformation === 'function') {
+                                self.setShippingInformation();
+                            }
+                        }, 1000);
+                    }
+                });
+
+                return this;
+            },
+
+            selectShippingMethod: function (shippingMethod) {
+                this._super(shippingMethod);
+
+                if (typeof this.setShippingInformation === 'function') {
+                    this.setShippingInformation();
+                }
+
+                return true;
+            }
+        });
+    };
 });

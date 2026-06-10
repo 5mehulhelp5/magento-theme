@@ -6,10 +6,8 @@ use Forever\Megamenu\Model\ResourceModel\Megamenu\CollectionFactory;
  
 class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
-    /**
-     * @var loadeddata
-     */
     protected $loadedData;
+    protected \Magento\Store\Model\StoreManagerInterface $storeManager;
 
     public function __construct(
         $name,

@@ -11,30 +11,11 @@ class SystemConfigurations implements ArgumentInterface
     const XML_PATH_STICKY_HEADER_TYPE = 'forever_general/header/stickyheader';
     const XML_PATH_STICKY_HEADER_TYPE_ENABLE = 'forever_general/header/sticky';
 
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    protected $logger;
-
-    /**
-     * @var array
-     */
-    protected $nextPrevious;
-
-    /**
-     * @var \Magento\Catalog\Model\Category
-     */
-    protected $categoryModel;
-
-    /**
-     * @var \Magento\Customer\Model\Session
-     */
-    protected $customerSession;
-
-    /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     */
-    protected $scopeConfig;
+    protected \Psr\Log\LoggerInterface $logger;
+    protected ?array $nextPrevious = null;
+    protected \Magento\Catalog\Model\Category $categoryModel;
+    protected \Magento\Customer\Model\Session $customerSession;
+    protected \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig;
 
     /**
      * @param Psr\Log\LoggerInterface $logger

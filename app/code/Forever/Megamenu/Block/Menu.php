@@ -165,6 +165,11 @@ class Menu extends \Magento\Catalog\Block\Navigation
     {
         $keyInfo     =  parent::getCacheKeyInfo();
         $keyInfo[]   =  $this->getCurrentCategory()->getId();
+        $keyInfo[]   =  $this->getNameInLayout();
+        $keyInfo[]   =  'enabled_' . (int) $this->_helper->getConfigModule('module/enabled', 0);
+        $keyInfo[]   =  'desktop_' . (string) $this->_helper->getConfigModule('desktop/deskposition', '');
+        $keyInfo[]   =  'mobile_' . (string) $this->_helper->getConfigModule('mobile/mobposition', '');
+        $keyInfo[]   =  'home_' . (int) $this->_helper->getConfigModule('homebutton/homebuttonenabled', 0);
         return $keyInfo;
     }
 
@@ -364,16 +369,25 @@ class Menu extends \Magento\Catalog\Block\Navigation
         $counter = 1;
         $this->removeChildrenWithoutActiveParent($categories, 0);
         $catIcons = [];
-        $catIds = $this->_magicmenuCollectionFactory->create()
-        ->addFieldToFilter('status', 1)
-        ->addFieldToSelect('cat_id')->getColumnValues('cat_id');
-        if (is_array($catIds) && count($catIds)) {
-            // $catIds = array_unique($catIds);
-            $catIds = $catIds;
-        }
+        $catIds = array_map(
+            'intval',
+            array_filter(
+                $this->_magicmenuCollectionFactory->create()
+                    ->addFieldToFilter('status', 1)
+                    ->addFieldToSelect('cat_id')
+                    ->getColumnValues('cat_id')
+            )
+        );
+        $catIds = array_values(array_unique($catIds));
         foreach ($categories as $catTop) {
             $catIcons[] = $catTop->getCategoryicon();
-            if (!in_array($catTop->getEntityId(), $catIds) || !$catTop->getData('is_parent_active')) {
+            if (!$this->isHomeButtonEnabled() && $this->isHomeMenuNode($catTop)) {
+                continue;
+            }
+            if (!$catTop->getData('is_parent_active')) {
+                continue;
+            }
+            if ($catIds && !in_array((int) $catTop->getEntityId(), $catIds, true)) {
                 continue;
             }
             $parentPositionClass = '';
@@ -506,6 +520,11 @@ class Menu extends \Magento\Catalog\Block\Navigation
             $currentUrl = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
             foreach ($extMenu as $ext) {
                 if ($ext->getCustcateurl() && $ext->getCatename()) {
+                    if (!$this->isHomeButtonEnabled()
+                        && strcasecmp(trim((string) $ext->getCatename()), 'home') === 0
+                    ) {
+                        continue;
+                    }
                     $link = $ext->getCustcateurl();
                     $url = (filter_var($link, FILTER_VALIDATE_URL)) ? $link : $this->getUrl('', ['_direct' => $link]);
                     $active = ( $link && $url == $currentUrl) ? ' active' : '';
@@ -678,6 +697,27 @@ class Menu extends \Magento\Catalog\Block\Navigation
     private function getChildLevel($parentLevel): int
     {
         return $parentLevel === null ? 0 : $parentLevel + 1;
+    }
+
+    /**
+     * Check whether Home menu item is enabled in module config.
+     *
+     * @return bool
+     */
+    private function isHomeButtonEnabled(): bool
+    {
+        return (bool) $this->_helper->getConfigModule('homebutton/homebuttonenabled', 0);
+    }
+
+    /**
+     * Check menu node represents the top-level Home item.
+     *
+     * @param Node $node
+     * @return bool
+     */
+    private function isHomeMenuNode(Node $node): bool
+    {
+        return strcasecmp(trim((string) $node->getName()), 'home') === 0;
     }
 
     /**

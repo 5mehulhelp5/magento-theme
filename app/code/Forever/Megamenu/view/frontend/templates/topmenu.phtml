@@ -17,10 +17,25 @@ $drawHomeMenu  = $homeHtml;
 $drawMainMenu  = '';
 $drawExtraMenu = $extraHtml ;
 
-$classmob=$menumobile['mobposition'];
+$classmob = isset($menumobile['mobposition']) && in_array($menumobile['mobposition'], ['accordian', 'drilldrop'], true)
+    ? $menumobile['mobposition']
+    : 'accordian';
+$classdesktop = isset($menudesktop['deskposition']) && in_array($menudesktop['deskposition'], ['vertical', 'horizontal'], true)
+    ? $menudesktop['deskposition']
+    : 'horizontal';
+$desktopWrapperClass = $classdesktop === 'vertical'
+    ? 'vmegamenu vmagicmenu clearfix config-vertical vertical'
+    : 'megamenu magicmenu clearfix config-horizontal horizontal';
 
 if (!$menu['enabled']) {
-    echo $block->getChildHtml();
+    $disabledMenuClass = $block->getNameInLayout() === 'catalog.mobile.topnav'
+        ? 'megamenu-native-mobile'
+        : 'megamenu-native-desktop';
+    ?>
+    <div class="<?= /* @noEscape */ $disabledMenuClass ?>">
+        <?= /* @noEscape */ $block->getChildHtml() ?>
+    </div>
+    <?php
     return;
 }
 ?>
@@ -55,9 +70,8 @@ navigation-mobile <?= /* @noEscape */ $classmob ?>" role="navigation" data-actio
     endif;?>
     
     <?php
-    $classdesktop=$menudesktop['deskposition'];
     if ($menu['enabled']):?>
-    <div class="megamenu clearfix <?= /* @noEscape */ $classdesktop ?>" >
+    <div class="<?= /* @noEscape */ $desktopWrapperClass ?>" >
         <ul class="nav-desktop ">
             <?php if ($homebutton['homebuttonenabled']): ?>
                 <?= /* @noEscape */ $drawHomeMenu ?>
@@ -67,7 +81,7 @@ navigation-mobile <?= /* @noEscape */ $classmob ?>" role="navigation" data-actio
         </ul>
     </div>
 <?php else: ?>
-    <div class="megamenu clearfix <?= /* @noEscape */ $classdesktop ?>" >
+    <div class="<?= /* @noEscape */ $desktopWrapperClass ?>" >
         <ul class="nav-desktop ">
             <?= /* @noEscape */ $block->getChildHtml() ?>
         </ul>

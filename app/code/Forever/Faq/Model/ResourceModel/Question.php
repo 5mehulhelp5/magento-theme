@@ -1,9 +1,6 @@
 <?php
 
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
+declare(strict_types=1);
 
 namespace Forever\Faq\Model\ResourceModel;
 
@@ -11,10 +8,10 @@ use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
 class Question extends AbstractDb
 {
-    const TABLE_NAME = 'forever_faq_question';
+    public const TABLE_NAME = 'forever_faq_question';
 
-    protected function _construct()
+    protected function _construct(): void
     {
-        $this->_init(static::TABLE_NAME, 'id');
+        $this->_init(self::TABLE_NAME, 'id');
     }
 }

@@ -1,24 +1,21 @@
 <?php
 
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
+declare(strict_types=1);
 
 namespace Forever\Faq\Model\Question\Status;
 
-class Options implements \Magento\Framework\Data\OptionSourceInterface
+use Magento\Framework\Data\OptionSourceInterface;
+
+class Options implements OptionSourceInterface
 {
     /**
      * Grid display options.
-     *
-     * @return array
      */
-    public function toOptionArray()
+    public function toOptionArray(): array
     {
         return [
             ['value' => '0', 'label' => __('Disabled')],
-            ['value' => '1', 'label' => __('Enabled')]
+            ['value' => '1', 'label' => __('Enabled')],
         ];
     }
 }

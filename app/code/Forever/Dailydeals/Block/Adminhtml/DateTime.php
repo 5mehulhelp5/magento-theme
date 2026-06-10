@@ -1,19 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Forever\Dailydeals\Block\Adminhtml;
 
-class DateTime extends \Magento\Config\Block\System\Config\Form\Field
+use Magento\Config\Block\System\Config\Form\Field;
+use Magento\Framework\Data\Form\Element\AbstractElement;
+use Magento\Framework\Stdlib\DateTime as MagentoDateTime;
+
+class DateTime extends Field
 {
     /**
-     * Get Element
-     *
-     * @param  \Magento\Framework\Data\Form\Element\AbstractElement $element
-     * @return Element
+     * Render the datetime field with date and time format set
      */
-    public function render(\Magento\Framework\Data\Form\Element\AbstractElement $element)
+    public function render(AbstractElement $element): string
     {
-        $element->setDateFormat(\Magento\Framework\Stdlib\DateTime::DATE_INTERNAL_FORMAT);
-        $element->setTimeFormat("HH:mm:ss");
+        $element->setDateFormat(MagentoDateTime::DATE_INTERNAL_FORMAT);
+        $element->setTimeFormat('HH:mm:ss');
         return parent::render($element);
     }
 }

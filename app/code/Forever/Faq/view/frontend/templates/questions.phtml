@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * @var $block \Forever\Faq\Block\Questions
+ * @var $escaper \Magento\Framework\Escaper
  */
 $isEnableModule = $block->getConfigValue();
 ?>
@@ -10,13 +10,12 @@ $isEnableModule = $block->getConfigValue();
     <?php foreach ($block->getItems() as $question): ?>
         <div class="faq-list">
             <div class="faq-questions">
-                <h4 class="faq-title"><?= /* @noEscape */ $question->getTitle();?></h4>  
+                <h4 class="faq-title"><?= $escaper->escapeHtml($question->getTitle()) ?></h4>
             </div>
             <div class="faq-answers">
-                <?= /* @noEscape */ $question->getAnswer();?>
-             </div>
-        </div>        
-    <?php endforeach;?>
+                <?= /* @noEscape */ $question->getAnswer() ?>
+            </div>
+        </div>
+    <?php endforeach; ?>
 </div>
-<?php endif;?>
-
+<?php endif; ?>

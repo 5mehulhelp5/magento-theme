@@ -1,74 +1,34 @@
 <?php
 
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
+declare(strict_types=1);
 
 namespace Forever\Faq\Block\Adminhtml\Question\Buttons;
 
 use Magento\Backend\Block\Widget\Context;
-use Magento\Framework\Registry;
 
-/**
- * @Class GenericButton
- */
 class GenericButton
 {
-    /**
-     * @var Context
-     */
-    protected $context;
-    /**
-     * Url Builder
-     *
-     * @var \Magento\Framework\UrlInterface
-     */
-    protected $urlBuilder;
+    protected readonly \Magento\Framework\UrlInterface $urlBuilder;
 
-    /**
-     * Registry
-     *
-     * @var \Magento\Framework\Registry
-     */
-    protected $registry;
-
-    /**
-     * Constructor
-     *
-     * @param \Magento\Backend\Block\Widget\Context $context
-     * @param \Magento\Framework\Registry $registry
-     */
     public function __construct(
-        Context $context,
-        Registry $registry
+        protected readonly Context $context
     ) {
-        $this->context = $context;
-        $this->urlBuilder = $this->context->getUrlBuilder();
-        $this->registry = $registry;
+        $this->urlBuilder = $context->getUrlBuilder();
     }
 
     /**
-     * Return the synonyms group Id.
-     *
-     * @return int|null
+     * Return the entity Id from request param
      */
-    public function getId()
+    public function getId(): ?int
     {
-        $entityId = null;
-        $entityId =  $this->context->getRequest()->getParam('id');
-        
-        return $entityId;
+        $id = $this->context->getRequest()->getParam('id');
+        return $id !== null ? (int) $id : null;
     }
 
     /**
      * Generate url by route and parameters
-     *
-     * @param   string $route
-     * @param   array $params
-     * @return  string
      */
-    public function getUrl($route = '', $params = [])
+    public function getUrl(string $route = '', array $params = []): string
     {
         return $this->urlBuilder->getUrl($route, $params);
     }

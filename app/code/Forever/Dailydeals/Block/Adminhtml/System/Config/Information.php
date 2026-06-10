@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Forever\Dailydeals\Block\Adminhtml\System\Config;
 
-use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 
@@ -14,20 +15,18 @@ class Information extends Field
     protected $_template = 'Forever_Dailydeals::system/config/info.phtml';
 
     /**
-     * @param  AbstractElement $element
-     * @return string
+     * Remove scope checkboxes and render field
      */
-    public function render(AbstractElement $element)
+    public function render(AbstractElement $element): string
     {
         $element->unsScope()->unsCanUseWebsiteValue()->unsCanUseDefaultValue();
         return parent::render($element);
     }
 
     /**
-     * @param  AbstractElement $element
-     * @return string
+     * Return rendered HTML for the element
      */
-    protected function _getElementHtml(AbstractElement $element)
+    protected function _getElementHtml(AbstractElement $element): string
     {
         return $this->_toHtml();
     }

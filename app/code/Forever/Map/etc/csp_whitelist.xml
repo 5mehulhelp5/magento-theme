@@ -12,7 +12,7 @@
                 <value id="google-maps-images" type="host">https://maps.googleapis.com</value>
                 <value id="google-maps-static-images" type="host">https://maps.gstatic.com</value>
                 <value id="google-maps" type="host">https://maps.google.com</value>
-                <value id="google-data" type="scheme">data:</value>
+                <value id="google-data" type="host">data:</value>
             </values>
         </policy>
         <policy id="style-src">

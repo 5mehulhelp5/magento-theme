@@ -8,11 +8,15 @@ $isEnableModule = $block->getConfigValue();
     </div>
     <div class="brand-section">
         <?php foreach ($block->getItems() as $question): ?>
+            <?php $imageUrl = $block->getBrandImageUrl($question->getImage()); ?>
+            <?php if (!$imageUrl) {
+                continue;
+            } ?>
             <div class="item">
                 <div class="brand-wraper d-flex align-items-center justify-content-center">
                     <a class="brand-link" href="" target="_self">
                         <img class="brand-image-hover" 
-                        src="<?= /* @noEscape */ $block->getMediaUrl() .'brand/image/'.$question->getImage()?>"
+                        src="<?= /* @noEscape */ $imageUrl ?>"
                         alt="a" width="210" height="83"> </a>
                 </div>
             </div>

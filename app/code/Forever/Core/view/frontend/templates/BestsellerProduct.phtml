@@ -45,8 +45,7 @@ $isEnabled = $block->isModuleEnabled();
         $pos = $block->getPositioned();
         ?>
         <div class="products wrapper <?= /* @noEscape */ $viewMode ?> products-<?= /* @noEscape */ $viewMode ?>">
-            <ol class="products list items product-items">
-                <div class="owl-carousel owl-theme bestseller-slider product-slider">
+            <ol class="products list items product-items owl-carousel owl-theme bestseller-slider product-slider">
                 <?php /** @var $product \Magento\Catalog\Model\Product */ ?>
                 <?php foreach ($productCollection as $product):?>
                 <li class="item product product-item">
@@ -54,6 +53,7 @@ $isEnabled = $block->isModuleEnabled();
                         <div class="product-image-section">
                         
                             <?php
+                            $position = '';
                             $productImage = $block->getImage($product, $imageDisplayArea);
                             if ($pos != null) {
                                 $position = ' style="left:' . $productImage->getWidth() . 'px;'
@@ -66,6 +66,7 @@ $isEnabled = $block->isModuleEnabled();
                             ?>
                             <?php
                         // display the product label
+                            $productoption = '';
                             if ($select = $product->getProductoption()):
                                 $selectAttr =  $product->getResource()->getAttribute('productoption');
                                 if ($selectAttr->usesSource()) {
@@ -138,10 +139,8 @@ $isEnabled = $block->isModuleEnabled();
                                             <input type="hidden"
                                                     name="product"
                                                     value="<?= /* @noEscape */ $postParams['data']['product'] ?>">
-                                            <input type="hidden" name="
-                                            <?= /* @noEscape */ Action::PARAM_NAME_URL_ENCODED ?>"
-                                                    value="<?= /* @noEscape */ $postParams['data']
-                                                    [Action::PARAM_NAME_URL_ENCODED] ?>">
+                                            <input type="hidden" name="uenc"
+                                                    value="<?= /* @noEscape */ $postParams['data']['uenc'] ?>">
                                             <?= $block->getBlockHtml('formkey') ?>
                                             <button type="submit"
                                                     title="<?= $block->escapeHtmlAttr(__('Add to Cart')) ?>"
@@ -282,7 +281,6 @@ $isEnabled = $block->isModuleEnabled();
                     </div>
                 </li>
                 <?php endforeach; ?>
-            </div>
             </ol>
         </div>
         

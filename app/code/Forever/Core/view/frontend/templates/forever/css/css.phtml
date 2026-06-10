@@ -6,6 +6,9 @@
      $d = $this->getConfig("themedesign", $this->_coreRegistry->registry('cssgen_store'));
      $_helper = \Magento\Framework\App\ObjectManager::getInstance()->get('Forever\Core\Helper\Cssconfig');
 ?>
+body.cms-index-index .page-main > .page-title-wrapper {
+     display: none;
+}
 /** Footer CSS Starts */
 <?php
 if(isset($d['general']['backgroundprimary']) && $d['general']['backgroundprimary']){
@@ -815,6 +818,101 @@ body .minicart-items-wrapper + .actions {
 }
 
 
+
+/** Forever 2.4.9 mega menu desktop alignment */
+@media(min-width: 1025px) {
+     body .header-two .header-bottom-left .megamenu {
+          margin-left: 135px !important;
+          position: static !important;
+     }
+
+     body .header-two .header-bottom,
+     body .header-two .header-bottom-left,
+     body .header-two .header.content {
+          overflow: visible !important;
+          position: relative !important;
+     }
+
+     body .header-two .megamenu .nav-desktop {
+          align-items: center !important;
+          gap: 26px !important;
+          justify-content: flex-start !important;
+          position: static !important;
+     }
+
+     body .header-two .megamenu .nav-desktop > .level0 {
+          flex: 0 0 auto !important;
+          position: static !important;
+          width: auto !important;
+     }
+
+     body .header-two .megamenu .nav-desktop > .level0 > .level-top {
+          border-right: 0 !important;
+          text-align: left !important;
+     }
+
+     body .header-two .megamenu .nav-desktop > .level0 .level-top-mega {
+          background: #ffffff !important;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12) !important;
+          box-sizing: border-box !important;
+          left: 0 !important;
+          max-width: calc(100vw - 40px) !important;
+          padding: 30px 50px !important;
+          top: 70px !important;
+          width: 1024px !important;
+          z-index: 99999 !important;
+     }
+
+     body .header-two .megamenu .nav-desktop > .level0.over .level-top-mega,
+     body .header-two .megamenu .nav-desktop > .level0:hover .level-top-mega {
+          opacity: 1 !important;
+          top: 70px !important;
+          visibility: visible !important;
+     }
+
+     body .header-two .megamenu .level-top-mega .content-mega,
+     body .header-two .megamenu .level-top-mega .content-mega-horizontal {
+          width: 100% !important;
+     }
+
+     body .header-two .megamenu .level-top-mega .content-mega-horizontal {
+          align-items: flex-start !important;
+          display: flex !important;
+          gap: 30px !important;
+          justify-content: space-between !important;
+     }
+
+     body .header-two .megamenu .level-top-mega .mage-column.cat-mega {
+          display: flex !important;
+          flex: 1 1 auto !important;
+          flex-wrap: wrap !important;
+          margin: 0 !important;
+          max-width: none !important;
+          padding: 0 !important;
+          width: auto !important;
+     }
+
+     body .header-two .megamenu .level-top-mega .mage-column.cat-mega > li.children.level1 {
+          box-sizing: border-box !important;
+          padding: 0 22px 20px 0 !important;
+          width: 25% !important;
+     }
+
+     body .header-two .megamenu .level-top-mega .mage-column.mega-block-leftcontent,
+     body .header-two .megamenu .level-top-mega .mage-column.mega-block-rightcontent {
+          flex: 0 0 187px !important;
+          max-width: 187px !important;
+          width: 187px !important;
+     }
+
+     body .header-two .megamenu .level-top-mega .mage-column.mega-block-leftcontent img,
+     body .header-two .megamenu .level-top-mega .mage-column.mega-block-rightcontent img {
+          display: block !important;
+          height: auto !important;
+          max-width: 187px !important;
+          width: 100% !important;
+     }
+}
 
 <style>
      body .product-item-info .product-item-actions .action.primary.tocart,

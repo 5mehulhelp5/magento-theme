@@ -1,6 +1,5 @@
 define([
     'jquery',
-    'Magento_Checkout/js/checkout-data',
     'Magento_Checkout/js/model/quote',
     'Magento_Checkout/js/model/url-builder',
     'mage/storage',
@@ -10,93 +9,130 @@ define([
     'Magento_Checkout/js/model/cart/totals-processor/default',
     'Magento_Checkout/js/model/cart/cache',
     'Magento_Ui/js/modal/confirm'
-    ], function (
-        $,
-        checkoutData,
-        quote,
-        urlBuilder,
-        storage,
-        customerData,
-        errorProcessor,
-        fullScreenLoader,
-        defaultTotal,
-        cartCache,
-        confirm
-    ) {
-    var item_parent;
+], function (
+    $,
+    quote,
+    urlBuilder,
+    storage,
+    customerData,
+    errorProcessor,
+    fullScreenLoader,
+    defaultTotal,
+    cartCache,
+    confirm
+) {
     'use strict';
-        var mixin = {
 
+    function getQuoteId() {
+        return typeof quote.getQuoteId === 'function' ? quote.getQuoteId() : quote.id;
+    }
+
+    function getCartItemUrl(itemId) {
+        var quoteId = getQuoteId();
+
+        if (window.checkoutConfig && window.checkoutConfig.isCustomerLoggedIn) {
+            return urlBuilder.createUrl('/carts/mine/items/' + itemId, {});
+        }
+
+        return urlBuilder.createUrl('/guest-carts/' + quoteId + '/items/' + itemId, {});
+    }
+
+    function refreshCheckoutData(forceReload) {
+        var sections = ['cart', 'checkout-data'];
+
+        customerData.invalidate(sections);
+
+        return customerData.reload(sections, forceReload).done(function () {
+            var cartData = customerData.get('cart')() || {},
+                items = cartData.items || [];
+
+            $('.opc-block-summary .items-in-cart .title span:first').html(cartData.summary_count || 0);
+
+            if (window.checkoutConfig) {
+                window.checkoutConfig.imageData = window.checkoutConfig.imageData || {};
+
+                $.each(items, function (index, item) {
+                    if (item && item.item_id && item.product_image && !window.checkoutConfig.imageData[item.item_id]) {
+                        window.checkoutConfig.imageData[item.item_id] = item.product_image;
+                    }
+                });
+            }
+        });
+    }
+
+    function normalizeQty(value) {
+        var qty = parseInt(value, 10);
+
+        return qty > 0 ? qty : 1;
+    }
+
+    return function (target) {
+        return target.extend({
             defaults: {
-                template: 'Forever_Onestep/summary/item/details',
+                template: 'Forever_Onestep/summary/item/details'
             },
-            initialize: function () {
-                item_parent = this._super();
-                return item_parent;
-            },
-            plusQty: function (element, data) {
-                var input = $(data.target).parent().find('input');
-                var qty = parseInt(input.val())+1;
-                if(!qty){
-                    qty = 1;
+
+            getItemOptions: function (item) {
+                var options = item && item.options ? item.options : '[]';
+
+                try {
+                    options = typeof options === 'string' ? JSON.parse(options) : options;
+                } catch (error) {
+                    options = [];
                 }
+
+                return Array.isArray(options) ? options : [];
+            },
+
+            plusQty: function (element, event) {
+                var input = $(event.target).parent().find('input'),
+                    qty = normalizeQty(input.val()) + 1;
+
                 input.val(qty).trigger('change');
             },
-            minusQty: function (element, data) {
-                var input = $(data.target).parent().find('input');
-                var qty = parseInt(input.val())-1;
-                if(qty){
+
+            minusQty: function (element, event) {
+                var input = $(event.target).parent().find('input'),
+                    qty = normalizeQty(input.val()) - 1;
+
+                if (qty > 0) {
                     input.val(qty).trigger('change');
                 }
             },
-            updateItem: function (parent, event) 
-            {   
+
+            updateItem: function (parent, event) {
+                var targetElement = $(event.currentTarget),
+                    qty = normalizeQty(targetElement.parents('div.details-qty').find('input').val()),
+                    quoteId = getQuoteId(),
+                    url = getCartItemUrl(parent.item_id);
+
                 fullScreenLoader.startLoader();
-                // console.log(parent, event);
-                var target = $(event.currentTarget);
-                var qty = target.parents('div.details-qty').find('input').val();
-                var url = urlBuilder.createUrl('/guest-carts/'+quote.getQuoteId()+'/items/'+parent.item_id, {});
-                if(window.checkoutConfig.isCustomerLoggedIn){
-                   var url = urlBuilder.createUrl('/carts/mine/items/'+parent.item_id, {});
-                }
-                var result = storage.put(
+
+                storage.put(
                     url,
                     JSON.stringify({
-                         quoteId: quote.getQuoteId(),
-                        "cartItem": {
-                            "quoteId": quote.getQuoteId(),
-                            "item_id" : parent.item_id,
-                            "qty": qty
+                        quoteId: quoteId,
+                        cartItem: {
+                            quoteId: quoteId,
+                            item_id: parent.item_id,
+                            qty: qty
                         }
                     })
-                ).fail(
-                    function (response) {
-                        errorProcessor.process(response);
-                        fullScreenLoader.stopLoader();
-                    }
-                ).done(function(){
-                    var sections = ['cart','checkout-data'];
-                    customerData.invalidate(sections);
-                    customerData.reload(sections, true).done(function () {
-                    var items = customerData.get('cart')().items;
-                    var cartData = customerData.get('cart')();
-                    console.log(cartData);
-                    $('.opc-block-summary .items-in-cart .title span:first').html(cartData.summary_count);
-                        $(items).each(function(k,v){
-                            if(!window.checkoutConfig.imageData[v.item_id]){
-                                window.checkoutConfig.imageData[v.item_id]=v.product_image;
-                            }
-                        });
-                        cartCache.set('totals',null);
+                ).fail(function (response) {
+                    errorProcessor.process(response);
+                    fullScreenLoader.stopLoader();
+                }).done(function () {
+                    refreshCheckoutData(true).done(function () {
+                        cartCache.set('totals', null);
                         defaultTotal.estimateTotals();
                         fullScreenLoader.stopLoader();
                     });
                 });
             },
 
-
             removeItem: function (parent) {
-                var self=this;
+                var self = this;
+
                 confirm({
                     title: $.mage.__('Do you want to remove this item from cart?'),
                     content: $.mage.__(''),
@@ -118,40 +154,29 @@ define([
             },
 
             confRemoveItem: function (parent) {
-                var url = urlBuilder.createUrl('/guest-carts/'+quote.getQuoteId()+'/items/'+parent.item_id, {});
-                if(window.checkoutConfig.isCustomerLoggedIn){
-                   url = urlBuilder.createUrl('/carts/mine/items/'+parent.item_id, {});
-                }
-                var result = storage.delete(
-                    url,
-                    JSON.stringify({
-                        cartId: quote.id,
-                        itemId: parent.item_id
-                    })
-                ).fail(
-                    function (response) {
-                        errorProcessor.process(response);   
-                        fullScreenLoader.stopLoader();
-                    }
-                ).done(function(){
-                    cartCache.set('totals',null);
+                var url = getCartItemUrl(parent.item_id);
+
+                fullScreenLoader.startLoader();
+
+                storage.delete(url).fail(function (response) {
+                    errorProcessor.process(response);
+                    fullScreenLoader.stopLoader();
+                }).done(function () {
+                    cartCache.set('totals', null);
                     defaultTotal.estimateTotals();
 
-                    var sections = ['cart','checkout-data'];
-                    customerData.invalidate(sections);
-                    customerData.reload(sections, false).done(function () {
-                        var items = customerData.get('cart')().items;
-                        var cartData = customerData.get('cart')();
-                        $('.opc-block-summary .items-in-cart .title span:first').html(cartData.summary_count);
-                        if(!items.length){
-                            location.reload();
-                        }
-                    });;
-                });                
-            },
-        };
+                    refreshCheckoutData(false).done(function () {
+                        var cartData = customerData.get('cart')() || {},
+                            items = cartData.items || [];
 
-        return function (target) {
-            return target.extend(mixin);
-        };
+                        fullScreenLoader.stopLoader();
+
+                        if (!items.length) {
+                            window.location.reload();
+                        }
+                    });
+                });
+            }
+        });
+    };
 });

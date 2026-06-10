@@ -43,7 +43,15 @@ class Cssconfig extends \Magento\Framework\App\Helper\AbstractHelper
     public function getDesignFile()
     {
         $code = $this->storeManager->getStore()->getCode();
-        return $this->getBaseMediaUrl() . $this->generatedCssFolder . 'css_' . $code . '.css';
+        $fileName = 'css_' . $code . '.css';
+        $fileUrl = $this->getBaseMediaUrl() . $this->generatedCssFolder . $fileName;
+        $filePath = $this->generatedCssDir . $fileName;
+
+        if (is_file($filePath)) {
+            $fileUrl .= '?v=' . filemtime($filePath);
+        }
+
+        return $fileUrl;
     }
 
     public function getPortoWebDir()

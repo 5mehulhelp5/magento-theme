@@ -1,41 +1,61 @@
 <?php
-/** @var $block \Forever\Productzoom\Block\Zoom */
-$helper = $block->getZoomHelper();
+/**
+ * @var \Forever\Productzoom\Block\Zoom $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\Serialize\Serializer\Json $jsonSerializer
+ */
+
+/** @var \Forever\Productzoom\Helper\Data $helper */
+$helper = $block->getData('helper');
 $data   = $helper->getConfigModule('general');
-foreach ($data as $key => $value) {
-    if (is_numeric($value)) {
-        $data[$key] = (float) $value;
-        continue;
-    }
-    $value = filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
-    if (!is_null($value)) {
-        $data[$key] = $value;
+
+if (is_array($data)) {
+    foreach ($data as $key => $value) {
+        if (is_numeric($value)) {
+            $data[$key] = (float) $value;
+            continue;
+        }
+        $boolVal = filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+        if ($boolVal !== null) {
+            $data[$key] = $boolVal;
+        }
     }
 }
+
+$configJson = is_array($data) ? json_encode($data, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT) : '{}';
 ?>
 <script type="text/javascript">
     require([
         'jquery',
-        'forever/elevatezoom',
-        ], function($){
-            "use strict";
+        'forever/elevatezoom'
+    ], function ($) {
+        'use strict';
 
-            if( $(window).width() < 768 ) return;
-            var options = <?php echo is_array($data) ? json_encode($data) : '{}' ?>;
-            $('head').append('<style type="text/css">.zoomContainer{z-index:' + options.zIndex + '}</style>');
-            $(document).on('fotorama:load fotorama:showend fotorama:fullscreenenter fotorama:fullscreenexit', function (event, fotorama, extra) {
+        if ($(window).width() < 768) { return; }
+
+        var options = <?= /* @noEscape */ $configJson ?>;
+        $('head').append('<style type="text/css">.zoomContainer{z-index:' + options.zIndex + '}</style>');
+
+        $(document).on(
+            'fotorama:load fotorama:showend fotorama:fullscreenenter fotorama:fullscreenexit',
+            function (event, fotorama) {
                 $('.zoomContainer').remove();
-                if(event.type == 'fotorama:fullscreenenter') return;
-                if( fotorama.activeFrame.type != 'image' || $('body').hasClass('fotorama__fullscreen') ) return;
+                if (event.type === 'fotorama:fullscreenenter') { return; }
+                if (!fotorama || fotorama.activeFrame.type !== 'image' || $('body').hasClass('fotorama__fullscreen')) {
+                    return;
+                }
                 var img = $('.product.media .fotorama__stage .fotorama__active .fotorama__img');
-                if(!img.length) return;
+                if (!img.length) { return; }
                 var defaults = {
-                    zoomWindowWidth : img.width(),
+                    zoomWindowWidth:  img.width(),
                     zoomWindowHeight: img.height()
                 };
                 var settings = $.extend(defaults, options);
-                if(fotorama.activeFrame.full) img.data('zoom-image', fotorama.activeFrame.full);
+                if (fotorama.activeFrame.full) {
+                    img.data('zoom-image', fotorama.activeFrame.full);
+                }
                 img.elevateZoom(settings);
-            });
+            }
+        );
     });
 </script>

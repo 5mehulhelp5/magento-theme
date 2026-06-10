@@ -1,60 +1,58 @@
 <?php
 
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
+declare(strict_types=1);
 
 namespace Forever\Faq\Controller\Adminhtml\Question;
 
-use Magento\Backend\App\Action;
-use Magento\Backend\Model\Session;
+use Exception;
 use Forever\Faq\Model\QuestionFactory;
+use Forever\Faq\Model\ResourceModel\Question as QuestionResource;
+use Magento\Backend\App\Action;
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\Controller\Result\Redirect;
 
-/**
- * @Class Save
- * package Forever\Faq\Controller\Adminhtml\Question
- */
 class Save extends Action
 {
-    private $collectionFactory;
-
-    public function __construct(Action\Context $context, QuestionFactory $collectionFactory)
-    {
+    public function __construct(
+        Context $context,
+        private readonly QuestionFactory $questionFactory,
+        private readonly QuestionResource $questionResource
+    ) {
         parent::__construct($context);
-        $this->collectionFactory = $collectionFactory;
     }
 
-    public function execute()
+    public function execute(): Redirect
     {
-        $data = $this->getRequest()->getPost();
+        $data = $this->getRequest()->getPostValue();
         $resultRedirect = $this->resultRedirectFactory->create();
+
         if ($data) {
-            $rowData = $this->collectionFactory->create();
+            $model = $this->questionFactory->create();
             $id = $this->getRequest()->getParam('id');
+
             if ($id) {
-                $rowData->load($id);
+                $this->questionResource->load($model, $id);
             }
-            $rowData->setStatus($data['status']);
-            $rowData->setTitle($data['title']);
-            $rowData->setAnswer($data['answer']);
+
+            $model->setStatus($data['status']);
+            $model->setTitle($data['title']);
+            $model->setAnswer($data['answer']);
+
             try {
-                $rowData->save();
+                $this->questionResource->save($model);
                 $this->messageManager->addSuccessMessage(__('Row data has been successfully saved.'));
+
                 if ($this->getRequest()->getParam('back')) {
-                    return $resultRedirect->setPath('*/*/edit', ['id' => $rowData->getBlogId(),
-                    '_current' => true]);
+                    return $resultRedirect->setPath('*/*/edit', ['id' => $model->getId(), '_current' => true]);
                 }
                 return $resultRedirect->setPath('*/*/');
-            } catch (\Magento\Framework\Model\Exception $e) {
-                $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the Data.'));
-            } catch (\RuntimeException $e) {
+            } catch (Exception $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
-            } catch (\Exception $e) {
-                $this->messageManager->addErrorMessage(__($e->getMessage()));
             }
+
             return $resultRedirect->setPath('*/*/edit', ['id' => $this->getRequest()->getParam('id')]);
         }
+
         return $resultRedirect->setPath('*/*/');
     }
 }

@@ -1,6 +1,6 @@
 var config = {
-    'config': {
-        'mixins': {
+    config: {
+        mixins: {
             'Magento_Checkout/js/view/shipping': {
                 'Forever_Onestep/js/view/shipping': true
             },
@@ -12,7 +12,7 @@ var config = {
             },
             'Magento_Checkout/js/view/summary/cart-items': {
                 'Forever_Onestep/js/view/summary/cart-items-mixin': true
-            },
+            }
         }
     }
 };

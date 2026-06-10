@@ -1,7 +1,6 @@
 <?php
-/**
- * @Author: Alex Dong
- */
+
+declare(strict_types=1);
 
 namespace Forever\Productzoom\Block;
 
@@ -11,22 +10,20 @@ use Magento\Framework\View\Element\Template\Context;
 
 class Zoom extends Template
 {
-    /**
-     * @var ZoomHelper
-     */
-    protected $zoomHelper;
-
     public function __construct(
         Context $context,
-        ZoomHelper $zoomHelper,
+        private readonly ZoomHelper $zoomHelper,
         array $data = []
     ) {
         parent::__construct($context, $data);
-        $this->zoomHelper = $zoomHelper;
     }
 
-    public function getZoomHelper()
+    /**
+     * Pass helper to template via getData('helper')
+     */
+    protected function _beforeToHtml(): static
     {
-        return $this->zoomHelper;
+        $this->setData('helper', $this->zoomHelper);
+        return parent::_beforeToHtml();
     }
 }

@@ -1,37 +1,32 @@
 <?php
 
-/**
- * @Author: Alex Dong
- * @Date:   2020-07-09 22:24:37
- * @Last Modified by:   Alex Dong
- * @Last Modified time: 2020-07-09 22:24:46
- */
+declare(strict_types=1);
 
 namespace Forever\Productzoom\Block\System\Config\Form\Field;
 
-class Color extends \Magento\Config\Block\System\Config\Form\Field
-{
+use Magento\Backend\Block\Template\Context;
+use Magento\Config\Block\System\Config\Form\Field;
+use Magento\Framework\Data\Form\Element\AbstractElement;
 
-    public function __construct(
-        \Magento\Backend\Block\Template\Context $context, array $data = []
-    ) {
+class Color extends Field
+{
+    public function __construct(Context $context, array $data = [])
+    {
         parent::__construct($context, $data);
     }
 
-    protected function _getElementHtml(\Magento\Framework\Data\Form\Element\AbstractElement $element) 
+    protected function _getElementHtml(AbstractElement $element): string
     {
-        $html = $element->getElementHtml();
+        $html  = $element->getElementHtml();
         $value = $element->getData('value');
-    
+
         $html .= '<script type="text/javascript">
             require(["jquery", "jquery/colorpicker/js/colorpicker"], function ($) {
-                $(document).ready(function (e) {
+                $(document).ready(function () {
                     var $el = $("#' . $element->getHtmlId() . '");
-                    $el.css("backgroundColor", "'. $value .'");
-
-                    // Attach the color picker
+                    $el.css("backgroundColor", "' . $value . '");
                     $el.ColorPicker({
-                        color: "'. $value .'",
+                        color: "' . $value . '",
                         onChange: function (hsb, hex, rgb) {
                             $el.css("backgroundColor", "#" + hex).val("#" + hex);
                         }
@@ -42,5 +37,4 @@ class Color extends \Magento\Config\Block\System\Config\Form\Field
 
         return $html;
     }
-
 }

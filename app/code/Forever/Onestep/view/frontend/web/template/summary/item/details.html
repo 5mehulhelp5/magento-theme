@@ -17,12 +17,12 @@
                 <span class="label"><!-- ko i18n: 'Qty' --><!-- /ko --></span>
                 <span class="qty-box">
                     <span class="qty-minus" data-bind="click: minusQty">-</span>
-                    <input type="number" name="qty" data-bind="value:$parent.qty" />
+                    <input type="number" name="qty" min="1" step="1" data-bind="value: $parent.qty" />
                     <span class="qty-plus" data-bind="click: plusQty">+</span>
                 </span>
                 <span class="action-box">
-                    <button type="button" id="success" data-bind="i18n: 'update', event:{click: function(data, event) {updateItem($parent, event)}}"></button>
-                    <button type="button" data-bind="i18n: 'remove', event:{click: function(data, event) {removeItem($parent, event)}}"></button>
+                    <button type="button" id="success" data-bind="i18n: 'update', event: {click: function (data, event) {updateItem($parent, event)}}"></button>
+                    <button type="button" data-bind="i18n: 'remove', event: {click: function (data, event) {removeItem($parent, event)}}"></button>
                 </span>
             </div>
         </div>
@@ -31,18 +31,18 @@
         <!-- /ko -->
     </div>
 
-    <!-- ko if: (JSON.parse($parent.options).length > 0)-->
-    <div class="product options" data-bind="mageInit: {'collapsible':{'openedState': 'active'}}">
+    <!-- ko if: getItemOptions($parent).length > 0 -->
+    <div class="product options" data-bind="mageInit: {'collapsible': {'openedState': 'active'}}">
         <span data-role="title" class="toggle"><!-- ko i18n: 'View Details' --><!-- /ko --></span>
         <div data-role="content" class="content">
             <strong class="subtitle"><!-- ko i18n: 'Options Details' --><!-- /ko --></strong>
             <dl class="item-options">
-                <!--ko foreach: JSON.parse($parent.options)-->
+                <!-- ko foreach: getItemOptions($parent) -->
                 <dt class="label" data-bind="text: label"></dt>
-                    <!-- ko if: ($data.full_view)-->
+                    <!-- ko if: ($data.full_view) -->
                     <dd class="values" data-bind="html: full_view"></dd>
                     <!-- /ko -->
-                    <!-- ko ifnot: ($data.full_view)-->
+                    <!-- ko ifnot: ($data.full_view) -->
                     <dd class="values" data-bind="html: value"></dd>
                     <!-- /ko -->
                 <!-- /ko -->

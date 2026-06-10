@@ -11,6 +11,11 @@ class Topmenu implements ObserverInterface
     const XML_PATH_EMAIL_RECIPIENT = 'blog/general/enable';
 
     /**
+     * @var \Magento\Framework\UrlInterface
+     */
+    protected $urlBuilder;
+
+    /**
      * @var $scopeConfig
      */
     protected $scopeConfig;

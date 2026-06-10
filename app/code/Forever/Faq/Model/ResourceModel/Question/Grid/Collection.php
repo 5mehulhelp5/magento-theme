@@ -1,9 +1,6 @@
 <?php
 
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
+declare(strict_types=1);
 
 namespace Forever\Faq\Model\ResourceModel\Question\Grid;
 
@@ -13,21 +10,18 @@ class Collection extends SearchResult
 {
     /**
      * Initialize select object
-     *
-     * @return Collection
      */
-    protected function _initSelect()
+    protected function _initSelect(): static
     {
         parent::_initSelect();
 
         $this->addFilterToMap('id', 'main_table.id');
-        $this->getSelect()->columns(
-            [
-                'id' => 'main_table.id',
-                'created_at' => 'main_table.created_at',
-                'updated_at' => 'main_table.updated_at',
-                'status' => 'main_table.status']
-        );
+        $this->getSelect()->columns([
+            'id'         => 'main_table.id',
+            'created_at' => 'main_table.created_at',
+            'updated_at' => 'main_table.updated_at',
+            'status'     => 'main_table.status',
+        ]);
 
         return $this;
     }

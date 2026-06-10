@@ -1,51 +1,58 @@
 <?php
-/**
- * @Author: nguyen
- * @Date:   2020-02-12 14:01:01
- * @Last Modified by:   Alex Dong
- * @Last Modified time: 2020-07-09 16:31:52
- */
+
+declare(strict_types=1);
 
 namespace Forever\Productzoom\Helper;
 
-class Data extends \Magento\Framework\App\Helper\AbstractHelper
+use Magento\Framework\App\Helper\AbstractHelper;
+use Magento\Framework\App\Helper\Context;
+use Magento\Store\Model\ScopeInterface;
+
+class Data extends AbstractHelper
 {
     /**
-     * @var array
+     * @var array|null
      */
-    protected $configModule;
+    protected ?array $configModule = null;
 
-    public function __construct(
-        \Magento\Framework\App\Helper\Context $context
-    )
+    public function __construct(Context $context)
     {
         parent::__construct($context);
-        $this->configModule = $this->getConfig(strtolower($this->_getModuleName()));
+        // Module name lowercased = forever_productzoom
+        $this->configModule = $this->getConfig('forever_productzoom');
     }
 
-    public function getConfig($cfg='')
+    /**
+     * Get raw scope config value or the scopeConfig object
+     */
+    public function getConfig(string $cfg = ''): mixed
     {
-        if($cfg) return $this->scopeConfig->getValue( $cfg, \Magento\Store\Model\ScopeInterface::SCOPE_STORE );
+        if ($cfg) {
+            return $this->scopeConfig->getValue($cfg, ScopeInterface::SCOPE_STORE);
+        }
         return $this->scopeConfig;
     }
 
-    public function getConfigModule($cfg='', $value=null)
+    /**
+     * Get nested config value by slash-delimited path
+     */
+    public function getConfigModule(string $cfg = '', mixed $value = null): mixed
     {
         $values = $this->configModule;
-        if( !$cfg ) return $values;
-        $config  = explode('/', $cfg);
-        $end     = count($config) - 1;
+        if (!$cfg) {
+            return $values;
+        }
+        $config = explode('/', $cfg);
+        $end    = count($config) - 1;
         foreach ($config as $key => $vl) {
-            if( isset($values[$vl]) ){
-                if( $key == $end ) {
+            if (isset($values[$vl])) {
+                if ($key === $end) {
                     $value = $values[$vl];
-                }else {
+                } else {
                     $values = $values[$vl];
                 }
-            } 
-
+            }
         }
         return $value;
     }
-
 }

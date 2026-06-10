@@ -334,13 +334,13 @@ if ( typeof Object.create !== 'function' ) {
 				}
 				/*-------------------END THE ZOOM WINDOW AND LENS----------------------------------*/
 				//touch events
-				self.$elem.bind('touchmove', function(e){    
+				self.$elem.on('touchmove', function(e){    
 					e.preventDefault();
 					var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];  
 					self.setPosition(touch);
 
 				});  
-				self.zoomContainer.bind('touchmove', function(e){ 
+				self.zoomContainer.on('touchmove', function(e){ 
 					if(self.options.zoomType == "inner") {
 						self.showHideWindow("show");
 
@@ -350,19 +350,19 @@ if ( typeof Object.create !== 'function' ) {
 					self.setPosition(touch); 
 
 				});  	
-				self.zoomContainer.bind('touchend', function(e){ 
+				self.zoomContainer.on('touchend', function(e){ 
 					self.showHideWindow("hide");
 					if(self.options.showLens) {self.showHideLens("hide");}
 					if(self.options.tint && self.options.zoomType != "inner") {self.showHideTint("hide");}
 				});  	
 
-				self.$elem.bind('touchend', function(e){ 
+				self.$elem.on('touchend', function(e){ 
 					self.showHideWindow("hide");
 					if(self.options.showLens) {self.showHideLens("hide");}
 					if(self.options.tint && self.options.zoomType != "inner") {self.showHideTint("hide");}
 				});  	
 				if(self.options.showLens) {
-					self.zoomLens.bind('touchmove', function(e){ 
+					self.zoomLens.on('touchmove', function(e){ 
 
 						e.preventDefault();
 						var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];  
@@ -370,14 +370,14 @@ if ( typeof Object.create !== 'function' ) {
 					});    
 
 
-					self.zoomLens.bind('touchend', function(e){ 
+					self.zoomLens.on('touchend', function(e){ 
 						self.showHideWindow("hide");
 						if(self.options.showLens) {self.showHideLens("hide");}
 						if(self.options.tint && self.options.zoomType != "inner") {self.showHideTint("hide");}
 					});  
 				}
 				//Needed to work in IE
-				self.$elem.bind('mousemove', function(e){   
+				self.$elem.on('mousemove', function(e){   
 					if(self.overWindow == false){self.setElements("show");}
 					//make sure on orientation change the setposition is not fired
 					if(self.lastX !== e.clientX || self.lastY !== e.clientY){
@@ -389,7 +389,7 @@ if ( typeof Object.create !== 'function' ) {
 
 				});  	
 
-				self.zoomContainer.bind('mousemove', function(e){ 
+				self.zoomContainer.on('mousemove', function(e){ 
 
 					if(self.overWindow == false){self.setElements("show");} 
 
@@ -402,7 +402,7 @@ if ( typeof Object.create !== 'function' ) {
 					self.lastY = e.clientY;    
 				});  	
 				if(self.options.zoomType != "inner") {
-					self.zoomLens.bind('mousemove', function(e){      
+					self.zoomLens.on('mousemove', function(e){      
 						//make sure on orientation change the setposition is not fired
 						if(self.lastX !== e.clientX || self.lastY !== e.clientY){
 							self.setPosition(e);
@@ -413,7 +413,7 @@ if ( typeof Object.create !== 'function' ) {
 					});
 				}
 				if(self.options.tint && self.options.zoomType != "inner") {
-					self.zoomTint.bind('mousemove', function(e){ 
+					self.zoomTint.on('mousemove', function(e){ 
 						//make sure on orientation change the setposition is not fired
 						if(self.lastX !== e.clientX || self.lastY !== e.clientY){
 							self.setPosition(e);
@@ -425,7 +425,7 @@ if ( typeof Object.create !== 'function' ) {
 
 				}
 				if(self.options.zoomType == "inner") {
-					self.zoomWindow.bind('mousemove', function(e) {
+					self.zoomWindow.on('mousemove', function(e) {
 						//self.overWindow = true;
 						//make sure on orientation change the setposition is not fired
 						if(self.lastX !== e.clientX || self.lastY !== e.clientY){
@@ -490,7 +490,7 @@ if ( typeof Object.create !== 'function' ) {
 				if(self.options.scrollZoom){
 
 
-					self.zoomContainer.add(self.$elem).bind('mousewheel DOMMouseScroll MozMousePixelScroll', function(e){
+					self.zoomContainer.add(self.$elem).on('mousewheel DOMMouseScroll MozMousePixelScroll', function(e){
 
 
 //						in IE there is issue with firing of mouseleave - So check whether still scrolling

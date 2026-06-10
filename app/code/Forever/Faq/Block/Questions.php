@@ -1,53 +1,46 @@
 <?php
 
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
+declare(strict_types=1);
 
 namespace Forever\Faq\Block;
 
-use Magento\Framework\View\Element\Template;
 use Forever\Faq\Model\ResourceModel\Question\CollectionFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\DataObject;
+use Magento\Framework\View\Element\Template;
+use Magento\Store\Model\ScopeInterface;
 
 class Questions extends Template
 {
-    const MAIN_LABEL = 'Default';
-
-    const MODULE_ENABLE = 'faq/general/enable';
-
-    /**
-     * @var CollectionFactory
-     */
-    protected $collectionFactory;
+    public const MAIN_LABEL = 'Default';
+    public const MODULE_ENABLE = 'faq/general/enable';
 
     public function __construct(
         Template\Context $context,
-        CollectionFactory $collectionFactory,
-        ScopeConfigInterface $scopeConfig,
+        protected readonly CollectionFactory $collectionFactory,
+        protected readonly ScopeConfigInterface $scopeConfig,
         array $data = []
     ) {
         parent::__construct($context, $data);
-        $this->collectionFactory = $collectionFactory;
-        $this->scopeConfig = $scopeConfig;
     }
 
     /**
-     * Get All Questions
+     * Get all enabled questions
      *
-     * @return \Magento\Framework\DataObject[]
+     * @return DataObject[]
      */
-    public function getItems()
+    public function getItems(): array
     {
         $questionCollection = $this->collectionFactory->create();
         $questionCollection->addFieldToFilter('main_table.status', 1);
-
         return $questionCollection->getItems();
     }
-    public function getConfigValue()
+
+    /**
+     * Check if module is enabled
+     */
+    public function getConfigValue(): mixed
     {
-        $storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
-        return $this->scopeConfig->getValue(self::MODULE_ENABLE, $storeScope);
+        return $this->scopeConfig->getValue(self::MODULE_ENABLE, ScopeInterface::SCOPE_STORE);
     }
 }

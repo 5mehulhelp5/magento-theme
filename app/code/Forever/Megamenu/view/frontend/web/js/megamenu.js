@@ -25,7 +25,7 @@ require(['jquery'], function ($) {
                     }
                     self.addClass('menu-init');
                     self.find("li").each(function () {
-                        if ($(this).find("ul").size() != 0) {
+                        if ($(this).find("ul").length != 0) {
                             $(this).find("ul").hide();
                             $(this).find("a:first").after("<span class='" + opts.closedSign + "'>" + opts.closedSign + "</span>");
                             if ($(this).find("a:first").attr('href') == "#") {
@@ -60,7 +60,7 @@ require(['jquery'], function ($) {
                 menuAction: function (self, item) {
                     var opts = $.extend(defaults, options);
                     var parent = item.parent();
-                    if (parent.find("ul").size() != 0) {
+                    if (parent.find("ul").length != 0) {
                         if (opts.accordion) {
                             if (!parent.find("ul").is(':visible')) {
                                 var parents = parent.parents("ul");
@@ -116,7 +116,7 @@ require(['jquery'], function ($) {
         "use strict";
         $.fn.magicmenu = function (options) {
             var defaults = {
-                breakpoint : 991,
+                breakpoint : 1025,
                 horizontal : '.magicmenu',
                 vertical   : '.vmagicmenu',
                 sticky     : '.header-sticker',
@@ -144,7 +144,8 @@ require(['jquery'], function ($) {
                     };
                     methods._listen();
                     return this.each(function () {
-                        var accordion = $("nav.navigation, .meanmenu-accordion");
+                        var accordion = $("nav.navigation:not(.drilldrop), .meanmenu-accordion");
+                        var drilldrop = $("nav.navigation-mobile.drilldrop");
                         if ("IntersectionObserver" in window) {
                             let accordionObserver = new IntersectionObserver(function (entries, observer) {
                                 entries.forEach(function (entry) {
@@ -175,6 +176,19 @@ require(['jquery'], function ($) {
                             vmenu.each(function () {
                                 megamenuObserver.observe(this);
                             });
+                            let drilldropObserver = new IntersectionObserver(function (entries, observer) {
+                                entries.forEach(function (entry) {
+                                    if (entry.isIntersecting) {
+                                        let $el = $(entry.target);
+                                        methods.active($el);
+                                        methods.drilldrop($el);
+                                        drilldropObserver.unobserve(entry.target);
+                                    }
+                                });
+                            });
+                            drilldrop.each(function () {
+                                drilldropObserver.observe(this);
+                            });
                         } else {
                             accordion.each(function () {
                                 var el = $(this); methods.active(el);
@@ -185,6 +199,11 @@ require(['jquery'], function ($) {
                             });
                             vmenu.each(function () {
                                 methods.megamenu(this);
+                            });
+                            drilldrop.each(function () {
+                                var el = $(this);
+                                methods.active(el);
+                                methods.drilldrop(el);
                             });
                         }
                     });
@@ -283,16 +302,19 @@ require(['jquery'], function ($) {
                                 columns = col;
                             }
                             var cat         = parseFloat(options.cat_proportion);
-                            console.log(cat);
                             var left        = parseFloat(options.left_proportion);
-                            console.log(left);
                             var right       = parseFloat(options.right_proportion);
-                            console.log(right);
                             if (isNaN(left)) {
                                 left = 0;
                                 if (isNaN(right)) {
                                     right = 0;
                                 }
+                            }
+                            if (isNaN(cat)) {
+                                cat = 0;
+                            }
+                            if (isNaN(right)) {
+                                right = 0;
                             }
                             var proportion  = cat + left + right;
                             var wCat        = Math.ceil(100 * cat / proportion);
@@ -481,8 +503,37 @@ require(['jquery'], function ($) {
                         html.addClass('nav-before-open');
                         setTimeout(function () {
                             html.addClass('nav-open');
+                            methods.activateMobileMenuTab();
                         }, this.options.showDelay);
                     }
+                },
+
+                activateMobileMenuTab: function () {
+                    var sections = $('.nav-sections-items'),
+                        menuTitle = sections.find('> .nav-sections-item-title[aria-controls="store.menu"]'),
+                        menuContent = sections.find('> #store\\.menu');
+
+                    if (!sections.length || !menuTitle.length || !menuContent.length) {
+                        return;
+                    }
+
+                    if (sections.data('mage-tabs')) {
+                        sections.tabs('activate', 0);
+                    }
+
+                    sections.find('> .nav-sections-item-title')
+                        .removeClass('active')
+                        .attr('aria-expanded', 'false');
+                    sections.find('> .nav-sections-item-content')
+                        .hide()
+                        .attr('aria-hidden', 'true');
+                    menuTitle
+                        .addClass('active')
+                        .attr('aria-expanded', 'true');
+                    menuContent
+                        .show()
+                        .attr('aria-hidden', 'false');
+                    methods.drilldrop(menuContent.find('nav.navigation-mobile.drilldrop'));
                 },
 
                 active: function (menu) {
@@ -499,6 +550,55 @@ require(['jquery'], function ($) {
                             }
                         });
                     }
+                },
+
+                drilldrop: function (menu) {
+                    var nav = $(menu);
+                    var navMobile = nav.find('> .nav-mobile');
+
+                    if (!navMobile.length || nav.hasClass('drilldrop-ready')) {
+                        return;
+                    }
+
+                    nav.addClass('drilldrop-ready');
+                    navMobile.find('li').has('> ul.submenu').each(function () {
+                        var item = $(this);
+                        var link = item.children('a').first();
+
+                        if (!item.children('.drilldrop-trigger').length) {
+                            link.after('<button type="button" class="drilldrop-trigger" aria-expanded="false"><span></span></button>');
+                        }
+                        if (!item.children('ul.submenu').children('.drilldrop-back').length) {
+                            item.children('ul.submenu').prepend(
+                                '<li class="drilldrop-back"><button type="button"><span>Back</span></button></li>'
+                            );
+                        }
+                    });
+
+                    navMobile.on('click', '.drilldrop-trigger', function (event) {
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        var trigger = $(this);
+                        var item = trigger.closest('li');
+                        var siblings = item.siblings(':not(.drilldrop-back)');
+
+                        item.addClass('drilldrop-current').removeClass('drilldrop-hidden');
+                        siblings.removeClass('drilldrop-current').addClass('drilldrop-hidden');
+                        trigger.attr('aria-expanded', 'true');
+                    });
+
+                    navMobile.on('click', '.drilldrop-back button', function (event) {
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        var submenu = $(this).closest('ul.submenu');
+                        var item = submenu.closest('li');
+
+                        item.removeClass('drilldrop-current');
+                        item.children('.drilldrop-trigger').attr('aria-expanded', 'false');
+                        item.siblings('.drilldrop-hidden').removeClass('drilldrop-hidden');
+                    });
                 },
 
                 megamenu: function (menu) {
@@ -531,7 +631,6 @@ require(['jquery'], function ($) {
                     $(window).on("magicmenu:refresh", function ( event ) {
                         if (breakpoint > $(window).width()) {
                             body.addClass('nav-mobile-display');
-                            $('.nav-mobile').show();
                             if (isHorizontal) {
                                 navDesktop.hide();
                             }
@@ -550,6 +649,10 @@ require(['jquery'], function ($) {
                     $(window).resize(function () {
                         $(this).trigger('magicmenu:refresh')
                     });
+
+                    if (breakpoint > $(window).width()) {
+                        $(window).trigger('magicmenu:refresh');
+                    }
                     
                     methods.taphover(menu);
                     methods.active(menu);

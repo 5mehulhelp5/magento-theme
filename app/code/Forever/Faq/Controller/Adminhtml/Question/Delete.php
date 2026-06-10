@@ -1,54 +1,52 @@
 <?php
 
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
+declare(strict_types=1);
 
 namespace Forever\Faq\Controller\Adminhtml\Question;
 
-class Delete extends \Magento\Backend\App\Action
+use Exception;
+use Forever\Faq\Model\QuestionFactory;
+use Forever\Faq\Model\ResourceModel\Question as QuestionResource;
+use Magento\Backend\App\Action;
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\Controller\Result\Redirect;
+
+class Delete extends Action
 {
-    /**
-     * @var $resultPageFactory
-     */
-    protected $resultPageFactory;
-    /**
-     * @var $questionFactory
-     */
-    protected $questionFactory;
-    /**
-     * @param \Magento\Backend\App\Action\Context        $context
-     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
-     * @param \Forever\Blog\Model\BlogFactory            $questionFactory
-     */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
-        \Forever\Faq\Model\QuestionFactory $questionFactory
+        Context $context,
+        private readonly QuestionFactory $questionFactory,
+        private readonly QuestionResource $questionResource
     ) {
-        $this->resultPageFactory = $resultPageFactory;
-        $this->questionFactory = $questionFactory;
         parent::__construct($context);
     }
-    public function execute()
+
+    public function execute(): Redirect
     {
+        $resultRedirect = $this->resultRedirectFactory->create();
         $id = $this->getRequest()->getParam('id');
-        $contact = $this->questionFactory->create()->load($id);
-        if (!$contact) {
+
+        if (!$id) {
             $this->messageManager->addErrorMessage(__('Unable to process. please, try again.'));
-            $resultRedirect = $this->resultRedirectFactory->create();
             return $resultRedirect->setPath('*/*/', ['_current' => true]);
         }
+
+        $model = $this->questionFactory->create();
+        $this->questionResource->load($model, $id);
+
+        if (!$model->getId()) {
+            $this->messageManager->addErrorMessage(__('Unable to process. please, try again.'));
+            return $resultRedirect->setPath('*/*/', ['_current' => true]);
+        }
+
         try {
-            $contact->delete();
+            $this->questionResource->delete($model);
             $this->messageManager->addSuccessMessage(__('Your data row has been deleted !'));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->messageManager->addErrorMessage(__('Error while trying to delete row'));
-            $resultRedirect = $this->resultRedirectFactory->create();
             return $resultRedirect->setPath('*/*/index', ['_current' => true]);
         }
-        $resultRedirect = $this->resultRedirectFactory->create();
+
         return $resultRedirect->setPath('*/*/index', ['_current' => true]);
     }
 }

@@ -1,209 +1,144 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Forever\Dailydeals\Block;
 
+use Magento\Backend\Block\Template\Context;
+use Magento\Catalog\Block\Product\ListProduct;
+use Magento\Catalog\Helper\Image;
+use Magento\Catalog\Model\Product;
+use Magento\Catalog\Model\ProductRepository;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Pricing\Helper\Data as PriceHelper;
+use Magento\Framework\View\Element\Template;
 use Magento\Store\Model\ScopeInterface;
+use Magento\Store\Model\StoreManagerInterface;
 
-class Dailydeals extends \Magento\Framework\View\Element\Template
+class Dailydeals extends Template
 {
-    const ENABLE = 'dailydeals/general/enabled';
-    const PRODUCTSKU = 'dailydeals/general/dailydeals_productsku';
-    const EXPDATETIME = 'dailydeals/general/dailydeals_exptime';
-    const SALETEXT = 'dailydeals/general/dailydeals_saletext';
-    const BUTTONTEXT = 'dailydeals/general/dailydeals_buttontext';
-    const THUMBNAIL_IMAGE = 'product_thumbnail_image';
-    const TIMEZONE = 'general/locale/timezone';
+    public const ENABLE = 'dailydeals/general/enabled';
+    public const PRODUCTSKU = 'dailydeals/general/dailydeals_productsku';
+    public const EXPDATETIME = 'dailydeals/general/dailydeals_exptime';
+    public const SALETEXT = 'dailydeals/general/dailydeals_saletext';
+    public const BUTTONTEXT = 'dailydeals/general/dailydeals_buttontext';
+    public const THUMBNAIL_IMAGE = 'product_thumbnail_image';
+    public const TIMEZONE = 'general/locale/timezone';
 
-    /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     */
-    protected $config;
-
-    /**
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    protected $storeManager;
-
-    /**
-     * @var \Magento\Catalog\Model\Product
-     */
-    protected $productObj;
-
-    /**
-     * @var \Magento\Catalog\Model\ProductRepository
-     */
-    protected $productRepository;
-
-    /**
-     * @var \Magento\Catalog\Block\Product\ListProduct
-     */
-    protected $listProduct;
-
-    /**
-     * @var \Magento\Catalog\Helper\Image
-     */
-    protected $productImage;
-
-    /**
-     * @var \Magento\Framework\Pricing\Helper\Data
-     */
-    protected $priceHelper;
-
-    /**
-     * @param Magento\Backend\Block\Template\Context $context
-     * @param Magento\Framework\App\Config\ScopeConfigInterface $config
-     * @param Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param Magento\Catalog\Model\Product $productObj
-     * @param Magento\Catalog\Model\ProductRepository $productRepository
-     * @param Magento\Catalog\Block\Product\ListProduct $listProduct
-     * @param Magento\Catalog\Helper\Image $productImage
-     * @param Magento\Framework\Pricing\Helper\Data $priceHelper
-     */
     public function __construct(
-        \Magento\Backend\Block\Template\Context $context,
-        \Magento\Framework\App\Config\ScopeConfigInterface $config,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Catalog\Model\Product $productObj,
-        \Magento\Catalog\Model\ProductRepository $productRepository,
-        \Magento\Catalog\Block\Product\ListProduct $listProduct,
-        \Magento\Catalog\Helper\Image $productImage,
-        \Magento\Framework\Pricing\Helper\Data $priceHelper
+        Context $context,
+        protected readonly ScopeConfigInterface $config,
+        protected readonly StoreManagerInterface $storeManager,
+        protected readonly Product $productObj,
+        protected readonly ProductRepository $productRepository,
+        protected readonly ListProduct $listProduct,
+        protected readonly Image $productImage,
+        protected readonly PriceHelper $priceHelper,
+        array $data = []
     ) {
-        parent::__construct($context);
-        $this->config = $config;
-        $this->storeManager = $storeManager;
-        $this->productObj = $productObj;
-        $this->productRepository = $productRepository;
-        $this->listProduct = $listProduct;
-        $this->productImage = $productImage;
-        $this->priceHelper = $priceHelper;
+        parent::__construct($context, $data);
     }
 
     /**
-     * @return Scope Config Value | string
+     * Get store config value
      */
-    public function getConfigData($path)
+    public function getConfigData(string $path): mixed
     {
-        $value = $this->config->getValue(
+        return $this->config->getValue(
             $path,
             ScopeInterface::SCOPE_STORE,
             $this->storeManager->getStore()->getStoreId()
         );
-        return $value;
     }
 
-    /**
-     * @return Scope Config Value | string
-     */
-    public function getConfigSKU()
+    public function getConfigSKU(): ?string
     {
         return $this->getConfigData(self::PRODUCTSKU);
     }
 
-    /**
-     * @return Scope Config Value | bool
-     */
-    public function isEnable()
+    public function isEnable(): bool
     {
-        return $this->getConfigData(self::ENABLE);
+        return (bool) $this->getConfigData(self::ENABLE);
     }
 
-    /**
-     * @return Scope Config Value | string
-     */
-    public function getConfigExpDateTime()
+    public function getConfigExpDateTime(): ?string
     {
         return $this->getConfigData(self::EXPDATETIME);
     }
 
-    /**
-     * @return Scope Config Value | string
-     */
-    public function getConfigSaleText()
+    public function getConfigSaleText(): ?string
     {
         return $this->getConfigData(self::SALETEXT);
     }
 
-    /**
-     * @return Scope Config Value | string
-     */
-    public function getConfigButtonText()
+    public function getConfigButtonText(): ?string
     {
         return $this->getConfigData(self::BUTTONTEXT);
     }
 
-    /**
-     * @return Scope Config Value | string
-     */
-    public function getConfigTimeZone()
+    public function getConfigTimeZone(): ?string
     {
         return $this->getConfigData(self::TIMEZONE);
     }
 
     /**
-     * @return Product | object
+     * @return Product|string
      */
-    public function getSpecificProduct()
+    public function getSpecificProduct(): Product|string
     {
         $sku = $this->getConfigSKU();
-        if ($this->productObj->getIdBySku($sku)) {
-            $product = $this->productRepository->get($sku);
-            return $product;
-        } else {
-            return '';
+        if ($sku && $this->productObj->getIdBySku($sku)) {
+            try {
+                return $this->productRepository->get($sku);
+            } catch (NoSuchEntityException $e) {
+                return '';
+            }
         }
+        return '';
     }
 
     /**
-     * @return Product Image URL | string
+     * Get product image URL
      */
-    public function getProductImage($product)
+    public function getProductImage(Product $product): string
     {
-        if ($this->productObj->getIdBySku($this->getConfigSKU())) {
-            $imageUrl = $this->productImage->init(
+        $sku = $this->getConfigSKU();
+        if ($sku && $this->productObj->getIdBySku($sku)) {
+            return $this->productImage->init(
                 $product,
                 self::THUMBNAIL_IMAGE
-            )->setImageFile(
-                $product->getFile()
-            )->resize(
-                200,
-                200
-            )->getUrl();
-            return $imageUrl;
-        } else {
-            return '';
+            )->resize(200, 200)->getUrl();
         }
+        return '';
     }
 
     /**
-     * @return Cart URL | string
+     * Get add-to-cart URL
      */
-    public function getAddCartUrl($product)
+    public function getAddCartUrl(Product $product): string
     {
-        if ($this->productObj->getIdBySku($this->getConfigSKU())) {
+        $sku = $this->getConfigSKU();
+        if ($sku && $this->productObj->getIdBySku($sku)) {
             return $this->listProduct->getAddToCartUrl($product);
-        } else {
-            return '';
         }
+        return '';
     }
 
     /**
-     * @return Formatted Price
+     * Format price with currency
      */
-    public function getFormatedPrice($price)
+    public function getFormatedPrice(float|int|string $price): string
     {
-        return $this->priceHelper->currency($price, true, false);
+        return (string) $this->priceHelper->currency($price, true, false);
     }
 
     /**
-     * @return bool
+     * Check if the configured product exists
      */
-    public function isProductAvailable()
+    public function isProductAvailable(): bool
     {
-        if ($this->productObj->getIdBySku($this->getConfigSKU())) {
-            return true;
-        } else {
-            return false;
-        }
+        $sku = $this->getConfigSKU();
+        return $sku !== null && $sku !== '' && (bool) $this->productObj->getIdBySku($sku);
     }
 }

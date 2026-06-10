@@ -1,9 +1,6 @@
 <?php
 
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
+declare(strict_types=1);
 
 namespace Forever\Faq\Model;
 
@@ -14,7 +11,7 @@ class Question extends AbstractModel
     /**
      * Question Model Constructor
      */
-    public function _construct()
+    protected function _construct(): void
     {
         $this->_init(ResourceModel\Question::class);
     }
