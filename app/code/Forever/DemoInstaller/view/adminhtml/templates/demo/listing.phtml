@@ -1,0 +1,51 @@
+<?php
+/** @var \Forever\DemoInstaller\Block\Adminhtml\Demo\Listing $block */
+?>
+<?php $demos = $block->getDemos(); ?>
+<div class="forever-demo-grid" style="display:flex;flex-wrap:wrap;gap:20px;">
+<?php if (!$demos): ?>
+    <p><?= $block->escapeHtml(__('No demo packages found. Add folders under app/code/Forever/DemoInstaller/data/demo/.')) ?></p>
+<?php endif; ?>
+<?php foreach ($demos as $demo): ?>
+    <div class="forever-demo-card" style="border:1px solid #ccc;border-radius:6px;width:280px;padding:12px;">
+        <img src="<?= $block->escapeUrl($block->getThumbnailUrl($demo->getCode())) ?>"
+             alt="<?= $block->escapeHtmlAttr($demo->getLabel()) ?>"
+             style="width:100%;height:160px;object-fit:cover;border-radius:4px;"/>
+        <h3 style="margin:10px 0 4px;"><?= $block->escapeHtml($demo->getLabel()) ?></h3>
+        <p style="color:#777;margin:0 0 6px;">v<?= $block->escapeHtml($demo->getVersion()) ?></p>
+        <p style="font-size:12px;color:#555;"><?= $block->escapeHtml($demo->getDescription()) ?></p>
+        <button type="button" class="action-primary forever-demo-import"
+                data-code="<?= $block->escapeHtmlAttr($demo->getCode()) ?>">
+            <span><?= $block->escapeHtml(__('Import this demo')) ?></span>
+        </button>
+    </div>
+<?php endforeach; ?>
+</div>
+<div id="forever-demo-result" style="margin-top:20px;white-space:pre-wrap;font-family:monospace;"></div>
+
+<script>
+require(['jquery', 'Magento_Ui/js/modal/confirm'], function ($, confirm) {
+    var importUrl = '<?= /* @noEscape */ $block->getImportUrl() ?>';
+    $('.forever-demo-import').on('click', function () {
+        var code = $(this).data('code');
+        confirm({
+            title: 'Import demo: ' + code,
+            content: 'This will create/overwrite CMS, widgets, configuration and module data. Continue?',
+            actions: {
+                confirm: function () {
+                    var $out = $('#forever-demo-result').text('Importing "' + code + '"...');
+                    $.post(importUrl, {
+                        code: code,
+                        form_key: window.FORM_KEY
+                    }).done(function (r) {
+                        var msg = (r.messages || []).join("\n");
+                        $out.text(msg + (r.success ? "\n\n[OK] Finished - flush the cache." : "\n\n[FAILED]"));
+                    }).fail(function () {
+                        $out.text('Request failed.');
+                    });
+                }
+            }
+        });
+    });
+});
+</script>

@@ -1,8 +1,9 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
-	.header-4 .sticky-header .megamenu .nav-desktop .level0:hover .level-top-mega,.header-4 .sticky-header2 .megamenu .nav-desktop .level0:hover .level-top-mega {
+	body.header-4.sticky-header-active .megamenu .nav-desktop .level0:hover .level-top-mega,
+	body.header-4.sticky-header2-active .megamenu .nav-desktop .level0:hover .level-top-mega {
     	top:50px;
 	} 
-	.header-4 .megamenu .nav-desktop .level0:hover .level-top-mega {
+	body.header-4 .megamenu .nav-desktop .level0:hover .level-top-mega {
 		top:75px;
 	}
 	.header-4 .header.panel > .header.links > li.welcome {

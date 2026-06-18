@@ -1,0 +1,38 @@
+[
+    {
+        "id": "2",
+        "name": "Jonathan Mark",
+        "designation": "Store manager",
+        "image": "team-img-2.jpg",
+        "order": "2",
+        "status": "1",
+        "orders": "5"
+    },
+    {
+        "id": "3",
+        "name": "Nately Port",
+        "designation": "Fine ceramics",
+        "image": "team-img-4_2.jpg",
+        "order": "3",
+        "status": "1",
+        "orders": "1"
+    },
+    {
+        "id": "4",
+        "name": "Nicolas Jen",
+        "designation": "Designer",
+        "image": "team-img-1.jpg",
+        "order": "4",
+        "status": "1",
+        "orders": null
+    },
+    {
+        "id": "7",
+        "name": "Jane doe",
+        "designation": "QA Tester ",
+        "image": "team-img-3_3.jpg",
+        "order": null,
+        "status": "1",
+        "orders": "5"
+    }
+]

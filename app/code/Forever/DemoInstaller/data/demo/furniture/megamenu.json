@@ -1,0 +1,26 @@
+[
+    {
+        "id": "1",
+        "linktype": "1",
+        "cat_id": "9",
+        "rightcontent": "<p><img src=\"{{media url=&quot;wysiwyg/furniture-megamenu-1.jpg&quot;}}\" alt=\"\" width=\"187\" height=\"268\"></p>",
+        "leftcontent": null,
+        "catename": null,
+        "custcateurl": null,
+        "image": null,
+        "stores": "0",
+        "status": "1"
+    },
+    {
+        "id": "3",
+        "linktype": "1",
+        "cat_id": "12",
+        "rightcontent": "<p><img src=\"{{media url=\"wysiwyg/furniture-megamenu-1.jpg\"}}\" alt=\"\" width=\"187\" height=\"268\"></p>",
+        "leftcontent": "<p><img src=\"{{media url=\"wysiwyg/furniture-megamenu-1.jpg\"}}\" alt=\"\" width=\"187\" height=\"268\"></p>",
+        "catename": null,
+        "custcateurl": null,
+        "image": null,
+        "stores": "0",
+        "status": "1"
+    }
+]

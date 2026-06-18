@@ -1,0 +1,1190 @@
+[
+    {
+        "path": "design/theme/theme_id",
+        "value": "4",
+        "scope": "stores",
+        "scope_id": "1"
+    },
+    {
+        "path": "themedesign/general/background",
+        "value": "#66666",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/general/backgroundprimary",
+        "value": "#000000",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/general/topfooterbgcolor",
+        "value": "#cf1527",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/general/bottomfootertextcolor",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/general/bottomfooterbgcolor",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/general/middlefooterhovercolor",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/general/middlefootertextcolor",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/general/middlefooterbgcolor",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/general/topfooterhovercolor",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/general/topfootertextcolor",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/general/headertextcolor",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/general/backgroundsecondary",
+        "value": "#dfa34a",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/general/headerbgcolor",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/general/buttonhovertextcolor",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/general/buttonhovercolor",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/general/buttontextcolor",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/general/buttoncolor",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/general/linkshovercolor",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/general/linkscolor",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/general/textcolor",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/general/bottomfooterhovercolor",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/productlabel/salelabel",
+        "value": "#f03e50",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/productlabel/newlabel",
+        "value": "#25c48a",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "forever_general/header/style",
+        "value": "style-4",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "forever_general/header/search_type",
+        "value": "0",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "forever_general/header/sticky",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "forever_general/footer/style",
+        "value": "style-4",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "forever_general/footer/footer_image",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "popup/general/ajaxlogin_enable",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "forever_categories/general/enabled",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "forever_categories/home_page/category_select",
+        "value": "9,12,13,14,16,17",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "bestseller/general/enable",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "bestseller/general/productscount",
+        "value": "0",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/colors/link",
+        "value": "#dfa34a",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/colors/text",
+        "value": "#000000",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/colors/linkhover",
+        "value": "#dfa34a",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/colors/button",
+        "value": "#dfa34a",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/colors/buttontext",
+        "value": "#ffffff",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/colors/buttonhover",
+        "value": "#000000",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/colors/buttonhovertext",
+        "value": "#ffffff",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/header/headerbg",
+        "value": "#ffffff",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/header/headertext",
+        "value": "#000",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/footer/topbgcolor",
+        "value": "#000000",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/footer/toptextcolor",
+        "value": "#ffffff",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/footer/tophovercolor",
+        "value": "#ffffff",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/footer/middlebgcolor",
+        "value": "#000000",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/footer/middlehovercolor",
+        "value": "#ffffff",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/footer/middletextcolor",
+        "value": "#ffffff",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/footer/bottombgcolor",
+        "value": "#000",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/footer/bottomtextcolor",
+        "value": "#ffffff",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/footer/bottomhovercolor",
+        "value": "#fff",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "lazyload/general/enable",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "lazyload/general/lazyload_images",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "lazyload/general/lazyload_iframes",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "lazyload/general/lazyload_cms",
+        "value": "0",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "lazyload/general/lazyload_skipclasses",
+        "value": "no-lazy",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "lazyload/general/lazyload_delay",
+        "value": "2000",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "lazyload/general/lazyload_effect",
+        "value": "fadeIn",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "lazyload/general/lazyload_effecttime",
+        "value": "500",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "lazyload/general/lazyload_placeholder",
+        "value": "default/sofa-furniture_1_.gif",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "infinitescroll/general/enabled",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "infinitescroll/general/infinitescroll_delay",
+        "value": "600",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "infinitescroll/general/infinitescroll_content",
+        "value": ".main",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "infinitescroll/general/infinitescroll_pagination",
+        "value": ".pages-items, .pager__list",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "infinitescroll/general/infinitescroll_next",
+        "value": ".next",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "infinitescroll/general/infinitescroll_item",
+        "value": ".product-item",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "infinitescroll/general/infinitescroll_loadingtext",
+        "value": "<em>Loading - please wait...</em>",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "infinitescroll/general/infinitescroll_loadmore",
+        "value": "2",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "infinitescroll/general/infinitescroll_loadmoretext",
+        "value": "Load more items",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "infinitescroll/general/infinitescroll_loadingimage",
+        "value": "default/sofa-furniture_1__1.gif",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/zoominout/enable",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/imageswitcher/enable",
+        "value": "0",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "megamenu/topmenu/enabled",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "dailydeals/general/enabled",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "dailydeals/general/dailydeals_productsku",
+        "value": "ff_chair_one_grey_2",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "dailydeals/general/dailydeals_exptime",
+        "value": "2026-06-12 07:24:59",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "dailydeals/general/dailydeals_saletext",
+        "value": "Take advantage of huge <b>discount</b>",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "dailydeals/general/dailydeals_buttontext",
+        "value": "Order Now",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "blog/general/enable",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "layered_navigation/general/ajax_enable",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "ajaxlayer/general/ajaxenable",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "buynow/general/buynow_enable",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "quickview/general/enabled",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "quickview/display/enable_product_listing",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "quickview/display/category",
+        "value": ".product-image-container, .product-item-photo, .cdz-product-top",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "quickview/display/enable_view_detail",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "storelocator/general/enable",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "storelocator/mapscope/lat",
+        "value": "26.51",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "storelocator/mapscope/lng",
+        "value": "76.05",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/general/enabled",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/general/contact_page",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/general/position",
+        "value": "top",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/map_setting/protocol",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/map_setting/api_key",
+        "value": "AIzaSyA-AB-9XZd-iQby-bNLYPFyb0pR2Qw3orw",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/map_setting/embed_code",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/map_setting/map_type",
+        "value": "roadmap",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/map_setting/map_style",
+        "value": "mid-night",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/map_setting/allow_drag",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/map_setting/zoom_default",
+        "value": "10",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/map_setting/marker_icon",
+        "value": "default/location_4_.png",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/map_setting/location_setting/address",
+        "value": "prahladnagar",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/map_setting/location_setting/latitude",
+        "value": "23.01180646742301",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/map_setting/location_setting/longitude",
+        "value": "72.51154539972704",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/water_group/water_color",
+        "value": "de1b1b",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/water_group/water_lightness",
+        "value": "20",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/water_group/water_weight",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/water_group/water_visibility",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/water_group/water_saturation",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/landscape_group/landscape_color",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/landscape_group/landscape_lightness",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/landscape_group/landscape_weight",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/landscape_group/landscape_visibility",
+        "value": "0",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/landscape_group/landscape_saturation",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/highway_fill_group/highway_fill_color",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/highway_fill_group/highway_fill_lightness",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/highway_fill_group/highway_fill_weight",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/highway_fill_group/highway_fill_visibility",
+        "value": "0",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/highway_fill_group/highway_fill_saturation",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/highway_stroke_group/highway_stroke_color",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/highway_stroke_group/highway_stroke_lightness",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/highway_stroke_group/highway_stroke_weight",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/highway_stroke_group/highway_stroke_visibility",
+        "value": "0",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/highway_stroke_group/highway_stroke_saturation",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/arterial_group/arterial_color",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/arterial_group/arterial_lightness",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/arterial_group/arterial_weight",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/arterial_group/arterial_visibility",
+        "value": "0",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/arterial_group/arterial_saturation",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/local_group/local_color",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/local_group/local_lightness",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/local_group/local_weight",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/local_group/local_visibility",
+        "value": "0",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/local_group/local_saturation",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/poi_group/poi_color",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/poi_group/poi_lightness",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/poi_group/poi_weight",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/poi_group/poi_visibility",
+        "value": "0",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/poi_group/poi_saturation",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/poi_park_group/poi_park_color",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/poi_park_group/poi_park_lightness",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/poi_park_group/poi_park_weight",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/poi_park_group/poi_park_visibility",
+        "value": "0",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/poi_park_group/poi_park_saturation",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/labels_text_stroke_group/labels_text_stroke_color",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/labels_text_stroke_group/labels_text_stroke_lightness",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/labels_text_stroke_group/labels_text_stroke_weight",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/labels_text_stroke_group/labels_text_stroke_visibility",
+        "value": "0",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/labels_text_stroke_group/labels_text_stroke_saturation",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/labels_text_fill_group/labels_text_fill_color",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/labels_text_fill_group/labels_text_fill_lightness",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/labels_text_fill_group/labels_text_fill_weight",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/labels_text_fill_group/labels_text_fill_visibility",
+        "value": "0",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/labels_text_fill_group/labels_text_fill_saturation",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/labels_icon_group/labels_icon_visibility",
+        "value": "0",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/transit_group/transit_color",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/transit_group/transit_lightness",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/transit_group/transit_weight",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/transit_group/transit_visibility",
+        "value": "0",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/transit_group/transit_saturation",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/administrative_fill_group/administrative_fill_color",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/administrative_fill_group/administrative_fill_lightness",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/administrative_fill_group/administrative_fill_weight",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/administrative_fill_group/administrative_fill_visibility",
+        "value": "0",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/administrative_fill_group/administrative_fill_saturation",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/administrative_stroke_group/administrative_stroke_color",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/administrative_stroke_group/administrative_stroke_lightness",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/administrative_stroke_group/administrative_stroke_weight",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/administrative_stroke_group/administrative_stroke_visibility",
+        "value": "0",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "fgooglemaps/my_style_group/administrative_stroke_group/administrative_stroke_saturation",
+        "value": null,
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "layered_navigation/general/enabled",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "megamenu/module/enabled",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "megamenu/desktop/deskposition",
+        "value": "horizontal",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "megamenu/mobile/mobposition",
+        "value": "accordian",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/header/topheaderbg",
+        "value": "#dfa34a",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/header/topheadertext",
+        "value": "#d72626",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/header/middleheaderbg",
+        "value": "#ffffff",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/header/middleheadertext",
+        "value": "#000000",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/header/middleheaderhover",
+        "value": "#000000",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/header/bottomheaderbg",
+        "value": "#ffffff",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/header/bottomheadertext",
+        "value": "#000000",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/header/headerprimary",
+        "value": "#000000",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/header/headersecondary",
+        "value": "#7bab18",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/header/bgcolor",
+        "value": "#262526",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/header/topheaderhover",
+        "value": "#ffffff",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "themedesign/general/svgcolor",
+        "value": "dfa34a",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "forever_general/header/stickyheader",
+        "value": "sticky-2",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "faq/general/enable",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "testimonials/recent_testimonials/number_recent_posts",
+        "value": "2",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "testimonials/general/enable",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "team/general/enable",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "brand/general/enable",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "blog/general/list_per_page_values",
+        "value": "2,4,6,8,10",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "blog/general/list_per_page",
+        "value": "2",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "blog/sidebar/number_recent_posts",
+        "value": "2",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "productlabel/general/productlabelenable",
+        "value": "1",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "megamenu/homebutton/homebuttonenabled",
+        "value": "0",
+        "scope": "default",
+        "scope_id": "0"
+    },
+    {
+        "path": "design/theme/theme_id",
+        "value": "4",
+        "scope": "default",
+        "scope_id": "0"
+    }
+]

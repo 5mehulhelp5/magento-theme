@@ -120,6 +120,35 @@
         position: static !important;
     }
 
+    html body.header-3 .page-wrapper .header.content .megamenu {
+        display: flex !important;
+        flex: 0 0 100% !important;
+        left: auto !important;
+        margin-top: 16px !important;
+        max-width: 100% !important;
+        position: static !important;
+        top: auto !important;
+        transform: none !important;
+        justify-content: center !important;
+        width: 100% !important;
+        overflow: visible !important;
+    }
+
+    html body.header-3 .page-wrapper .header.content .megamenu .nav-desktop {
+        display: flex !important;
+        gap: 34px !important;
+        justify-content: center !important;
+        width: auto !important;
+        overflow: visible !important;
+    }
+
+    html body.header-3 .page-wrapper .page-header,
+    html body.header-3 .page-wrapper .header-one.header-container__inner,
+    html body.header-3 .page-wrapper .header.content,
+    html body.header-3 .page-wrapper .header.content .megamenu .nav-desktop > .level0 {
+        overflow: visible !important;
+    }
+
     html body .page-wrapper .megamenu .nav-desktop > .level0 {
         flex: 0 0 auto !important;
         width: auto !important;
@@ -145,10 +174,29 @@
         z-index: 99999 !important;
     }
 
+    html body.header-3 .page-wrapper .header.content .megamenu .nav-desktop > .level0 .level-top-mega {
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        top: 72px !important;
+        visibility: hidden;
+        z-index: 99999 !important;
+    }
+
     html body .page-wrapper .megamenu .nav-desktop > .level0.over .level-top-mega,
     html body .page-wrapper .megamenu .nav-desktop > .level0:hover .level-top-mega {
         opacity: 1 !important;
         top: 70px !important;
+        visibility: visible !important;
+    }
+
+    html body.header-3 .page-wrapper .header.content .megamenu .nav-desktop > .level0.over .level-top-mega,
+    html body.header-3 .page-wrapper .header.content .megamenu .nav-desktop > .level0:hover .level-top-mega {
+        height: auto !important;
+        max-height: none !important;
+        opacity: 1 !important;
+        overflow: visible !important;
+        top: 72px !important;
         visibility: visible !important;
     }
 

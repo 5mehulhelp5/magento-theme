@@ -28,6 +28,6 @@ $isEnableModule = $block->getConfigValue();
         </div>
     </div>
     <div class="view-all">
-        <a class="view-all-btn action primary" href="/team"><?= /* @noEscape */ __('View All') ?></a>
+        <a class="view-all-btn action primary" href="<?= $block->escapeUrl($block->getUrl('team')) ?>"><?= /* @noEscape */ __('View All') ?></a>
     </div>
 <?php endif;?>

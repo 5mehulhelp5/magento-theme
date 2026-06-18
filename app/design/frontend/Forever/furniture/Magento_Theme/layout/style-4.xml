@@ -89,6 +89,7 @@
             </container>
 
         <!-- Move catalog.topnav directly (bypasses hidden tabs wrapper) -->
+        <move element="header.panel" destination="header-wrapper" before="-" />
         <move element="catalog.topnav" destination="header-wrapper" after="logo"/>
         <move element="header-wishlist" destination="header-wrapper" after="-"/>
         <move element="header-wrapper" destination="header3-block" after="-"/>

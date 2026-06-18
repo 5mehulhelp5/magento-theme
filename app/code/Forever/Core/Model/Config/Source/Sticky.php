@@ -28,7 +28,7 @@ class Sticky implements ArrayInterface
     {
         return [
             'sticky-1' => __('Sticky Header 1'),
-            'sticky-1' => __('Sticky Header 2')
+            'sticky-2' => __('Sticky Header 2')
         ];
     }
 }

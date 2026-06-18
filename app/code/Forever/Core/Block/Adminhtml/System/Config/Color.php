@@ -14,26 +14,29 @@ class Color extends Field
     protected function _getElementHtml(AbstractElement $element)
     {
         $html = $element->getElementHtml();
-        $value = $element->getData('value');
-        $html .= '<script type="text/javascript">
-            require(["jquery"], function($) {
-                $(document).ready(function(e) {
-                    $("#' . $element->getHtmlId() . '").css("background-color", "#' . $value . '");
-                    $("#' . $element->getHtmlId() . '").colpick({
-                        layout: "hex",
-                        submit: 0,
-                        colorScheme: "dark",
-                        color: "#' . $value . '",
-                        onChange: function(hsb, hex, rgb, el, bySetColor) {
-                            $(el).css("background-color", "#" + hex);
-                            if (!bySetColor) $(el).val("#" + hex);
-                        }
-                    }).keyup(function() {
-                        $(this).colpickSetColor(this.value);
-                    });
-                });
+
+        $value = $element->getValue() ?: '#000000';
+
+        $html .= '
+        <script>
+        require([
+            "jquery",
+            "spectrum"
+        ], function ($) {
+
+            $("#'.$element->getHtmlId().'").spectrum({
+                preferredFormat: "hex",
+                showInput: true,
+                allowEmpty: false,
+                color: "'.$value.'",
+                change: function(color) {
+                    $("#'.$element->getHtmlId().'").val(color.toHexString());
+                }
             });
-            </script>';
+
+        });
+        </script>';
+
         return $html;
     }
 }

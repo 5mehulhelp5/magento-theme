@@ -246,6 +246,37 @@ class BestsellerProduct extends \Magento\Catalog\Block\Product\ListProduct
     {
         return $this->compareProduct->getAddUrl();
     }
+
+    public function getProductPrice(ModelProduct $product)
+    {
+        $this->ensurePriceRenderer();
+
+        try {
+            return parent::getProductPrice($product);
+        } catch (\Throwable $e) {
+            $this->_logger->critical($e);
+        }
+
+        return '';
+    }
+
+    private function ensurePriceRenderer()
+    {
+        if ($this->getLayout()->getBlock('product.price.render.default')) {
+            return;
+        }
+
+        $this->getLayout()->createBlock(
+            \Magento\Framework\Pricing\Render::class,
+            'product.price.render.default',
+            [
+                'data' => [
+                    'price_render_handle' => 'catalog_product_prices',
+                    'use_link_for_as_low_as' => true,
+                ],
+            ]
+        );
+    }
     
     public function productAttribute($product, $attributeHtml, $attributeName)
     {

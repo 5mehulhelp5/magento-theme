@@ -11,6 +11,7 @@ use Forever\StoreLocator\Model\ResourceModel\Store\CollectionFactory;
 
 class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
+    protected array $loadedData = [];
     /**
      * @param string $name
      * @param string $primaryFieldName
@@ -32,7 +33,7 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
     }
     public function getData()
     {
-        if (isset($this->loadedData)) {
+        if (!empty($this->loadedData)) {
             return $this->loadedData;
         }
         $items = $this->collection->getItems();

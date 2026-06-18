@@ -1,15 +1,21 @@
 <?php
-$viewmodel = $block->getViewModel();
-$stickyenable = $viewmodel->isStickyEnable();
-$stickytype = $viewmodel->getStickyHeaderType();
+/** @var \Forever\Core\ViewModel\SystemConfigurations $viewModel */
+$viewModel = $block->getData('view_model');
+if (!$viewModel) {
+    return;
+}
+$stickyenable = (int)$viewModel->isStickyEnable();
+$stickytype   = $viewModel->getStickyHeaderType();
 ?>
+<?php if ($stickyenable): ?>
 <script type="text/x-magento-init">
     {
-       "*": {
-           "stickyheader": {
-           "stickey_type": "<?=/* @noEscape */ $stickytype ?>",
-           "stickey_type_enable": <?=/* @noEscape */ $stickyenable ?>
-           }
-       }
+        "*": {
+            "stickyheader": {
+                "stickey_type": "<?= /* @noEscape */ $stickytype ?>",
+                "stickey_type_enable": <?= /* @noEscape */ $stickyenable ?>
+            }
+        }
     }
 </script>
+<?php endif; ?>

@@ -1,0 +1,26 @@
+{
+    "code": "furniture",
+    "label": "Furniture Demo",
+    "version": "1.0.0",
+    "description": "Furniture storefront - homepage, mega menu, sliders, blog.",
+    "thumbnail": "media/thumbnail.jpg",
+    "steps": [
+        { "type": "media",     "source": "media", "overwrite": false },
+        { "type": "cms_block", "source": "cms_blocks.xml" },
+        { "type": "cms_page",  "source": "cms_pages.xml" },
+        { "type": "widget",    "source": "widgets.json" },
+        { "type": "table", "source": "bannerslider.json",   "table": "bannerslider",        "unique": ["imagetext"], "truncate": true },
+        { "type": "table", "source": "megamenu.json",       "table": "forever_megamenu",    "unique": ["id"] },
+        { "type": "table", "source": "blog.json",           "table": "forever_blog",        "unique": ["blog_id"] },
+        { "type": "table", "source": "brand.json",          "table": "forever_brand",       "unique": ["id"] },
+        { "type": "table", "source": "testimonials.json",   "table": "forever_testimonials","unique": ["id"] },
+        { "type": "table", "source": "team.json",           "table": "forever_team",        "unique": ["id"] },
+        { "type": "config", "source": "config.json", "paths": [
+            "forever_general", "forever_categories", "themedesign", "design/theme",
+            "megamenu", "bestseller", "blog", "brand", "buynow", "dailydeals", "faq",
+            "fgooglemaps", "infinitescroll", "layered_navigation", "lazyload", "popup",
+            "productlabel", "quickview", "storelocator", "team", "testimonials", "ajaxlayer"
+        ] },
+        { "type": "theme",  "theme": "frontend/Forever/furniture" }
+    ]
+}

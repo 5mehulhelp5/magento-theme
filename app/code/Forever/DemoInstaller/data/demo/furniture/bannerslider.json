@@ -1,0 +1,38 @@
+[
+    {
+        "id": "1",
+        "imagetext": "Furniture",
+        "description": "<h2 class=\"\">Lamps you will love in 2022</h2>\r\n<p class=\"\">Lorem Ipsum is simply dummy text of the printing</p>",
+        "buttonlink": "",
+        "buttontext": "",
+        "sliderimage": "furniture1-lamp.png",
+        "status": "1"
+    },
+    {
+        "id": "2",
+        "imagetext": "",
+        "description": "<div class=\"slider-des\">\r\n<h2 class=\"\">Chairs you will love in 2022</h2>\r\n<p class=\"\">Quisque sagittis pellentesque hac ullamcorper habitasse vivamus phasellus donec nunc quis ornare eu quis hendrerit integer placerat dignissim bibendum dictumst felis curae; lobortis venenatis dignissim eget ante mattis semper tristique, etiam blandit aliquam mattis sem porta iaculis vel lacinia urna. Class justo sollicitudin fringilla molestie. Netus tellus dignissim nulla condimentum dui lacus pharetra primis natoque pharetra erat accumsan dignissim laoreet tempor phasellus. Sapien per. Per molestie nascetur dignissim accumsan. Class egestas. Nisi etiam vehicula.&nbsp;</p>\r\n</div>",
+        "buttonlink": "",
+        "buttontext": "",
+        "sliderimage": "furniture1-chair.png",
+        "status": "1"
+    },
+    {
+        "id": "4",
+        "imagetext": "",
+        "description": "<div class=\"slider-des\"><h2 class=\"\">New Design Furniture</h2>\r\n<h3 class=\"\">Relaxing Chair Up To 50% Off</h3>\r\n<p class=\"\">New Collection Only This Month</p>\r\n</div>",
+        "buttonlink": "",
+        "buttontext": "",
+        "sliderimage": "973dd50bdb3488e782b3ac7c63217980.png",
+        "status": "1"
+    },
+    {
+        "id": "5",
+        "imagetext": "",
+        "description": "<div class=\"slider-des\"><h2 class=\"\">New Design Furniture</h2>\r\n<h3 class=\"\">Relaxing Chair Up To 60% Off</h3>\r\n<p class=\"\">New Collection Only This Month</p></div>",
+        "buttonlink": "",
+        "buttontext": "",
+        "sliderimage": "GUEST_e5dd9a80-8968-4090-ae3e-0fe429887eb8.png",
+        "status": "1"
+    }
+]

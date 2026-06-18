@@ -21,6 +21,6 @@ if ($isEnableModule == 1): ?>
             </div>
         <?php endforeach;?>
     </div>
-    <div class="view-all"><a class="view-all-btn action primary" href="/brand"><?= /* @noEscape */ __('View All') ?></a></div>
+    <div class="view-all"><a class="view-all-btn action primary" href="<?= $block->escapeUrl($block->getUrl('brand')) ?>"><?= /* @noEscape */ __('View All') ?></a></div>
 </div>
 <?php endif;?>

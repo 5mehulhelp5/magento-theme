@@ -1,0 +1,445 @@
+[
+    {
+        "title": "Recently Viewed Products 123",
+        "instance_type": "Magento\\Catalog\\Block\\Widget\\RecentlyViewed",
+        "theme_full_path": "frontend/Forever/furniture",
+        "store_ids": [
+            "0"
+        ],
+        "sort_order": 0,
+        "widget_parameters": {
+            "uiComponent": "widget_recently_viewed",
+            "page_size": "5",
+            "show_attributes": [
+                "name",
+                "image",
+                "price"
+            ],
+            "show_buttons": [
+                "add_to_cart",
+                "add_to_compare",
+                "add_to_wishlist"
+            ]
+        },
+        "page_groups": [
+            {
+                "page_id": "1",
+                "instance_id": "1",
+                "page_group": "pages",
+                "layout_handle": "catalog_product_view",
+                "block_reference": "content",
+                "page_for": "all",
+                "entities": "",
+                "page_template": "product/widget/viewed/grid.phtml"
+            }
+        ]
+    },
+    {
+        "title": "Contact us info",
+        "instance_type": "Magento\\Cms\\Block\\Widget\\Block",
+        "theme_full_path": "frontend/Magento/luma",
+        "store_ids": [
+            "0"
+        ],
+        "sort_order": 0,
+        "widget_parameters": {
+            "block_id": "46"
+        },
+        "page_groups": [
+            {
+                "page_id": "2",
+                "instance_id": "2",
+                "page_group": "pages",
+                "layout_handle": "contact_index_index",
+                "block_reference": "content.top",
+                "page_for": "all",
+                "entities": "",
+                "page_template": "widget/static_block/default.phtml"
+            }
+        ]
+    },
+    {
+        "title": "Footer Links",
+        "instance_type": "Magento\\Cms\\Block\\Widget\\Block",
+        "theme_full_path": "frontend/Magento/luma",
+        "store_ids": [
+            "0"
+        ],
+        "sort_order": 0,
+        "widget_parameters": {
+            "block_id": "45"
+        },
+        "page_groups": [
+            {
+                "page_id": "3",
+                "instance_id": "3",
+                "page_group": "all_pages",
+                "layout_handle": "default",
+                "block_reference": "cms_footer_links_container",
+                "page_for": "all",
+                "entities": "",
+                "page_template": "widget/static_block/default.phtml"
+            }
+        ]
+    },
+    {
+        "title": "Sale Left Menu",
+        "instance_type": "Magento\\Cms\\Block\\Widget\\Block",
+        "theme_full_path": "frontend/Magento/luma",
+        "store_ids": [
+            "0"
+        ],
+        "sort_order": 0,
+        "widget_parameters": {
+            "block_id": "47"
+        },
+        "page_groups": [
+            {
+                "page_id": "4",
+                "instance_id": "4",
+                "page_group": "anchor_categories",
+                "layout_handle": "catalog_category_view_type_layered",
+                "block_reference": "sidebar.main",
+                "page_for": "specific",
+                "entities": "103",
+                "page_template": "widget/static_block/default.phtml"
+            }
+        ]
+    },
+    {
+        "title": "Gear Left Menu",
+        "instance_type": "Magento\\Cms\\Block\\Widget\\Block",
+        "theme_full_path": "frontend/Magento/luma",
+        "store_ids": [
+            "0"
+        ],
+        "sort_order": 0,
+        "widget_parameters": {
+            "block_id": "48"
+        },
+        "page_groups": [
+            {
+                "page_id": "5",
+                "instance_id": "5",
+                "page_group": "anchor_categories",
+                "layout_handle": "catalog_category_view_type_layered",
+                "block_reference": "sidebar.main",
+                "page_for": "specific",
+                "entities": "69",
+                "page_template": "widget/static_block/default.phtml"
+            }
+        ]
+    },
+    {
+        "title": "Men's Left Menu",
+        "instance_type": "Magento\\Cms\\Block\\Widget\\Block",
+        "theme_full_path": "frontend/Magento/luma",
+        "store_ids": [
+            "0"
+        ],
+        "sort_order": 0,
+        "widget_parameters": {
+            "block_id": "49"
+        },
+        "page_groups": [
+            {
+                "page_id": "6",
+                "instance_id": "6",
+                "page_group": "anchor_categories",
+                "layout_handle": "catalog_category_view_type_layered",
+                "block_reference": "sidebar.main",
+                "page_for": "specific",
+                "entities": "77",
+                "page_template": "widget/static_block/default.phtml"
+            }
+        ]
+    },
+    {
+        "title": "Women's Left Menu",
+        "instance_type": "Magento\\Cms\\Block\\Widget\\Block",
+        "theme_full_path": "frontend/Magento/luma",
+        "store_ids": [
+            "0"
+        ],
+        "sort_order": 0,
+        "widget_parameters": {
+            "block_id": "50"
+        },
+        "page_groups": [
+            {
+                "page_id": "7",
+                "instance_id": "7",
+                "page_group": "anchor_categories",
+                "layout_handle": "catalog_category_view_type_layered",
+                "block_reference": "sidebar.main",
+                "page_for": "specific",
+                "entities": "86",
+                "page_template": "widget/static_block/default.phtml"
+            }
+        ]
+    },
+    {
+        "title": "What's New Left Menu",
+        "instance_type": "Magento\\Cms\\Block\\Widget\\Block",
+        "theme_full_path": "frontend/Magento/luma",
+        "store_ids": [
+            "0"
+        ],
+        "sort_order": 0,
+        "widget_parameters": {
+            "block_id": "51"
+        },
+        "page_groups": [
+            {
+                "page_id": "8",
+                "instance_id": "8",
+                "page_group": "anchor_categories",
+                "layout_handle": "catalog_category_view_type_layered",
+                "block_reference": "sidebar.main",
+                "page_for": "specific",
+                "entities": "104",
+                "page_template": "widget/static_block/default.phtml"
+            }
+        ]
+    },
+    {
+        "title": "Women Category Content",
+        "instance_type": "Magento\\Cms\\Block\\Widget\\Block",
+        "theme_full_path": "frontend/Magento/luma",
+        "store_ids": [
+            "0"
+        ],
+        "sort_order": 0,
+        "widget_parameters": {
+            "block_id": "52"
+        },
+        "page_groups": [
+            {
+                "page_id": "9",
+                "instance_id": "9",
+                "page_group": "anchor_categories",
+                "layout_handle": "catalog_category_view_type_layered",
+                "block_reference": "content.top",
+                "page_for": "specific",
+                "entities": "86",
+                "page_template": "widget/static_block/default.phtml"
+            }
+        ]
+    },
+    {
+        "title": "Training Category Content",
+        "instance_type": "Magento\\Cms\\Block\\Widget\\Block",
+        "theme_full_path": "frontend/Magento/luma",
+        "store_ids": [
+            "0"
+        ],
+        "sort_order": 0,
+        "widget_parameters": {
+            "block_id": "53"
+        },
+        "page_groups": [
+            {
+                "page_id": "10",
+                "instance_id": "10",
+                "page_group": "anchor_categories",
+                "layout_handle": "catalog_category_view_type_layered",
+                "block_reference": "content.top",
+                "page_for": "specific",
+                "entities": "75",
+                "page_template": "widget/static_block/default.phtml"
+            }
+        ]
+    },
+    {
+        "title": "Men Category Content",
+        "instance_type": "Magento\\Cms\\Block\\Widget\\Block",
+        "theme_full_path": "frontend/Magento/luma",
+        "store_ids": [
+            "0"
+        ],
+        "sort_order": 0,
+        "widget_parameters": {
+            "block_id": "54"
+        },
+        "page_groups": [
+            {
+                "page_id": "11",
+                "instance_id": "11",
+                "page_group": "anchor_categories",
+                "layout_handle": "catalog_category_view_type_layered",
+                "block_reference": "content.top",
+                "page_for": "specific",
+                "entities": "77",
+                "page_template": "widget/static_block/default.phtml"
+            }
+        ]
+    },
+    {
+        "title": "Gear Category Content",
+        "instance_type": "Magento\\Cms\\Block\\Widget\\Block",
+        "theme_full_path": "frontend/Magento/luma",
+        "store_ids": [
+            "0"
+        ],
+        "sort_order": 0,
+        "widget_parameters": {
+            "block_id": "55"
+        },
+        "page_groups": [
+            {
+                "page_id": "12",
+                "instance_id": "12",
+                "page_group": "anchor_categories",
+                "layout_handle": "catalog_category_view_type_layered",
+                "block_reference": "content.top",
+                "page_for": "specific",
+                "entities": "69",
+                "page_template": "widget/static_block/default.phtml"
+            }
+        ]
+    },
+    {
+        "title": "New Products Category Content",
+        "instance_type": "Magento\\Cms\\Block\\Widget\\Block",
+        "theme_full_path": "frontend/Magento/luma",
+        "store_ids": [
+            "0"
+        ],
+        "sort_order": 0,
+        "widget_parameters": {
+            "block_id": "57"
+        },
+        "page_groups": [
+            {
+                "page_id": "13",
+                "instance_id": "13",
+                "page_group": "anchor_categories",
+                "layout_handle": "catalog_category_view_type_layered",
+                "block_reference": "content.top",
+                "page_for": "specific",
+                "entities": "104",
+                "page_template": "widget/static_block/default.phtml"
+            }
+        ]
+    },
+    {
+        "title": "Sale Category Content",
+        "instance_type": "Magento\\Cms\\Block\\Widget\\Block",
+        "theme_full_path": "frontend/Magento/luma",
+        "store_ids": [
+            "0"
+        ],
+        "sort_order": 0,
+        "widget_parameters": {
+            "block_id": "56"
+        },
+        "page_groups": [
+            {
+                "page_id": "14",
+                "instance_id": "14",
+                "page_group": "anchor_categories",
+                "layout_handle": "catalog_category_view_type_layered",
+                "block_reference": "content.top",
+                "page_for": "specific",
+                "entities": "103",
+                "page_template": "widget/static_block/default.phtml"
+            }
+        ]
+    },
+    {
+        "title": "Home Page",
+        "instance_type": "Magento\\Cms\\Block\\Widget\\Block",
+        "theme_full_path": "frontend/Magento/luma",
+        "store_ids": [
+            "0"
+        ],
+        "sort_order": 0,
+        "widget_parameters": {
+            "block_id": "58"
+        },
+        "page_groups": [
+            {
+                "page_id": "15",
+                "instance_id": "15",
+                "page_group": "pages",
+                "layout_handle": "cms_index_index",
+                "block_reference": "content",
+                "page_for": "all",
+                "entities": "",
+                "page_template": "widget/static_block/default.phtml"
+            }
+        ]
+    },
+    {
+        "title": "Performance Fabrics",
+        "instance_type": "Magento\\Cms\\Block\\Widget\\Block",
+        "theme_full_path": "frontend/Magento/luma",
+        "store_ids": [
+            "0"
+        ],
+        "sort_order": 0,
+        "widget_parameters": {
+            "block_id": "59"
+        },
+        "page_groups": [
+            {
+                "page_id": "16",
+                "instance_id": "16",
+                "page_group": "anchor_categories",
+                "layout_handle": "catalog_category_view_type_layered",
+                "block_reference": "content.top",
+                "page_for": "specific",
+                "entities": "105",
+                "page_template": "widget/static_block/default.phtml"
+            }
+        ]
+    },
+    {
+        "title": "Eco Friendly",
+        "instance_type": "Magento\\Cms\\Block\\Widget\\Block",
+        "theme_full_path": "frontend/Magento/luma",
+        "store_ids": [
+            "0"
+        ],
+        "sort_order": 0,
+        "widget_parameters": {
+            "block_id": "60"
+        },
+        "page_groups": [
+            {
+                "page_id": "17",
+                "instance_id": "17",
+                "page_group": "anchor_categories",
+                "layout_handle": "catalog_category_view_type_layered",
+                "block_reference": "content.top",
+                "page_for": "specific",
+                "entities": "106",
+                "page_template": "widget/static_block/default.phtml"
+            }
+        ]
+    },
+    {
+        "title": "Login Info",
+        "instance_type": "Magento\\Cms\\Block\\Widget\\Block",
+        "theme_full_path": "frontend/Magento/luma",
+        "store_ids": [
+            "0"
+        ],
+        "sort_order": 0,
+        "widget_parameters": {
+            "block_id": "61"
+        },
+        "page_groups": [
+            {
+                "page_id": "18",
+                "instance_id": "18",
+                "page_group": "pages",
+                "layout_handle": "customer_account_login",
+                "block_reference": "customer.login.container",
+                "page_for": "all",
+                "entities": "",
+                "page_template": "widget/static_block/default.phtml"
+            }
+        ]
+    }
+]

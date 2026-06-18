@@ -41,6 +41,6 @@ $isEnableModule = $block->getConfigData('testimonials/general/enable');
                     <?php endforeach;?>
                 <?php endif;?>
             </div>
-<div class="view-all"><a class="view-all-btn action primary" href="/testimonials">View All</a></div>
+<div class="view-all"><a class="view-all-btn action primary" href="<?= $block->escapeUrl($block->getUrl('testimonials')) ?>">View All</a></div>
 </div>
 <?php endif;?>

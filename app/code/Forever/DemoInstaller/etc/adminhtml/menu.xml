@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/menu.xsd">
+    <menu>
+        <add id="Forever_DemoInstaller::demo"
+             title="Demo Importer"
+             module="Forever_DemoInstaller"
+             sortOrder="20"
+             parent="Magento_Backend::content"
+             action="forever_demo/demo/index"
+             resource="Forever_DemoInstaller::demo"/>
+    </menu>
+</config>

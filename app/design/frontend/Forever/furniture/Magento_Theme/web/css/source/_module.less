@@ -328,7 +328,8 @@
     body._has-modal .page-header .header.content .logo {
         z-index: 9;
     }
-    .page-wrapper.sticky-header, .page-wrapper.sticky-header2 {
+    body.sticky-header-active .page-wrapper,
+    body.sticky-header2-active .page-wrapper {
         .page-header {
             position:fixed;
             top:0px;
@@ -337,12 +338,12 @@
             background:#fff;
         }
     }
-    .page-wrapper.sticky-header {
+    body.sticky-header-active .page-wrapper {
         .page-header {
             z-index:99;
         }
     }
-    .page-wrapper.sticky-header2 {
+    body.sticky-header2-active .page-wrapper {
         .page-header {
             background: @SecondaryColor;
             z-index: 999;
@@ -1730,7 +1731,8 @@
             border-bottom:1px solid #ffffff42;
         }
     }
-    .page-wrapper.sticky-header, .page-wrapper.sticky-header2 {
+    body.sticky-header-active .page-wrapper,
+    body.sticky-header2-active .page-wrapper {
         .page-main,.page-main-full-width {
             margin-top: 75px;
         }
@@ -1964,7 +1966,10 @@
     }
 }
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-    .page-wrapper.sticky-header .page-main, .page-wrapper.sticky-header2 .page-main,.page-wrapper.sticky-header .page-main-full-width,.page-wrapper.sticky-header2 .page-main-full-width {
+    body.sticky-header-active .page-wrapper .page-main,
+    body.sticky-header2-active .page-wrapper .page-main,
+    body.sticky-header-active .page-wrapper .page-main-full-width,
+    body.sticky-header2-active .page-wrapper .page-main-full-width {
         margin-top: 85px;
     }
     .cms-page-view .page-main {
@@ -2505,7 +2510,7 @@
 }
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
-    .sticky-header2 .page-header .header-two .header.content {
+    body.sticky-header2-active .page-header .header-two .header.content {
         padding:15px 20px;
     }
     .header-two .megamenu .nav-desktop .level0:hover .level-top-mega {
@@ -2616,7 +2621,7 @@
      .page-header .header-two .header.content .minicart-wrapper {
         padding-left:0px;
     }
-    .sticky-header2 .page-header {
+    body.sticky-header2-active .page-header {
         position: fixed;
         left: 0;
         width: 100%;
